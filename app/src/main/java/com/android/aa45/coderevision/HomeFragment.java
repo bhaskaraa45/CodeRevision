@@ -19,9 +19,6 @@ import com.google.android.material.tabs.TabLayout;
 import java.util.Objects;
 
 public class HomeFragment extends Fragment {
-    private TabLayout tl;
-    private ViewPager vp;
-
 
 
     @Override
@@ -30,8 +27,8 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        tl = view.findViewById(R.id.tabLayout);
-        vp=view.findViewById(R.id.viewPager);
+        TabLayout tl = view.findViewById(R.id.tabLayout);
+        ViewPager vp = view.findViewById(R.id.viewPager);
 
         tl.setupWithViewPager(vp);
 
