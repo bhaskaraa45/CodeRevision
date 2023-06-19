@@ -1,10 +1,16 @@
-package com.android.aa45.coderevision;
+package com.android.aa45.coderevision.Adapters;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+
+import com.android.aa45.coderevision.SolvedFragment;
+import com.android.aa45.coderevision.TriedFragment;
+import com.android.aa45.coderevision.WishlistFragment;
+
+
 
 import java.util.ArrayList;
 
