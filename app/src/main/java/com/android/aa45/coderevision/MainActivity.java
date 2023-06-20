@@ -9,8 +9,6 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.android.aa45.coderevision.databinding.ActivityMainBinding;
 
@@ -22,9 +20,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //for buttom Nevigation
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
         replaceFragment(new HomeFragment());
         binding.bottomNavigationView.setOnItemSelectedListener(item ->{
             int id = item.getItemId();
@@ -49,5 +47,13 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.frameLayout,fragment);
         fragmentTransaction.commit();
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.refresh_menu,menu);
+        return true;
+    }
+
 
 }

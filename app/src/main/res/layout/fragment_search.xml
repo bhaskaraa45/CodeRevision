@@ -10,19 +10,19 @@
     <SearchView
         android:id="@+id/searchView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="42dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginRight="30dp"
         android:background="@drawable/search_bar"
+        android:iconifiedByDefault="false"
+        android:queryHint="Search..."
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:iconifiedByDefault="false"
-        android:layout_marginTop="25dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:queryHint="Search..."
 
 
-       />
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

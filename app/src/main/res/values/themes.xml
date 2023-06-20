@@ -6,5 +6,11 @@
         <item name="colorPrimary" >@color/blue_</item>
     </style>
 
+    <style name="AddedTheme" parent="Theme.Material3.Light.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary" >@color/blue_</item>
+    </style>
+
     <style name="Theme.CodeRevision" parent="Base.Theme.CodeRevision" />
 </resources>
