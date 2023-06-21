@@ -18,4 +18,6 @@
     <string name="profile">Profile</string>
     <string name="bhaskar">Bhaskar</string>
     <string name="dark_mode">Dark Mode</string>
+    <string name="about">About</string>
+    <string name="report_a_bug">Report a bug</string>
 </resources>

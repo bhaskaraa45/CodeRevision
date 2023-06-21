@@ -51,7 +51,7 @@
             android:layout_gravity="center"
             android:textStyle="italic"
             android:textSize="22sp"
-            android:textColor="@color/darkPurple"
+            android:textColor="@color/blue_"
             />
 
     </LinearLayout>
@@ -89,42 +89,6 @@
             android:textSize="17sp"
             android:layout_marginStart="5dp"
             />
-    </RelativeLayout>
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="20dp"
-        />
-    <RelativeLayout
-        android:id="@+id/darkMode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        >
-        <ImageView
-            android:id="@+id/darkModeIcon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/settings"
-            android:contentDescription="@string/dark_mode" />
-        <TextView
-            android:id="@+id/darkText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/dark_mode"
-            android:layout_toEndOf="@id/darkModeIcon"
-            android:fontFamily="@font/actor"
-            android:textSize="17sp"
-            android:layout_marginStart="5dp"
-            />
-            <Switch
-                android:id="@+id/switcher"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:ignore="UseSwitchCompatOrMaterialXml"
-                android:paddingLeft="290dp"
-                android:switchMinWidth="53dp"
-                android:shadowColor="@color/darkPurple"
-                />
     </RelativeLayout>
 
     <Space
@@ -179,6 +143,31 @@
             android:layout_marginStart="5dp"
             />
     </RelativeLayout>
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        />
+    <RelativeLayout
+        android:id="@+id/about"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        >
+        <ImageView
+            android:id="@+id/aboutIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/about"
+            android:contentDescription="@string/about" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/about"
+            android:layout_toEndOf="@id/aboutIcon"
+            android:fontFamily="@font/actor"
+            android:textSize="17sp"
+            android:layout_marginStart="5dp"
+            />
+    </RelativeLayout>
 
     <Space
         android:layout_width="match_parent"
@@ -205,6 +194,33 @@
             android:layout_marginStart="5dp"
             />
     </RelativeLayout>
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        />
+    <RelativeLayout
+        android:id="@+id/darkMode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        >
+        <ImageView
+            android:id="@+id/bugReport"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/bug_report"
+            android:contentDescription="@string/report_a_bug" />
+        <TextView
+            android:id="@+id/darkText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/report_a_bug"
+            android:layout_toEndOf="@id/bugReport"
+            android:fontFamily="@font/actor"
+            android:textSize="17sp"
+            android:layout_marginStart="5dp"
+            />
+    </RelativeLayout>
+
 </LinearLayout>
 
 

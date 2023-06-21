@@ -12,9 +12,6 @@
         android:supportsRtl="true"
         tools:targetApi="31">
         <activity
-            android:name=".SettingsActivity"
-            android:exported="false" />
-        <activity
             android:name=".AddProblemActivity"
             android:exported="false"
             android:theme="@style/AddedTheme" />
