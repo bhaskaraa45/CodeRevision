@@ -6,23 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MeFragment">
-
-<!--    <Toolbar-->
-<!--        android:id="@+id/toolbar"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content">-->
-
-<!--        <TextView-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:gravity="center_horizontal"-->
-<!--            android:text="@string/settings"-->
-<!--            android:textColor="@color/darkPurple"-->
-<!--            android:textSize="25sp"-->
-<!--            android:textStyle="bold"-->
-<!--            />-->
-<!--    </Toolbar>-->
-
+    
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -57,18 +41,19 @@
     </LinearLayout>
     <Space
         android:layout_width="match_parent"
-        android:layout_height="25dp"
+        android:layout_height="35dp"
         />
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:paddingStart="20dp">
+    android:paddingStart="25dp"
+    tools:ignore="RtlSymmetry">
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    >
+    tools:ignore="UselessParent">
     <RelativeLayout
         android:id="@+id/settings"
         android:layout_width="wrap_content"
@@ -86,8 +71,8 @@
             android:text="@string/settings"
             android:layout_toEndOf="@id/settingsIcon"
             android:fontFamily="@font/actor"
-            android:textSize="17sp"
-            android:layout_marginStart="5dp"
+            android:textSize="20sp"
+            android:layout_marginStart="10dp"
             />
     </RelativeLayout>
 
@@ -113,8 +98,8 @@
             android:text="@string/feedback"
             android:layout_toEndOf="@id/feedbackIcon"
             android:fontFamily="@font/actor"
-            android:textSize="17sp"
-            android:layout_marginStart="5dp"
+            android:textSize="20sp"
+            android:layout_marginStart="10dp"
             />
     </RelativeLayout>
 
@@ -139,8 +124,8 @@
             android:text="@string/share"
             android:layout_toEndOf="@id/shareIcon"
             android:fontFamily="@font/actor"
-            android:textSize="17sp"
-            android:layout_marginStart="5dp"
+            android:textSize="20sp"
+            android:layout_marginStart="10dp"
             />
     </RelativeLayout>
     <Space
@@ -164,8 +149,8 @@
             android:text="@string/about"
             android:layout_toEndOf="@id/aboutIcon"
             android:fontFamily="@font/actor"
-            android:textSize="17sp"
-            android:layout_marginStart="5dp"
+            android:textSize="20sp"
+            android:layout_marginStart="10dp"
             />
     </RelativeLayout>
 
@@ -190,8 +175,8 @@
             android:text="@string/log_out"
             android:layout_toEndOf="@id/logoutIcon"
             android:fontFamily="@font/actor"
-            android:textSize="17sp"
-            android:layout_marginStart="5dp"
+            android:textSize="20sp"
+            android:layout_marginStart="10dp"
             />
     </RelativeLayout>
     <Space
@@ -216,8 +201,8 @@
             android:text="@string/report_a_bug"
             android:layout_toEndOf="@id/bugReport"
             android:fontFamily="@font/actor"
-            android:textSize="17sp"
-            android:layout_marginStart="5dp"
+            android:textSize="20sp"
+            android:layout_marginStart="10dp"
             />
     </RelativeLayout>
 
