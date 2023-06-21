@@ -19,4 +19,11 @@
         <item name="android:windowExitAnimation">@anim/slide_out_bottom</item>
     </style>
 
+    <style name="dark_me">
+        <item name="android:background" >#474747</item>
+        <item name="android:textColor" >@color/white</item>
+        <item name="colorSwitchThumbNormal">#BDBBBB</item>
+        <item name="colorControlActivated">@color/darkPurple</item>
+    </style>
+
 </resources>

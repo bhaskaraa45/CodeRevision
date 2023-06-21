@@ -2,6 +2,7 @@ package com.android.aa45.coderevision;
 
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -21,15 +22,16 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.android.aa45.coderevision.Adapters.FragPageAdapter;
+import com.android.aa45.coderevision.FABfragments.AddSolvedFragment;
 import com.android.aa45.coderevision.Fragments.SolvedFragment;
 import com.android.aa45.coderevision.Fragments.TriedFragment;
 import com.android.aa45.coderevision.Fragments.WishlistFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
+import java.util.Stack;
 
 public class HomeFragment extends Fragment{
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -47,7 +49,6 @@ public class HomeFragment extends Fragment{
         adapter.fragmentAdd(new WishlistFragment(), "Wishlist");
         vp.setAdapter(adapter);
 
-
         FloatingActionButton addButton = view.findViewById(R.id.addButton);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,6 +59,7 @@ public class HomeFragment extends Fragment{
 
        return view;
     }
+    static Stack<Integer> tabNo = new Stack<>();
 
 
     private void replaceFragment(Fragment fragment){
@@ -79,42 +81,46 @@ public class HomeFragment extends Fragment{
         addSolved.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 dialog.dismiss();
+                if(!tabNo.isEmpty()){
+                    tabNo.empty();
+                }
+                tabNo.add(0);
+                Intent intent = new Intent(getContext(),AddProblemActivity.class);
+                startActivity(intent);
                 Toast.makeText(getContext(),"solved is Clicked",Toast.LENGTH_SHORT).show();
-
             }
         });
-
         addTried.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 dialog.dismiss();
+                if(!tabNo.isEmpty()){
+                    tabNo.empty();
+                }
+                tabNo.add(1);
+                Intent intent = new Intent(getContext(),AddProblemActivity.class);
+                startActivity(intent);
                 Toast.makeText(getContext(),"tried is Clicked",Toast.LENGTH_SHORT).show();
-
             }
         });
-
         addWishlist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 dialog.dismiss();
+                if(!tabNo.isEmpty()){
+                    tabNo.empty();
+                }
+                tabNo.add(2);
+                Intent intent = new Intent(getContext(),AddProblemActivity.class);
+                startActivity(intent);
                 Toast.makeText(getContext(),"wishlist is Clicked",Toast.LENGTH_SHORT).show();
-
             }
         });
-
-
         dialog.show();
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.getWindow().getAttributes().windowAnimations = R.style.FloatingActionButton;
         dialog.getWindow().setGravity(Gravity.BOTTOM);
-
-
-
     }
-
 }
