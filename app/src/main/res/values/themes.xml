@@ -12,5 +12,11 @@
         <item name="colorPrimary" >@color/blue_</item>
     </style>
 
+    <style name="FloatingActionButton" >
+        <item name="android:windowEnterAnimation">@anim/slide_in_bottom</item>
+        <item name="android:windowExitAnimation">@anim/slide_out_bottom</item>
+    </style>
+
+
     <style name="Theme.CodeRevision" parent="Base.Theme.CodeRevision" />
 </resources>

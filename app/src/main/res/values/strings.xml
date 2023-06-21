@@ -6,4 +6,8 @@
     <string name="refresh">Refresh</string>
     <string name="sort_by_name">Sort by Name</string>
     <string name="sort_by_date">Sort by Date</string>
+    <string name="add_wishlist_problem">Add Wishlist Problem</string>
+    <string name="add_tried_problem">Add Tried Problem</string>
+    <string name="add_solved_problem">Add Solved Problem</string>
+    <string name="to_add_problems">to add problems</string>
 </resources>
