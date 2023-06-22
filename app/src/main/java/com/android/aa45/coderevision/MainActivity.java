@@ -6,13 +6,29 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 
+import com.android.aa45.coderevision.Firebase.LoginActivity;
 import com.android.aa45.coderevision.databinding.ActivityMainBinding;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
+
+    FirebaseAuth mAuth;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser==null) {
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+        }
+    }
 
     ActivityMainBinding binding;
     @Override
@@ -20,7 +36,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //for buttom Nevigation
+        mAuth = FirebaseAuth.getInstance();
+
+
+        //for bottom Navigation
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         replaceFragment(new HomeFragment());
