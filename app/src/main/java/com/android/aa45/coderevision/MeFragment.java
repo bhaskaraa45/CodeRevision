@@ -1,12 +1,13 @@
 package com.android.aa45.coderevision;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
-import android.content.SharedPreferences;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -14,14 +15,26 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+import java.io.InputStream;
 import java.util.Objects;
 
 
 @SuppressLint("UseSwitchCompatOrMaterialCode")
 public class MeFragment extends Fragment {
+
+    private FirebaseAuth mAuth;
+    private GoogleSignInClient mGoogleSignInClient;
+
     private RelativeLayout settings;
     private RelativeLayout feedback;
     private RelativeLayout share;
@@ -29,6 +42,8 @@ public class MeFragment extends Fragment {
     private RelativeLayout about;
     private RelativeLayout bugReport;
 
+    private ImageView profilePic;
+    private TextView emailId,usersName;
     @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,6 +53,28 @@ public class MeFragment extends Fragment {
 
         // Inflate the layout for this fragment
         final View rootView = inflater.inflate(R.layout.fragment_me, container, false);
+
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+        mGoogleSignInClient = GoogleSignIn.getClient(requireContext(), gso);
+        mAuth = FirebaseAuth.getInstance();
+
+
+        //Add profile photo , name and email
+        profilePic = (ImageView) rootView.findViewById(R.id.profilePic);
+        usersName =(TextView) rootView.findViewById(R.id.profile_name);
+        emailId = (TextView) rootView.findViewById(R.id.email);
+
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if(user!=null){
+            usersName.setText(user.getDisplayName());
+            emailId.setText(user.getEmail());
+            Uri photoUrl = user.getPhotoUrl();
+            Glide.with(requireActivity()).load(photoUrl).into(profilePic);
+        }
 
         settings = rootView.findViewById(R.id.settings);
         feedback = rootView.findViewById(R.id.feedback);
@@ -67,7 +104,8 @@ public class MeFragment extends Fragment {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "Log Out", Toast.LENGTH_SHORT).show();
+                signOut();
+                Toast.makeText(getContext(), "Logged Out", Toast.LENGTH_SHORT).show();
             }
         });
         bugReport.setOnClickListener(new View.OnClickListener() {
@@ -83,7 +121,14 @@ public class MeFragment extends Fragment {
             }
         });
 
-
         return rootView;
+    }
+
+    private void signOut() {
+        mAuth.signOut();
+        mGoogleSignInClient.signOut();
+        startActivity(new Intent(getContext(),MainActivity.class));
+        requireActivity().finish();
+
     }
 }

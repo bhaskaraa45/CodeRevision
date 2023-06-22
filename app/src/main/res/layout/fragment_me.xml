@@ -37,11 +37,19 @@
             android:textSize="22sp"
             android:textColor="@color/blue_"
             />
+        <TextView
+            android:id="@+id/email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/email_id"
+            android:layout_gravity="center"
+            android:textSize="10sp"
+            tools:ignore="SmallSp" />
 
     </LinearLayout>
     <Space
         android:layout_width="match_parent"
-        android:layout_height="35dp"
+        android:layout_height="45dp"
         />
 <LinearLayout
     android:layout_width="match_parent"
