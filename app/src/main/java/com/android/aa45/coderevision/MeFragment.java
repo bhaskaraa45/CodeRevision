@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import java.util.Objects;
 
@@ -25,19 +26,9 @@ public class MeFragment extends Fragment {
     private RelativeLayout feedback;
     private RelativeLayout share;
     private RelativeLayout logout;
+    private RelativeLayout about;
+    private RelativeLayout bugReport;
 
-    private ImageView settIcon ;
-    private ImageView darkIcon;
-
-    private ImageView fbackIcon ;
-    private ImageView shareIcon;
-    private ImageView lgoutIcon;
-
-    //for darkmode
-    private Switch switcher;
-    boolean darkMode;
-    SharedPreferences sharedPreferences;
-    SharedPreferences.Editor editor;
     @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,10 +43,45 @@ public class MeFragment extends Fragment {
         feedback = rootView.findViewById(R.id.feedback);
         share = rootView.findViewById(R.id.share);
         logout = rootView.findViewById(R.id.logout);
-        settIcon = rootView.findViewById(R.id.settingsIcon);
-        fbackIcon = rootView.findViewById(R.id.feedbackIcon);
-        shareIcon = rootView.findViewById(R.id.shareIcon);
-        lgoutIcon = rootView.findViewById(R.id.logoutIcon);
+        bugReport = rootView.findViewById(R.id.bugReport);
+        about = rootView.findViewById(R.id.about);
+
+        settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getContext(), "Settings", Toast.LENGTH_SHORT).show();
+            }
+        });
+        feedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getContext(), "Feedback", Toast.LENGTH_SHORT).show();
+            }
+        });
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getContext(), "Share", Toast.LENGTH_SHORT).show();
+            }
+        });
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getContext(), "Log Out", Toast.LENGTH_SHORT).show();
+            }
+        });
+        bugReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getContext(), "Report a bug", Toast.LENGTH_SHORT).show();
+            }
+        });
+        about.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getContext(), "About", Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
         return rootView;

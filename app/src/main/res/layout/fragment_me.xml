@@ -184,12 +184,12 @@
         android:layout_height="20dp"
         />
     <RelativeLayout
-        android:id="@+id/darkMode"
+        android:id="@+id/bugReport"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         >
         <ImageView
-            android:id="@+id/bugReport"
+            android:id="@+id/bugReportIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/bug_report"
@@ -199,7 +199,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/report_a_bug"
-            android:layout_toEndOf="@id/bugReport"
+            android:layout_toEndOf="@id/bugReportIcon"
             android:fontFamily="@font/actor"
             android:textSize="20sp"
             android:layout_marginStart="10dp"
