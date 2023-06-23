@@ -64,7 +64,6 @@ public class HomeFragment extends Fragment{
     }
     static Stack<Integer> tabNo = new Stack<>();
 
-
     private void replaceFragment(Fragment fragment){
         FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

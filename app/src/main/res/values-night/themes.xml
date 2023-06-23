@@ -5,8 +5,8 @@
 
     </style>
 
-    <style name="AddedTheme" parent="Theme.Material3.Dark.NoActionBar">
-        <item name="colorPrimary" >@color/blue_dark</item>
+    <style name="AddedTheme" parent="Theme.MaterialComponents.NoActionBar.Bridge">
+        <item name="colorPrimary" >@color/blue_</item>
     </style>
 
     <style name="FloatingActionButton" >

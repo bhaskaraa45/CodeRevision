@@ -14,7 +14,7 @@
         android:orientation="vertical"
         tools:ignore="UseCompoundDrawables">
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profilePic"
             android:layout_width="100dp"
             android:layout_height="100dp"
@@ -213,11 +213,6 @@
             android:layout_marginStart="10dp"
             />
     </RelativeLayout>
-
 </LinearLayout>
-
-
 </LinearLayout>
-
-
 </LinearLayout>

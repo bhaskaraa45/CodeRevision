@@ -16,17 +16,27 @@ import com.android.aa45.coderevision.databinding.ActivityMainBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
     FirebaseAuth mAuth;
+    static ArrayList<String> userDetails=new ArrayList<>(); // at 0-> name , at 1-> email , at 2-> photo url
 
     @Override
     protected void onStart() {
         super.onStart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser==null) {
+        FirebaseUser user = mAuth.getCurrentUser();
+        if(user==null) {
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
+        }else{
+            //To store User Details in a ArrayList
+                userDetails.clear();
+                userDetails.add(user.getDisplayName());
+                userDetails.add(user.getEmail());
+                userDetails.add(String.valueOf(user.getPhotoUrl()));
+
         }
     }
 
@@ -37,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mAuth = FirebaseAuth.getInstance();
-
 
         //for bottom Navigation
         binding = ActivityMainBinding.inflate(getLayoutInflater());
@@ -72,6 +81,10 @@ public class MainActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.refresh_menu,menu);
         return true;
+    }
+    public void exitApplication(){
+        finish();
+        System.exit(0);
     }
 
 

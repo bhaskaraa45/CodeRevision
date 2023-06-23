@@ -4,8 +4,8 @@
         <item name="colorPrimary" >@color/blue_dark</item>
     </style>
 
-    <style name="AddedTheme" parent="Theme.Material3.Light.NoActionBar">
-        <item name="colorPrimary" >@color/blue_dark</item>
+    <style name="AddedTheme" parent="Theme.MaterialComponents.NoActionBar.Bridge">
+        <item name="colorPrimary" >@color/blue_</item>
     </style>
 
     <style name="FloatingActionButton" >
@@ -16,6 +16,8 @@
     <style name="loginPage" parent="Theme.AppCompat.DayNight.NoActionBar">
         <item name="colorPrimary">@color/blue_dark</item>
     </style>
+
+
 
 
     <style name="Theme.CodeRevision" parent="Base.Theme.CodeRevision" />

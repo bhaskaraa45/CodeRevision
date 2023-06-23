@@ -21,4 +21,20 @@
     <string name="about">About</string>
     <string name="report_a_bug">Report a bug</string>
     <string name="email_id">bhaskarmandal369@gmail.com</string>
+    <string name="code_revision">© Code Revision</string>
+    <string name="_2">2.</string>
+    <string name="_1">1.</string>
+    <string name="_3">3.</string>
+    <string name="_5">5.</string>
+    <string name="_4">4.</string>
+    <string name="topic">Enter Topic/Tag</string>
+    <string name="difficulty_level">Difficulty Level</string>
+    <string name="wow_solved">🎉Wow! Solved a new problem</string>
+    <string name="date_format">dd-mm-yyyy</string>
+    <string name="keep_it_up">Keep it up @Name</string>
+    <string name="enter_title">Enter Title...</string>
+    <string name="todo">TODO</string>
+    <string name="paste_the_link">Paste the Link</string>
+    <string name="add">Add</string>
+    <string name="today">Today</string>
 </resources>

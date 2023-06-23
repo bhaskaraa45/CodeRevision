@@ -30,9 +30,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class LoginActivity extends AppCompatActivity {
 
-    private SignInButton signInButton;
     private static final int RC_SIGN_IN = 264;
     private final boolean showOneTapUI = true;
     private FirebaseAuth mAuth;
@@ -56,7 +57,7 @@ public class LoginActivity extends AppCompatActivity {
 
         processRequest();
 
-        signInButton = (SignInButton) findViewById(R.id.sign_in_button);
+        SignInButton signInButton = (SignInButton) findViewById(R.id.sign_in_button);
 
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,9 +65,6 @@ public class LoginActivity extends AppCompatActivity {
                 signIn();
             }
         });
-
-
-
     }
 
     private void processRequest() {

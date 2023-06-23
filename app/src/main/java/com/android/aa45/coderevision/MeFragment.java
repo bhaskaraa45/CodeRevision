@@ -26,6 +26,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Objects;
 
 
@@ -42,9 +43,6 @@ public class MeFragment extends Fragment {
     private RelativeLayout about;
     private RelativeLayout bugReport;
 
-    private ImageView profilePic;
-    private TextView emailId,usersName;
-    @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -63,17 +61,15 @@ public class MeFragment extends Fragment {
 
 
         //Add profile photo , name and email
-        profilePic = (ImageView) rootView.findViewById(R.id.profilePic);
-        usersName =(TextView) rootView.findViewById(R.id.profile_name);
-        emailId = (TextView) rootView.findViewById(R.id.email);
+        ImageView profilePic = (ImageView) rootView.findViewById(R.id.profilePic);
+        TextView usersName = (TextView) rootView.findViewById(R.id.profile_name);
+        TextView emailId = (TextView) rootView.findViewById(R.id.email);
 
-
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if(user!=null){
-            usersName.setText(user.getDisplayName());
-            emailId.setText(user.getEmail());
-            Uri photoUrl = user.getPhotoUrl();
-            Glide.with(requireActivity()).load(photoUrl).into(profilePic);
+        ArrayList<String> userData = MainActivity.userDetails;
+        if(userData.size()>0){
+            usersName.setText(userData.get(0));
+            emailId.setText(userData.get(1));
+            Glide.with(requireActivity()).load(userData.get(2)).into(profilePic);
         }
 
         settings = rootView.findViewById(R.id.settings);
