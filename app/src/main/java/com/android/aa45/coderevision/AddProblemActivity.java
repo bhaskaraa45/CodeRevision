@@ -90,7 +90,6 @@ public class AddProblemActivity extends AppCompatActivity {
                 textView1.setText("Add Problem to wishlist");
                 textView2.setText("To solve it later \uD83D\uDE4C");
                 break;
-            default:
         }
 
         addButton.setOnClickListener(new View.OnClickListener() {
