@@ -105,7 +105,7 @@ public class AddProblemActivity extends AppCompatActivity {
                 if(diff==-1 || questionLink==null || questionTag==null){
                     Toast.makeText(AddProblemActivity.this, "Please fill the form appropriately", Toast.LENGTH_LONG).show();
                 }else{
-                    Toast.makeText(AddProblemActivity.this, "Problem Added", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddProblemActivity.this, diff + "Problem Added", Toast.LENGTH_SHORT).show();
                     finish();
                 }
             }
