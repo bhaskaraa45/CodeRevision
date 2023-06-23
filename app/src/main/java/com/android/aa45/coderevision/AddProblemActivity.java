@@ -8,12 +8,14 @@ import android.app.DatePickerDialog;
 import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Calendar;
 import java.util.Stack;
@@ -23,6 +25,8 @@ public class AddProblemActivity extends AppCompatActivity {
     private Button datePickerButton;
     private DatePickerDialog datePickerDialog;
     private String selectedDate;
+    private int selectedDifficulty= -1;
+    private final String[] diffItems = {"Basic", "Easy" , "Medium" , "Hard"};
     @SuppressLint({"MissingInflatedId", "SetTextI18n"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +40,16 @@ public class AddProblemActivity extends AppCompatActivity {
         TextView topic = findViewById(R.id.topic);
         Button addButton = findViewById(R.id.add_problem);
         AutoCompleteTextView difficultyLevel = findViewById(R.id.difficulty_level);
-        String[] diffItems = {"Basic", "Easy" , "Medium" , "Hard"};
         ArrayAdapter<String> stringArrayAdapter = new ArrayAdapter<>(this,R.layout.difficulty_list,diffItems);
 
         //set difficulty options
         difficultyLevel.setAdapter(stringArrayAdapter);
+        difficultyLevel.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                selectedDifficulty = position;
+            }
+        });
 
         //select date
         initDatePicker();
@@ -91,7 +100,14 @@ public class AddProblemActivity extends AppCompatActivity {
                 String questionLink = link.getText().toString();
                 String questionTag = topic.getText().toString();
                 String date = selectedDate;
-                String difficulty ;
+                int diff = selectedDifficulty;
+                
+                if(diff==-1 || questionLink==null || questionTag==null){
+                    Toast.makeText(AddProblemActivity.this, "Please fill the form appropriately", Toast.LENGTH_LONG).show();
+                }else{
+                    Toast.makeText(AddProblemActivity.this, "Problem Added", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
             }
         });
 
