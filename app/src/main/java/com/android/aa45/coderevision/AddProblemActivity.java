@@ -1,5 +1,7 @@
 package com.android.aa45.coderevision;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -17,6 +19,17 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.aa45.coderevision.Firebase.DataHolder;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Stack;
 
@@ -27,6 +40,12 @@ public class AddProblemActivity extends AppCompatActivity {
     private String selectedDate;
     private int selectedDifficulty= -1;
     private final String[] diffItems = {"Basic", "Easy" , "Medium" , "Hard"};
+    private final String[] branch = {"Solved","Tried","Wishlist"};
+    String sl = "";
+    long[] slNo = {0};
+    int selectedTab;
+    String questionTag="";
+
     @SuppressLint({"MissingInflatedId", "SetTextI18n"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +70,7 @@ public class AddProblemActivity extends AppCompatActivity {
             }
         });
 
+
         //select date
         initDatePicker();
         datePickerButton = findViewById(R.id.date_picker);
@@ -66,7 +86,7 @@ public class AddProblemActivity extends AppCompatActivity {
 
 
         Stack<Integer> tab = HomeFragment.tabNo;
-        int selectedTab = tab.pop();
+        selectedTab = tab.pop();
         String name = MainActivity.userDetails.get(0);
         String[] splitName;
         String firstName;
@@ -92,28 +112,30 @@ public class AddProblemActivity extends AppCompatActivity {
                 break;
         }
 
+
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String questionTitle = title.getText().toString();
                 String questionLink = link.getText().toString();
-                String questionTag = topic.getText().toString();
+                questionTag = topic.getText().toString();
                 String date = selectedDate;
                 int diff = selectedDifficulty;
-                
-                if(diff==-1 || questionLink==null || questionTag==null){
+
+                if (diff == -1 || questionLink == null || questionTag == null) {
                     Toast.makeText(AddProblemActivity.this, "Please fill the form appropriately", Toast.LENGTH_LONG).show();
-                }else{
-                    Toast.makeText(AddProblemActivity.this, diff + "Problem Added", Toast.LENGTH_SHORT).show();
+                } else {
+
+                    DataHolder obj = new DataHolder(questionTitle, questionLink, date, diffItems[diff], questionTag);
+
+                    setData(obj);
+
                     finish();
                 }
             }
         });
-
-
-
-
     }
+
 
     @SuppressLint("SimpleDateFormat")
     public String getTodaysDate(){
@@ -149,6 +171,32 @@ public class AddProblemActivity extends AppCompatActivity {
 
     private String makeDateString(int day, int month, int year) {
         return (day + "-" + month + "-" + year);
+    }
+    private void setData(DataHolder obj){
+        FirebaseDatabase db = FirebaseDatabase.getInstance("https://code-revision-default-rtdb.asia-southeast1.firebasedatabase.app");
+        DatabaseReference myRef = db.getReference(); //root
+        String uid = FirebaseAuth.getInstance().getUid();
+        DatabaseReference branchRef = myRef.child("user").child(uid).child(branch[selectedTab]); //root->user->uid->branch(tab)
+
+        //for SL no
+        branchRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                slNo[0]=snapshot.getChildrenCount();
+                sl += slNo[0];
+
+                //root->user->uid->branch(tab)->sl no->tag
+                DatabaseReference finalRef = branchRef.child(sl).child(questionTag);
+
+                //set data
+                finalRef.setValue(obj);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
 }
