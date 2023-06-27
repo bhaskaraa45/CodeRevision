@@ -173,7 +173,7 @@ public class AddProblemActivity extends AppCompatActivity {
         return (day + "-" + month + "-" + year);
     }
     private void setData(DataHolder obj){
-        FirebaseDatabase db = FirebaseDatabase.getInstance("https://code-revision-default-rtdb.asia-southeast1.firebasedatabase.app");
+        FirebaseDatabase db = FirebaseDatabase.getInstance("https://code-revision-default-rtdb.asia-southeast1.firebasedatabase.app/");
         DatabaseReference myRef = db.getReference(); //root
         String uid = FirebaseAuth.getInstance().getUid();
         DatabaseReference branchRef = myRef.child("user").child(uid).child(branch[selectedTab]); //root->user->uid->branch(tab)
@@ -183,10 +183,10 @@ public class AddProblemActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 slNo[0]=snapshot.getChildrenCount();
-                sl += slNo[0];
+                sl += (slNo[0]+1);
 
-                //root->user->uid->branch(tab)->sl no->tag
-                DatabaseReference finalRef = branchRef.child(sl).child(questionTag);
+                //root->user->uid->branch(tab)->sl no
+                DatabaseReference finalRef = branchRef.child(sl);
 
                 //set data
                 finalRef.setValue(obj);
