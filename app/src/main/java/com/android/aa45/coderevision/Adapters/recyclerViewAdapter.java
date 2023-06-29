@@ -1,7 +1,6 @@
 package com.android.aa45.coderevision.Adapters;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,16 +10,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.aa45.coderevision.Firebase.DataHolder;
-import com.android.aa45.coderevision.Firebase.dataShowing;
 import com.android.aa45.coderevision.R;
 
 import java.util.List;
 
 public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapter.ViewHolder> {
 
-    List<dataShowing> items ;
+    List<DataHolder> items ;
 
-    public recyclerViewAdapter(List<dataShowing> items) {
+    public recyclerViewAdapter(List<DataHolder> items) {
         this.items = items;
     }
 
@@ -34,11 +32,11 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapte
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        dataShowing dataS = items.get(position);
-        holder.setTitle.setText(dataS.getTitle());
-        holder.setDate.setText(dataS.getDate());
-        holder.setSlNo.setText(dataS.getslNo()+".");
-        holder.setDiff.setText(dataS.getDifficulty());
+        DataHolder dataHolder = items.get(position);
+        holder.setTitle.setText(dataHolder.getTitle());
+        holder.setDate.setText(dataHolder.getDate());
+        holder.setSlNo.setText(dataHolder.getslNo()+".");
+        holder.setDiff.setText(dataHolder.getDifficulty());
     }
 
     @Override

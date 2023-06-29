@@ -13,11 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.android.aa45.coderevision.Adapters.recyclerViewAdapter;
 import com.android.aa45.coderevision.Firebase.DataHolder;
-import com.android.aa45.coderevision.Firebase.dataShowing;
 import com.android.aa45.coderevision.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -33,7 +31,7 @@ import java.util.List;
 public class SolvedFragment extends Fragment {
 
     private Toolbar toolbar;
-    private List<dataShowing> ItemList;
+    private List<DataHolder> ItemList;
     private recyclerViewAdapter viewAdapter;
     private RecyclerView recyclerView;
 
@@ -56,7 +54,7 @@ public class SolvedFragment extends Fragment {
                 ItemList.clear();
 
                 for (DataSnapshot userSnap : snapshot.getChildren()){
-                    dataShowing dataS = userSnap.getValue(dataShowing.class);
+                    DataHolder dataS = userSnap.getValue(DataHolder.class);
                     ItemList.add(dataS);
                 }
                 viewAdapter.notifyDataSetChanged();
