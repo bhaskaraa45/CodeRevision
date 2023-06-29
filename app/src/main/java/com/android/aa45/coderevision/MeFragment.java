@@ -94,7 +94,11 @@ public class MeFragment extends Fragment {
         share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "Share", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_SEND);
+                intent.putExtra(Intent.EXTRA_TEXT,"Download CodeRevision app & save solved problems to revise it\n\n https://bit.ly/code-revision-aa45");
+                intent.setType("text/plain");
+                startActivity(intent);
             }
         });
         logout.setOnClickListener(new View.OnClickListener() {

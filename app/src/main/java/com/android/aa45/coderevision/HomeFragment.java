@@ -23,7 +23,6 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.android.aa45.coderevision.Adapters.FragPageAdapter;
-import com.android.aa45.coderevision.FABfragments.AddSolvedFragment;
 import com.android.aa45.coderevision.Fragments.SolvedFragment;
 import com.android.aa45.coderevision.Fragments.TriedFragment;
 import com.android.aa45.coderevision.Fragments.WishlistFragment;
