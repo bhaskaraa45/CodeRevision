@@ -44,7 +44,8 @@ public class AddProblemActivity extends AppCompatActivity {
     String sl = "";
     long[] slNo = {0};
     int selectedTab;
-    private String questionLink ="",enteredCode = "",questionTitle = "",questionTag="";
+    private String questionLink ="",enteredCode = "",questionTitle = "",questionTag="" , date = "";
+    private int diff;
 
     @SuppressLint({"MissingInflatedId", "SetTextI18n"})
     @Override
@@ -121,17 +122,13 @@ public class AddProblemActivity extends AppCompatActivity {
                 questionLink += link.getText().toString();
                 questionTag += topic.getText().toString();
                 enteredCode += code.getText().toString();
-                String date = selectedDate;
-                int diff = selectedDifficulty;
+                date = selectedDate;
+                diff = selectedDifficulty;
 
                 if (diff == -1 || questionLink.equals("") || questionTag.equals("") || enteredCode.equals("")) {
                     Toast.makeText(AddProblemActivity.this, "Please fill the form appropriately", Toast.LENGTH_LONG).show();
                 } else {
-
-                    DataHolder obj = new DataHolder(questionTitle, questionLink, date, diffItems[diff], questionTag,enteredCode);
-
-                    setData(obj);
-
+                    setData();
                     finish();
                 }
             }
@@ -174,7 +171,7 @@ public class AddProblemActivity extends AppCompatActivity {
     private String makeDateString(int day, int month, int year) {
         return (day + "-" + month + "-" + year);
     }
-    private void setData(DataHolder obj){
+    private void setData(){
         FirebaseDatabase db = FirebaseDatabase.getInstance("https://code-revision-default-rtdb.asia-southeast1.firebasedatabase.app/");
         DatabaseReference myRef = db.getReference(); //root
         String uid = FirebaseAuth.getInstance().getUid();
@@ -186,6 +183,9 @@ public class AddProblemActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 slNo[0]=snapshot.getChildrenCount();
                 sl += (slNo[0]+1);
+
+                DataHolder obj = new DataHolder(questionTitle, questionLink, date, diffItems[diff], questionTag,enteredCode,sl);
+
 
                 //root->user->uid->branch(tab)->sl no
                 DatabaseReference finalRef = branchRef.child(sl);

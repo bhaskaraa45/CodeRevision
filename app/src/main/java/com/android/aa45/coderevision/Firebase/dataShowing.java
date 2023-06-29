@@ -1,11 +1,11 @@
 package com.android.aa45.coderevision.Firebase;
 
-public class DataHolder {
+public class dataShowing {
     String title,link,date,difficulty,tag,code,slNo;
-    public DataHolder() {
+    public dataShowing() {
     }
 
-    public DataHolder(String title, String link, String date, String difficulty, String tag,String code,String slNo) {
+    public dataShowing(String title, String link, String date, String difficulty, String tag,String code,String slNo) {
         this.title = title;
         this.link = link;
         this.date = date;
