@@ -54,14 +54,16 @@
             android:layout_marginStart="15dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:ignore="UselessParent">
+            tools:ignore="UselessParent"
+            android:background="@drawable/edittet_shape">
             <ImageView
                 android:id="@+id/calendar_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/baseline_edit_calendar_24"
                 android:contentDescription="@string/todo"
-                android:layout_centerVertical="true"/>
+                android:layout_centerVertical="true"
+                android:layout_marginStart="5dp"/>
             <Button
                 android:id="@+id/date_picker"
                 android:layout_width="150dp"
@@ -81,17 +83,158 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        <RelativeLayout
+            android:id="@+id/enter_title"
+            android:layout_marginStart="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:ignore="UselessParent"
+            android:background="@drawable/edittet_shape">
+
+            <ImageView
+                android:id="@+id/title_icon"
+                android:layout_width="24sp"
+                android:layout_height="24sp"
+                android:src="@drawable/title"
+                android:background="@color/white"
+                android:layout_marginTop="7dp"
+                android:contentDescription="@string/todo"
+                android:layout_marginStart="8dp"
+                />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/title"
+                android:layout_width="310dp"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/title_icon"
+                android:layout_marginStart="14dp"
+                android:hint="@string/enter_title"
+                android:textSize="14sp"/>
+        </RelativeLayout>
+    </LinearLayout>
+    <Space
+        android:layout_width="10dp"
+        android:layout_height="20dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        <RelativeLayout
+            android:id="@+id/enter_link"
+            android:layout_marginStart="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:ignore="UselessParent"
+            android:background="@drawable/edittet_shape">
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:id="@+id/link_icon"
+                android:src="@drawable/link"
+                android:layout_marginTop="7dp"
+                android:contentDescription="@string/todo"
+                android:layout_marginStart="8dp"/>
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/link"
+                android:layout_width="310dp"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/link_icon"
+                android:layout_marginStart="14dp"
+                android:hint="@string/paste_the_link"
+                android:textSize="14sp"/>
+        </RelativeLayout>
+    </LinearLayout>
+    <Space
+        android:layout_width="10dp"
+        android:layout_height="20dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        <RelativeLayout
+            android:id="@+id/enter_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            tools:ignore="UselessParent"
+            android:background="@drawable/edittet_shape">
+            <ImageView
+                android:id="@+id/tag_icon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/tag"
+                android:layout_marginTop="7dp"
+                android:contentDescription="@string/todo"
+                android:layout_marginStart="8dp"/>
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/topic"
+                android:layout_width="310dp"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/tag_icon"
+                android:layout_marginStart="14dp"
+                android:hint="@string/topic"
+                android:textSize="14sp"/>
+        </RelativeLayout>
+    </LinearLayout>
+    <Space
+        android:layout_width="10dp"
+        android:layout_height="20dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:id="@+id/enter_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            tools:ignore="UselessParent"
+            android:background="@drawable/edittet_shape">
+            <ImageView
+                android:id="@+id/code_icon"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/code_icon"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/todo"
+                android:layout_marginStart="8dp"/>
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/code"
+                android:layout_width="310dp"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/code_icon"
+                android:lines="8"
+                android:layout_marginStart="14dp"
+                android:hint="Code"
+                android:textSize="14sp"/>
+
+        </RelativeLayout>
+    </LinearLayout>
+
+
+    <Space
+        android:layout_width="10dp"
+        android:layout_height="20dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
         <RelativeLayout
             android:layout_marginStart="15dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:ignore="UselessParent">
+            tools:ignore="UselessParent"
+            >
             <ImageView
                 android:layout_centerVertical="true"
                 android:id="@+id/diff_icon"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
+                android:layout_marginStart="6dp"
                 android:src="@drawable/difficulty_level"
                 android:contentDescription="@string/todo" />
             <com.google.android.material.textfield.TextInputLayout
@@ -116,105 +259,10 @@
 
         </RelativeLayout>
     </LinearLayout>
-    <Space
-        android:layout_width="10dp"
-        android:layout_height="20dp"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
-        <RelativeLayout
-            android:id="@+id/enter_title"
-            android:layout_marginStart="15dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:ignore="UselessParent">
-
-            <ImageView
-                android:id="@+id/title_icon"
-                android:layout_width="25sp"
-                android:layout_height="25sp"
-                android:src="@drawable/title"
-                android:background="@color/white"
-                android:layout_marginTop="5dp"
-                android:contentDescription="@string/todo"
-                />
-
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/title"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_toEndOf="@id/title_icon"
-                android:layout_marginStart="14dp"
-                android:hint="@string/enter_title"
-                android:textSize="14sp"/>
-        </RelativeLayout>
-    </LinearLayout>
-    <Space
-        android:layout_width="10dp"
-        android:layout_height="20dp"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
-        <RelativeLayout
-            android:id="@+id/enter_link"
-            android:layout_marginStart="15dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:ignore="UselessParent">
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:id="@+id/link_icon"
-                android:src="@drawable/link"
-                android:layout_marginTop="5dp"
-                android:contentDescription="@string/todo" />
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/link"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="35dp"
-                android:hint="@string/paste_the_link"
-                android:textSize="14sp"/>
-        </RelativeLayout>
-    </LinearLayout>
-    <Space
-        android:layout_width="10dp"
-        android:layout_height="20dp"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
-        <RelativeLayout
-            android:id="@+id/enter_tag"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            tools:ignore="UselessParent">
-            <ImageView
-                android:id="@+id/tag_icon"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/tag"
-                android:layout_marginTop="6dp"
-                android:contentDescription="@string/todo" />
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/topic"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="35dp"
-                android:hint="@string/topic"
-                android:textSize="14sp"/>
-        </RelativeLayout>
-    </LinearLayout>
 
 
     <LinearLayout
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="35dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"

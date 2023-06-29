@@ -44,7 +44,7 @@ public class AddProblemActivity extends AppCompatActivity {
     String sl = "";
     long[] slNo = {0};
     int selectedTab;
-    String questionTag="";
+    private String questionLink ="",enteredCode = "",questionTitle = "",questionTag="";
 
     @SuppressLint({"MissingInflatedId", "SetTextI18n"})
     @Override
@@ -52,6 +52,7 @@ public class AddProblemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_problem);
 
+        TextView code = findViewById(R.id.code);
         TextView textView1 = findViewById(R.id.text_headline1);
         TextView textView2 = findViewById(R.id.text_headline2);
         TextView title = findViewById(R.id.title);
@@ -116,17 +117,18 @@ public class AddProblemActivity extends AppCompatActivity {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String questionTitle = title.getText().toString();
-                String questionLink = link.getText().toString();
-                questionTag = topic.getText().toString();
+                questionTitle += title.getText().toString();
+                questionLink += link.getText().toString();
+                questionTag += topic.getText().toString();
+                enteredCode += code.getText().toString();
                 String date = selectedDate;
                 int diff = selectedDifficulty;
 
-                if (diff == -1 || questionLink == null || questionTag == null) {
+                if (diff == -1 || questionLink.equals("") || questionTag.equals("") || enteredCode.equals("")) {
                     Toast.makeText(AddProblemActivity.this, "Please fill the form appropriately", Toast.LENGTH_LONG).show();
                 } else {
 
-                    DataHolder obj = new DataHolder(questionTitle, questionLink, date, diffItems[diff], questionTag);
+                    DataHolder obj = new DataHolder(questionTitle, questionLink, date, diffItems[diff], questionTag,enteredCode);
 
                     setData(obj);
 
