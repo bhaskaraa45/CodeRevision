@@ -37,4 +37,7 @@
     <string name="paste_the_link">Paste the Link</string>
     <string name="add">Add</string>
     <string name="today">Today</string>
+    <string name="github_link">github.com/bhaskaraa45/CodeRevision</string>
+    <string name="name">Code Revision</string>
+    <string name="about_paragraph">Sometimes, we forget certain approaches or syntax that we have previously used. To address this, I have developed an app that allows you to save your solved CP problems and revise them later.\n\nWith this app, you can easily store your solved problems and access them whenever you need to refresh your memory.</string>
 </resources>

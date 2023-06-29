@@ -1,14 +1,18 @@
 package com.android.aa45.coderevision;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +22,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.aa45.coderevision.Fragments.AboutFragment;
+import com.android.aa45.coderevision.Fragments.FeedbackFragment;
+import com.android.aa45.coderevision.Fragments.SettingsFragment;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -46,7 +53,6 @@ public class MeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).setTitle("Profile");
 
         // Inflate the layout for this fragment
@@ -82,13 +88,15 @@ public class MeFragment extends Fragment {
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                replaceFragment(new SettingsFragment());
                 Toast.makeText(getContext(), "Settings", Toast.LENGTH_SHORT).show();
+
             }
         });
         feedback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "Feedback", Toast.LENGTH_SHORT).show();
+                replaceFragment(new FeedbackFragment());
             }
         });
         share.setOnClickListener(new View.OnClickListener() {
@@ -104,24 +112,49 @@ public class MeFragment extends Fragment {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                signOut();
-                Toast.makeText(getContext(), "Logged Out", Toast.LENGTH_SHORT).show();
+                showAlert();
             }
         });
         bugReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "Report a bug", Toast.LENGTH_SHORT).show();
+                Intent email = new Intent();
+                String text = "mailto:" + Uri.encode("bhaskarmandal369@gmail.com") + "?subject=" +
+                        Uri.encode("Code-Revision: Bug Report by " + userData.get(0) ) ;
+                Uri uri = Uri.parse(text);
+                email.setData(uri);
+                email.setPackage("com.google.android.gm");
+                startActivity(email);
             }
         });
         about.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "About", Toast.LENGTH_SHORT).show();
+                replaceFragment(new AboutFragment());
             }
         });
 
         return rootView;
+    }
+
+    private void showAlert() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setMessage("Do you want to log out?");
+        builder.setPositiveButton("Log Out", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                signOut();
+                Toast.makeText(getContext(), "Logged Out", Toast.LENGTH_SHORT).show();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 
     private void signOut() {
@@ -130,5 +163,14 @@ public class MeFragment extends Fragment {
         startActivity(new Intent(getContext(),MainActivity.class));
         requireActivity().finish();
 
+    }
+
+    private void replaceFragment(Fragment fragment){
+        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.setReorderingAllowed(false);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.replace(R.id.frameLayout,fragment);
+        fragmentTransaction.commit();
     }
 }
