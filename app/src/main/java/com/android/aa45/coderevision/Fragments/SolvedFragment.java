@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.aa45.coderevision.R;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 public class SolvedFragment extends Fragment {
@@ -21,7 +23,8 @@ public class SolvedFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
     final View view = inflater.inflate(R.layout.fragment_solved, container, false);
-
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        DatabaseReference reference=db.getReference();
         return view;
     }
 
