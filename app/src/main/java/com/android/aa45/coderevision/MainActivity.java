@@ -76,12 +76,7 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.refresh_menu,menu);
-        return true;
-    }
+
     public void exitApplication(){
         finish();
         System.exit(0);

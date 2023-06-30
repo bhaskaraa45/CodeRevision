@@ -50,10 +50,10 @@ public class MeFragment extends Fragment {
     private RelativeLayout about;
     private RelativeLayout bugReport;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).setTitle("Profile");
 
         // Inflate the layout for this fragment
         final View rootView = inflater.inflate(R.layout.fragment_me, container, false);
@@ -82,14 +82,13 @@ public class MeFragment extends Fragment {
         feedback = rootView.findViewById(R.id.feedback);
         share = rootView.findViewById(R.id.share);
         logout = rootView.findViewById(R.id.logout);
-        bugReport = rootView.findViewById(R.id.bugReport);
+        bugReport = rootView.findViewById(R.id.report);
         about = rootView.findViewById(R.id.about);
 
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 replaceFragment(new SettingsFragment());
-                Toast.makeText(getContext(), "Settings", Toast.LENGTH_SHORT).show();
 
             }
         });

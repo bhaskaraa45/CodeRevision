@@ -21,11 +21,17 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapte
     public recyclerViewAdapter(List<DataHolder> items) {
         this.items = items;
     }
+    int redColor,blueColor,greenColor,whiteColor,orangeColor;
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_view_row, parent, false);
+        redColor = parent.getContext().getResources().getColor(R.color.red);
+        blueColor = parent.getContext().getResources().getColor(R.color.blue_);
+        greenColor = parent.getContext().getResources().getColor(R.color.green);
+        whiteColor = parent.getContext().getResources().getColor(R.color.white);
+        orangeColor = parent.getContext().getResources().getColor(R.color.orange);
         return new ViewHolder(itemView);
     }
 
@@ -37,6 +43,20 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapte
         holder.setDate.setText(dataHolder.getDate());
         holder.setSlNo.setText(dataHolder.getslNo()+".");
         holder.setDiff.setText(dataHolder.getDifficulty());
+        holder.setTopic.setText(dataHolder.getTag());
+
+        switch (dataHolder.getDifficulty()) {
+            case "Hard":
+                holder.setDiff.setTextColor(redColor);
+                break;
+            case "Easy":
+            case "Medium":
+                holder.setDiff.setTextColor(greenColor);
+                break;
+            default:
+                holder.setDiff.setTextColor(whiteColor);
+                break;
+        }
     }
 
     @Override

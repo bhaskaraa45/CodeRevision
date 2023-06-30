@@ -1,13 +1,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.CodeRevision" parent="Theme.AppCompat">
-        <item name="colorPrimary" >@color/blue_dark</item>
+    <style name="Base.Theme.CodeRevision" parent="Theme.MaterialComponents.NoActionBar.Bridge">
+        <item name="colorPrimary" >@color/secondary</item>
 
     </style>
 
-    <style name="AddedTheme" parent="Theme.MaterialComponents.NoActionBar.Bridge">
-        <item name="colorPrimary" >@color/blue_</item>
-    </style>
 
     <style name="FloatingActionButton" >
         <item name="android:windowEnterAnimation">@anim/slide_in_bottom</item>

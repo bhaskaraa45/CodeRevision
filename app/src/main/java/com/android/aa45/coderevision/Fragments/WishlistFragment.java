@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,15 +30,18 @@ public class WishlistFragment extends Fragment {
 
     private List<DataHolder> ItemList;
     private recyclerViewAdapter viewAdapter;
-    private RecyclerView recyclerView;
+    private SwipeRefreshLayout swipeRefreshLayout;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootview = inflater.inflate(R.layout.fragment_wishlist, container, false);
+        swipeRefreshLayout = rootview.findViewById(R.id.swipeRefreshLayout);
+
         if(FirebaseAuth.getInstance().getCurrentUser()!=null) {
             ItemList = new ArrayList<>();
-            recyclerView = rootview.findViewById(R.id.recyclerView);
+            RecyclerView recyclerView = rootview.findViewById(R.id.recyclerView);
 
             FirebaseDatabase db = FirebaseDatabase.getInstance("https://code-revision-default-rtdb.asia-southeast1.firebasedatabase.app/");
             String uid = FirebaseAuth.getInstance().getUid();
@@ -66,6 +70,14 @@ public class WishlistFragment extends Fragment {
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
             recyclerView.setAdapter(viewAdapter);
         }
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @SuppressLint("NotifyDataSetChanged")
+            @Override
+            public void onRefresh() {
+                viewAdapter.notifyDataSetChanged();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
     return rootview;
     }
 }

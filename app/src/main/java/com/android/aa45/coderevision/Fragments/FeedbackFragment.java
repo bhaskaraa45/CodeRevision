@@ -36,7 +36,6 @@ public class FeedbackFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_feedback, container, false);
-        Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).setTitle("Feedback");
 
         submit = view.findViewById(R.id.feedbackSubmit);
         rating = view.findViewById(R.id.starRating);
