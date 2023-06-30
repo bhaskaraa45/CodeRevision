@@ -18,6 +18,7 @@ import com.android.aa45.coderevision.Adapters.recyclerViewAdapter;
 import com.android.aa45.coderevision.Firebase.DataHolder;
 import com.android.aa45.coderevision.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -40,6 +41,7 @@ public class SolvedFragment extends Fragment {
                              Bundle savedInstanceState) {
     final View view = inflater.inflate(R.layout.fragment_solved, container, false);
 
+    if(FirebaseAuth.getInstance().getCurrentUser()!=null) {
         ItemList = new ArrayList<>();
         recyclerView = view.findViewById(R.id.recyclerView);
 
@@ -53,7 +55,7 @@ public class SolvedFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 ItemList.clear();
 
-                for (DataSnapshot userSnap : snapshot.getChildren()){
+                for (DataSnapshot userSnap : snapshot.getChildren()) {
                     DataHolder dataS = userSnap.getValue(DataHolder.class);
                     ItemList.add(dataS);
                 }
@@ -66,9 +68,11 @@ public class SolvedFragment extends Fragment {
             }
         });
 
+
         viewAdapter = new recyclerViewAdapter(ItemList);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(viewAdapter);
+    }
 
         return view;
     }

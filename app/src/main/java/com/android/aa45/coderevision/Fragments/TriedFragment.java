@@ -35,37 +35,38 @@ public class TriedFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootview = inflater.inflate(R.layout.fragment_tried, container, false);
+        if(FirebaseAuth.getInstance().getCurrentUser()!=null) {
 
-        ItemList = new ArrayList<>();
-        recyclerView = rootview.findViewById(R.id.recyclerView);
+            ItemList = new ArrayList<>();
+            recyclerView = rootview.findViewById(R.id.recyclerView);
 
-        FirebaseDatabase db = FirebaseDatabase.getInstance("https://code-revision-default-rtdb.asia-southeast1.firebasedatabase.app/");
-        String uid = FirebaseAuth.getInstance().getUid();
-        DatabaseReference uidRef = db.getReference().child("user").child(uid).child("Tried"); //root->user->uid->tired
+            FirebaseDatabase db = FirebaseDatabase.getInstance("https://code-revision-default-rtdb.asia-southeast1.firebasedatabase.app/");
+            String uid = FirebaseAuth.getInstance().getUid();
+            DatabaseReference uidRef = db.getReference().child("user").child(uid).child("Tried"); //root->user->uid->tired
 
-        uidRef.addValueEventListener(new ValueEventListener() {
-            @SuppressLint("NotifyDataSetChanged")
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                ItemList.clear();
+            uidRef.addValueEventListener(new ValueEventListener() {
+                @SuppressLint("NotifyDataSetChanged")
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    ItemList.clear();
 
-                for (DataSnapshot userSnap : snapshot.getChildren()){
-                    DataHolder dataS = userSnap.getValue(DataHolder.class);
-                    ItemList.add(dataS);
+                    for (DataSnapshot userSnap : snapshot.getChildren()) {
+                        DataHolder dataS = userSnap.getValue(DataHolder.class);
+                        ItemList.add(dataS);
+                    }
+                    viewAdapter.notifyDataSetChanged();
                 }
-                viewAdapter.notifyDataSetChanged();
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
-            }
-        });
+                }
+            });
 
-        viewAdapter = new recyclerViewAdapter(ItemList);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(viewAdapter);
-
+            viewAdapter = new recyclerViewAdapter(ItemList);
+            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+            recyclerView.setAdapter(viewAdapter);
+        }
     return rootview;
     }
 }
