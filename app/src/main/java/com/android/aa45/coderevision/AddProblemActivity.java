@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.SharedPreferences;
 import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.util.Patterns;
@@ -192,34 +193,25 @@ public class AddProblemActivity extends AppCompatActivity {
     private String makeDateString(int day, int month, int year) {
         return (day + "-" + month + "-" + year);
     }
+    @SuppressLint("CommitPrefEdits")
     private void setData(){
         FirebaseDatabase db = FirebaseDatabase.getInstance("https://code-revision-default-rtdb.asia-southeast1.firebasedatabase.app/");
         DatabaseReference myRef = db.getReference(); //root
         String uid = FirebaseAuth.getInstance().getUid();
-        DatabaseReference branchRef = myRef.child("user").child(uid).child(branch[selectedTab]); //root->user->uid->branch(tab)
 
-        //for SL no
-        branchRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                slNo[0]=snapshot.getChildrenCount();
-                sl += (slNo[0]+1);
+        SharedPreferences sharedPreferences = getSharedPreferences("unique",MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        long s = sharedPreferences.getInt("id",0);
+        editor.putLong("id",s+1);
+        editor.apply();
 
-                DataHolder obj = new DataHolder(questionTitle, questionLink, date, diffItems[diff], questionTag,enteredCode,sl,branch[selectedTab]);
+        //root->user->uid->branch(tab)->unique ID
+        DatabaseReference branchRef = myRef.child("user").child(uid).child(branch[selectedTab]).child(s+"");
 
+        DataHolder obj = new DataHolder(questionTitle, questionLink, date, diffItems[diff], questionTag,enteredCode,s+"",branch[selectedTab]);
 
-                //root->user->uid->branch(tab)->sl no
-                DatabaseReference finalRef = branchRef.child(sl);
+        branchRef.setValue(obj);
 
-                //set data
-                finalRef.setValue(obj);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
     }
 
 }

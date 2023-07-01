@@ -212,15 +212,17 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapte
                             difficulty.setSelection(0);
                     }
 
+                    String updatedTitle = title.getText().toString();
+                    String updatedTopic = topic.getText().toString();
+                    String updatedLink = link.getText().toString();
+                    String updatedCode = code.getText().toString();
+                    String updatedDate = selectedDate;
+                    int diff = selectedDifficulty;
+
                     updateButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            String updatedTitle = title.getText().toString();
-                            String updatedTopic = topic.getText().toString();
-                            String updatedLink = link.getText().toString();
-                            String updatedCode = code.getText().toString();
-                            String updatedDate = selectedDate;
-                            int diff = selectedDifficulty;
+
                             if(!Patterns.WEB_URL.matcher(updatedLink).matches()){
                                 Toast.makeText(context, "Please Enter valid Link", Toast.LENGTH_SHORT).show();
                             }
@@ -239,11 +241,12 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapte
                         }
                     });
 
-
                     editDialog.show();
 
                 }
             });
+
+            
 
 
             dialog.show();
@@ -315,5 +318,4 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapte
         //update data
         finalRef.setValue(dataHolder);
     }
-
 }
