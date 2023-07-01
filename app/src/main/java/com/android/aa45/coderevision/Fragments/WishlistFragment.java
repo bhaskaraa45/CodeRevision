@@ -66,7 +66,7 @@ public class WishlistFragment extends Fragment {
                 }
             });
 
-            viewAdapter = new recyclerViewAdapter(ItemList);
+            viewAdapter = new recyclerViewAdapter(ItemList,getContext());
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
             recyclerView.setAdapter(viewAdapter);
         }

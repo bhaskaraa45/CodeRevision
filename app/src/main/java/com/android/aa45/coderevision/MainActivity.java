@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -19,6 +20,8 @@ import com.google.firebase.auth.FirebaseUser;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+
+    public static ArrayList<Context> MainActContext = new ArrayList<>();
 
     FirebaseAuth mAuth;
     static ArrayList<String> userDetails=new ArrayList<>(); // at 0-> name , at 1-> email , at 2-> photo url
@@ -45,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        MainActContext.add(MainActivity.this);
 
         mAuth = FirebaseAuth.getInstance();
 

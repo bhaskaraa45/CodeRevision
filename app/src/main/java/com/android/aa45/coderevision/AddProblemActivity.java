@@ -9,7 +9,9 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
+import android.webkit.URLUtil;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -29,6 +31,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Stack;
@@ -124,8 +129,20 @@ public class AddProblemActivity extends AppCompatActivity {
                 enteredCode += code.getText().toString();
                 date = selectedDate;
                 diff = selectedDifficulty;
+                
+//                boolean checkLink =false;
+//
+//                try {
+//                    new URL(questionLink).toURI();
+//                    checkLink=true;
+//                    Toast.makeText(AddProblemActivity.this, "loda", Toast.LENGTH_SHORT).show();
+//                } catch (MalformedURLException | URISyntaxException ignored) {
+//                }
 
-                if (diff == -1 || questionLink.equals("") || questionTag.equals("") || enteredCode.equals("")) {
+                if(!Patterns.WEB_URL.matcher(questionLink).matches()){
+                    Toast.makeText(AddProblemActivity.this, "Please Enter valid Link", Toast.LENGTH_SHORT).show();
+                }
+                else if (diff == -1 || questionTag.equals("") || enteredCode.equals("")) {
                     Toast.makeText(AddProblemActivity.this, "Please fill the form appropriately", Toast.LENGTH_LONG).show();
                 } else {
                     setData();
