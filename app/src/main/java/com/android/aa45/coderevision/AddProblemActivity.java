@@ -48,11 +48,11 @@ public class AddProblemActivity extends AppCompatActivity {
     private int selectedDifficulty= -1;
     private final String[] diffItems = {"Basic", "Easy" , "Medium" , "Hard"};
     private final String[] branch = {"Solved","Tried","Wishlist"};
-    String sl = "";
-    long[] slNo = {0};
+    String sl = "0";
     int selectedTab;
     private String questionLink ="",enteredCode = "",questionTitle = "",questionTag="" , date = "";
     private int diff;
+    String uniqueId ="";
 
     @SuppressLint({"MissingInflatedId", "SetTextI18n"})
     @Override
@@ -199,18 +199,16 @@ public class AddProblemActivity extends AppCompatActivity {
         DatabaseReference myRef = db.getReference(); //root
         String uid = FirebaseAuth.getInstance().getUid();
 
-        SharedPreferences sharedPreferences = getSharedPreferences("unique",MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        long s = sharedPreferences.getInt("id",0);
-        editor.putLong("id",s+1);
-        editor.apply();
 
-        //root->user->uid->branch(tab)->unique ID
-        DatabaseReference branchRef = myRef.child("user").child(uid).child(branch[selectedTab]).child(s+"");
 
-        DataHolder obj = new DataHolder(questionTitle, questionLink, date, diffItems[diff], questionTag,enteredCode,s+"",branch[selectedTab]);
+        //root->user->uid->branch(tab)
+        DatabaseReference branchRef = myRef.child("user").child(uid).child(branch[selectedTab]);
+        uniqueId = branchRef.push().getKey();
+        DatabaseReference finalRef = myRef.child("user").child(uid).child(branch[selectedTab]).child(uniqueId);
 
-        branchRef.setValue(obj);
+        DataHolder obj = new DataHolder(questionTitle, questionLink, date, diffItems[diff], questionTag,enteredCode,uniqueId,branch[selectedTab]);
+
+        finalRef.setValue(obj);
 
     }
 

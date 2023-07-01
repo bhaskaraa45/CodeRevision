@@ -245,7 +245,6 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapte
 
                 }
             });
-
             
 
 
@@ -318,4 +317,6 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapte
         //update data
         finalRef.setValue(dataHolder);
     }
+
+
 }

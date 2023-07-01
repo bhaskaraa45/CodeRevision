@@ -112,7 +112,8 @@
                 android:layout_toEndOf="@id/title_icon"
                 android:layout_marginStart="14dp"
                 android:hint="@string/enter_title"
-                android:textSize="14sp"/>
+                android:textSize="14sp"
+                android:maxLines="2"/>
         </RelativeLayout>
     </LinearLayout>
     <Space
@@ -145,7 +146,8 @@
                 android:layout_toEndOf="@id/link_icon"
                 android:layout_marginStart="14dp"
                 android:hint="@string/paste_the_link"
-                android:textSize="14sp"/>
+                android:textSize="14sp"
+                android:maxLines="2"/>
         </RelativeLayout>
     </LinearLayout>
     <Space
@@ -178,7 +180,8 @@
                 android:layout_toEndOf="@id/tag_icon"
                 android:layout_marginStart="14dp"
                 android:hint="@string/topic"
-                android:textSize="14sp"/>
+                android:textSize="14sp"
+                android:maxLines="2"/>
         </RelativeLayout>
     </LinearLayout>
     <Space
