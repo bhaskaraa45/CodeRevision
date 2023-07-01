@@ -41,7 +41,6 @@
             android:text="@string/bhaskar"
             android:fontFamily="@font/glitch0"
             android:layout_gravity="center"
-            android:textStyle="italic"
             android:textSize="30sp"
             android:textColor="@color/white"
             android:padding="1dp"

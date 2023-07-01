@@ -18,6 +18,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -65,17 +66,28 @@ public class AddProblemActivity extends AppCompatActivity {
         TextView link = findViewById(R.id.link);
         TextView topic = findViewById(R.id.topic);
         Button addButton = findViewById(R.id.add_problem);
-        AutoCompleteTextView difficultyLevel = findViewById(R.id.difficulty_level);
-        ArrayAdapter<String> stringArrayAdapter = new ArrayAdapter<>(this,R.layout.difficulty_list,diffItems);
 
-        //set difficulty options
-        difficultyLevel.setAdapter(stringArrayAdapter);
-        difficultyLevel.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.difficulty_items, android.R.layout.simple_spinner_item);
+        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                selectedDifficulty = position;
+            public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id) {
+                selectedDifficulty=pos-1;
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
             }
         });
+
+
 
 
         //select date
@@ -129,21 +141,13 @@ public class AddProblemActivity extends AppCompatActivity {
                 enteredCode += code.getText().toString();
                 date = selectedDate;
                 diff = selectedDifficulty;
-                
-//                boolean checkLink =false;
-//
-//                try {
-//                    new URL(questionLink).toURI();
-//                    checkLink=true;
-//                    Toast.makeText(AddProblemActivity.this, "loda", Toast.LENGTH_SHORT).show();
-//                } catch (MalformedURLException | URISyntaxException ignored) {
-//                }
+
 
                 if(!Patterns.WEB_URL.matcher(questionLink).matches()){
                     Toast.makeText(AddProblemActivity.this, "Please Enter valid Link", Toast.LENGTH_SHORT).show();
                 }
-                else if (diff == -1 || questionTag.equals("") || enteredCode.equals("")) {
-                    Toast.makeText(AddProblemActivity.this, "Please fill the form appropriately", Toast.LENGTH_LONG).show();
+                else if (diff <0 || questionTag.equals("") || enteredCode.equals("")) {
+                    Toast.makeText(AddProblemActivity.this, "Please fill the form appropriately", Toast.LENGTH_SHORT).show();
                 } else {
                     setData();
                     finish();
@@ -201,7 +205,7 @@ public class AddProblemActivity extends AppCompatActivity {
                 slNo[0]=snapshot.getChildrenCount();
                 sl += (slNo[0]+1);
 
-                DataHolder obj = new DataHolder(questionTitle, questionLink, date, diffItems[diff], questionTag,enteredCode,sl);
+                DataHolder obj = new DataHolder(questionTitle, questionLink, date, diffItems[diff], questionTag,enteredCode,sl,branch[selectedTab]);
 
 
                 //root->user->uid->branch(tab)->sl no

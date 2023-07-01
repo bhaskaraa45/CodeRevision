@@ -2,34 +2,57 @@ package com.android.aa45.coderevision.Adapters;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.aa45.coderevision.AddProblemActivity;
 import com.android.aa45.coderevision.Firebase.DataHolder;
 import com.android.aa45.coderevision.MainActivity;
 import com.android.aa45.coderevision.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.Calendar;
 import java.util.List;
 
 public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapter.ViewHolder> {
 
-    Context mainContext;
     List<DataHolder> items ;
     Activity activity;
     Context context;
+    private DatePickerDialog datePickerDialog;
+    private  Button datePickerButton;
+    private String selectedDate;
+    int selectedDifficulty=-1;
+    private final String[] diffItems = {"Basic", "Easy" , "Medium" , "Hard"};
+
 
     public recyclerViewAdapter(List<DataHolder> items,Context context) {
         this.items = items;
@@ -40,7 +63,6 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapte
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-//        context = parent.getContext();
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_view_row, parent, false);
         redColor = parent.getContext().getResources().getColor(R.color.red);
         blueColor = parent.getContext().getResources().getColor(R.color.blue);
@@ -73,10 +95,9 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapte
                 break;
         }
 
-        mainContext = MainActivity.MainActContext.get(0);
 
         holder.rowCard.setOnClickListener(view -> {
-            Dialog dialog = new Dialog(mainContext,R.style.Base_Theme_CodeRevision);
+            Dialog dialog = new Dialog(context,R.style.Base_Theme_CodeRevision);
             dialog.setContentView(R.layout.dialog_row_card);
 
             TextView slPlusTitle = dialog.findViewById(R.id.sl_plus_title);
@@ -116,8 +137,117 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapte
                 }
             });
 
+            edit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Dialog editDialog = new Dialog(context,R.style.Base_Theme_CodeRevision);
+                    editDialog.setContentView(R.layout.dialog_edit_problem_details);
+
+                    TextView code = editDialog.findViewById(R.id.code_edit);
+                    TextView title = editDialog.findViewById(R.id.title_edit);
+                    TextView link = editDialog.findViewById(R.id.link_edit);
+                    TextView topic = editDialog.findViewById(R.id.topic_edit);
+                    Button updateButton = editDialog.findViewById(R.id.update_button);
+                    Spinner difficulty = editDialog.findViewById(R.id.spinner_edit);
+                    datePickerButton = editDialog.findViewById(R.id.date_picker_edit);
+                    ImageView back = editDialog.findViewById(R.id.back_edit);
+
+
+                    code.setText(dataHolder.getCode());
+                    title.setText(dataHolder.getTitle());
+                    link.setText(dataHolder.getLink());
+                    topic.setText(dataHolder.getTag());
+
+                    back.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            dialog.dismiss();
+                            editDialog.dismiss();
+                        }
+                    });
+
+                    //datePicker
+                    initDatePicker();
+                    selectedDate = dataHolder.getDate();
+                    datePickerButton.setText(selectedDate);
+                    datePickerButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            datePickerDialog.show();
+                        }
+                    });
+
+                    //difficulty level
+                    ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(context,
+                            R.array.difficulty_items, android.R.layout.simple_spinner_item);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    difficulty.setAdapter(adapter);
+
+                    difficulty.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id) {
+                            selectedDifficulty = pos - 1;
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+
+                        }
+                    });
+
+                    switch (dataHolder.getDifficulty()){
+                        case "Hard" :
+                            difficulty.setSelection(4);
+                            break;
+                        case "Medium" :
+                            difficulty.setSelection(3);
+                            break;
+                        case "Easy" :
+                            difficulty.setSelection(2);
+                            break;
+                        case "Basic" :
+                            difficulty.setSelection(1);
+                            break;
+                        default:
+                            difficulty.setSelection(0);
+                    }
+
+                    updateButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            String updatedTitle = title.getText().toString();
+                            String updatedTopic = topic.getText().toString();
+                            String updatedLink = link.getText().toString();
+                            String updatedCode = code.getText().toString();
+                            String updatedDate = selectedDate;
+                            int diff = selectedDifficulty;
+                            if(!Patterns.WEB_URL.matcher(updatedLink).matches()){
+                                Toast.makeText(context, "Please Enter valid Link", Toast.LENGTH_SHORT).show();
+                            }
+                            else if (diff <0 || updatedTopic.equals("") || updatedCode.equals("")) {
+                                Toast.makeText(context, "Please fill the form appropriately", Toast.LENGTH_SHORT).show();
+                            } else {
+
+                                DataHolder updatedDataHolder = new DataHolder(updatedTitle,updatedLink,updatedDate,diffItems[diff],updatedTopic,updatedCode, dataHolder.getSlNo(), dataHolder.getTab());
+
+                                updateData(updatedDataHolder);
+
+                                dialog.dismiss();
+                                editDialog.dismiss();
+                            }
+
+                        }
+                    });
+
+
+                    editDialog.show();
+
+                }
+            });
+
 
             dialog.show();
+
         });
     }
 
@@ -144,6 +274,46 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapte
             setDiff = itemView.findViewById(R.id.setDiff);
             rowCard = itemView.findViewById(R.id.rowCard);
         }
+    }
+
+
+    //for date picker
+    private void initDatePicker()
+    {
+        DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener()
+        {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day)
+            {
+                selectedDate = makeDateString(day,month +1 , year);
+                datePickerButton.setText(selectedDate);
+            }
+        };
+
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+
+        int style = AlertDialog.THEME_HOLO_DARK;
+
+        datePickerDialog = new DatePickerDialog(context, style, dateSetListener, year, month, day);
+
+    }
+
+    private String makeDateString(int day, int month, int year) {
+        return (day + "-" + month + "-" + year);
+    }
+
+    //update data on firebase rtdb
+    private void updateData(DataHolder dataHolder){
+        FirebaseDatabase db = FirebaseDatabase.getInstance("https://code-revision-default-rtdb.asia-southeast1.firebasedatabase.app/");
+        DatabaseReference myRef = db.getReference(); //root
+        String uid = FirebaseAuth.getInstance().getUid();
+        DatabaseReference finalRef = myRef.child("user").child(uid).child(dataHolder.getTab()).child(dataHolder.getSlNo()); //root->user->uid->branch(tab)->Sl
+
+        //update data
+        finalRef.setValue(dataHolder);
     }
 
 }

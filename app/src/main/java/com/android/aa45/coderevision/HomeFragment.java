@@ -88,7 +88,6 @@ public class HomeFragment extends Fragment{
                 tabNo.add(0);
                 Intent intent = new Intent(getContext(),AddProblemActivity.class);
                 startActivity(intent);
-                Toast.makeText(getContext(),"solved is Clicked",Toast.LENGTH_SHORT).show();
             }
         });
         addTried.setOnClickListener(new View.OnClickListener() {
@@ -101,7 +100,6 @@ public class HomeFragment extends Fragment{
                 tabNo.add(1);
                 Intent intent = new Intent(getContext(),AddProblemActivity.class);
                 startActivity(intent);
-                Toast.makeText(getContext(),"tried is Clicked",Toast.LENGTH_SHORT).show();
             }
         });
         addWishlist.setOnClickListener(new View.OnClickListener() {
@@ -114,7 +112,6 @@ public class HomeFragment extends Fragment{
                 tabNo.add(2);
                 Intent intent = new Intent(getContext(),AddProblemActivity.class);
                 startActivity(intent);
-                Toast.makeText(getContext(),"wishlist is Clicked",Toast.LENGTH_SHORT).show();
             }
         });
         dialog.show();

@@ -1,11 +1,11 @@
 package com.android.aa45.coderevision.Firebase;
 
 public class DataHolder {
-    String title,link,date,difficulty,tag,code,slNo;
+    String title,link,date,difficulty,tag,code,slNo,tab;
     public DataHolder() {
     }
 
-    public DataHolder(String title, String link, String date, String difficulty, String tag,String code,String slNo) {
+    public DataHolder(String title, String link, String date, String difficulty, String tag,String code,String slNo,String tab) {
         this.title = title;
         this.link = link;
         this.date = date;
@@ -13,13 +13,22 @@ public class DataHolder {
         this.tag = tag;
         this.code = code;
         this.slNo=slNo;
+        this.tab=tab;
     }
 
-    public String getslNo() {
+    public String getTab() {
+        return tab;
+    }
+
+    public void setTab(String tab) {
+        this.tab = tab;
+    }
+
+    public String getSlNo() {
         return slNo;
     }
 
-    public void setslNo(String slNo) {
+    public void setSlNo(String slNo) {
         this.slNo = slNo;
     }
 
