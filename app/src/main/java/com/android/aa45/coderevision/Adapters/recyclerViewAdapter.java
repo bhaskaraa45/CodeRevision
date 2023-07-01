@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.util.Patterns;
@@ -212,16 +213,17 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapte
                             difficulty.setSelection(0);
                     }
 
-                    String updatedTitle = title.getText().toString();
-                    String updatedTopic = topic.getText().toString();
-                    String updatedLink = link.getText().toString();
-                    String updatedCode = code.getText().toString();
-                    String updatedDate = selectedDate;
-                    int diff = selectedDifficulty;
+
 
                     updateButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
+                            String updatedTitle = title.getText().toString();
+                            String updatedTopic = topic.getText().toString();
+                            String updatedLink = link.getText().toString();
+                            String updatedCode = code.getText().toString();
+                            String updatedDate = selectedDate;
+                            int diff = selectedDifficulty;
 
                             if(!Patterns.WEB_URL.matcher(updatedLink).matches()){
                                 Toast.makeText(context, "Please Enter valid Link", Toast.LENGTH_SHORT).show();
@@ -245,7 +247,14 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapte
 
                 }
             });
-            
+
+            delete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    showAlert(dataHolder,dialog);
+                }
+            });
 
 
             dialog.show();
@@ -316,6 +325,36 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapte
 
         //update data
         finalRef.setValue(dataHolder);
+    }
+    private void deleteData(DataHolder dataHolder){
+        FirebaseDatabase db = FirebaseDatabase.getInstance("https://code-revision-default-rtdb.asia-southeast1.firebasedatabase.app/");
+        DatabaseReference myRef = db.getReference(); //root
+        String uid = FirebaseAuth.getInstance().getUid();
+        //root->user->uid->branch(tab)->Sl(unique ID)
+        DatabaseReference finalRef = myRef.child("user").child(uid).child(dataHolder.getTab()).child(dataHolder.getSlNo());
+
+        //delete data
+        finalRef.setValue(null);
+    }
+    private void showAlert(DataHolder dataHolder,Dialog dialog) {
+        androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(context);
+        builder.setMessage("Do you want to delete this permanently?");
+        builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialog.dismiss();
+                deleteData(dataHolder);
+                Toast.makeText(context, "Deleted", Toast.LENGTH_SHORT).show();
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        androidx.appcompat.app.AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 
 
