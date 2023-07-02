@@ -47,15 +47,6 @@ public class MeFragment extends Fragment {
     private FirebaseAuth mAuth;
     private GoogleSignInClient mGoogleSignInClient;
 
-    private RelativeLayout settings;
-    private RelativeLayout feedback;
-    private RelativeLayout share;
-    private RelativeLayout logout;
-    private RelativeLayout about;
-    private RelativeLayout bugReport;
-    private Switch notification;
-    private Switch darkMode;
-
     @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -84,14 +75,14 @@ public class MeFragment extends Fragment {
             Glide.with(requireActivity()).load(userData.get(2)).into(profilePic);
         }
 
-        settings = rootView.findViewById(R.id.settings);
-        feedback = rootView.findViewById(R.id.feedback);
-        share = rootView.findViewById(R.id.share);
-        logout = rootView.findViewById(R.id.logout);
-        bugReport = rootView.findViewById(R.id.report);
-        about = rootView.findViewById(R.id.about);
-        notification=rootView.findViewById(R.id.notificationSwitch);
-        darkMode = rootView.findViewById(R.id.darkModeSwitch);
+        RelativeLayout settings = rootView.findViewById(R.id.settings);
+        RelativeLayout feedback = rootView.findViewById(R.id.feedback);
+        RelativeLayout share = rootView.findViewById(R.id.share);
+        RelativeLayout logout = rootView.findViewById(R.id.logout);
+        RelativeLayout bugReport = rootView.findViewById(R.id.report);
+        RelativeLayout about = rootView.findViewById(R.id.about);
+        Switch notification = rootView.findViewById(R.id.notificationSwitch);
+        Switch darkMode = rootView.findViewById(R.id.darkModeSwitch);
 
         SharedPreferences sharedPref = requireActivity().getSharedPreferences("Settings", Context.MODE_PRIVATE);
         @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = sharedPref.edit();

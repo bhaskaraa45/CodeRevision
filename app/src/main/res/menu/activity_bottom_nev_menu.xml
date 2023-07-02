@@ -10,6 +10,11 @@
         android:icon="@drawable/search"
         android:title="Search" />
     <item
+        android:id="@+id/tags"
+        android:icon="@drawable/tags"
+        android:title="Topics"
+        />
+    <item
         android:id="@+id/me"
         android:icon="@drawable/profile"
         android:title="Me" />

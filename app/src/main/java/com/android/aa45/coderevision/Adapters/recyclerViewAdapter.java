@@ -46,7 +46,6 @@ import java.util.List;
 public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapter.ViewHolder> {
 
     List<DataHolder> items ;
-    Activity activity;
     Context context;
     private DatePickerDialog datePickerDialog;
     private  Button datePickerButton;

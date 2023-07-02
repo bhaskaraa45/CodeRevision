@@ -26,10 +26,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
 public class SolvedFragment extends Fragment {
+    public static HashMap<String , Integer> topicFreq;
 
     private List<DataHolder> ItemList;
     private recyclerViewAdapter viewAdapter;
@@ -55,10 +57,20 @@ public class SolvedFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 ItemList.clear();
+                topicFreq =new HashMap<>();
 
                 for (DataSnapshot userSnap : snapshot.getChildren()) {
                     DataHolder dataS = userSnap.getValue(DataHolder.class);
                     ItemList.add(dataS);
+                    String tag = ItemList.get(ItemList.size()-1).getTag();
+                    if(topicFreq.containsKey(tag)){
+                        Integer currCount = topicFreq.get(tag);
+                        int newCount = currCount==null? 1 : currCount+1;
+                        topicFreq.put(tag, (newCount));
+
+                    }else{
+                        topicFreq.put(tag , 1);
+                    }
                 }
                 viewAdapter.notifyDataSetChanged();
             }

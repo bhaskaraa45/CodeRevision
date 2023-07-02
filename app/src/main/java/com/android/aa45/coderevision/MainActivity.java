@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
             int home = R.id.home;
             int me = R.id.me;
             int search = R.id.search;
+            int topics = R.id.tags;
 
             if(id==home){
                 replaceFragment(new HomeFragment());
@@ -69,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
                 replaceFragment(new SearchFragment());
             } else if (id==me) {
                 replaceFragment(new MeFragment());
+            } else if (id==topics) {
+                replaceFragment(new TopicsFragment());
             }
             return true;
         });
