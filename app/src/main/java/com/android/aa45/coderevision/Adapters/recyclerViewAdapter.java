@@ -161,7 +161,6 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapte
                     back.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            dialog.dismiss();
                             editDialog.dismiss();
                         }
                     });

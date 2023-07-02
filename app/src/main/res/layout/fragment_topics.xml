@@ -6,10 +6,20 @@
     tools:context=".TopicsFragment"
     android:orientation="vertical"
     android:background="@color/primary">
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/swipeRefreshLayout_topics">
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewGrid"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+
+            android:id="@+id/recyclerViewGrid"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </LinearLayout>

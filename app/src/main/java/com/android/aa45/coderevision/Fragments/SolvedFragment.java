@@ -33,7 +33,7 @@ import java.util.List;
 public class SolvedFragment extends Fragment {
     public static HashMap<String , Integer> topicFreq;
 
-    private List<DataHolder> ItemList;
+    public static List<DataHolder> ItemList;
     private recyclerViewAdapter viewAdapter;
     private SwipeRefreshLayout swipeRefreshLayout;
 
