@@ -1,8 +1,10 @@
 package com.android.aa45.coderevision;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -17,8 +19,10 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,6 +53,8 @@ public class MeFragment extends Fragment {
     private RelativeLayout logout;
     private RelativeLayout about;
     private RelativeLayout bugReport;
+    private Switch notification;
+    private Switch darkMode;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -84,6 +90,32 @@ public class MeFragment extends Fragment {
         logout = rootView.findViewById(R.id.logout);
         bugReport = rootView.findViewById(R.id.report);
         about = rootView.findViewById(R.id.about);
+        notification=rootView.findViewById(R.id.notificationSwitch);
+        darkMode = rootView.findViewById(R.id.darkModeSwitch);
+
+        SharedPreferences sharedPref = requireActivity().getSharedPreferences("Settings", Context.MODE_PRIVATE);
+        @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = sharedPref.edit();
+        boolean dark = sharedPref.getBoolean("dark",false);
+        boolean notify = sharedPref.getBoolean("notify",true);
+
+        darkMode.setChecked(dark);
+        notification.setChecked(notify);
+
+        darkMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                editor.putBoolean("dark",isChecked);
+                editor.apply();
+            }
+        });
+        notification.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                editor.putBoolean("notify",isChecked);
+                editor.apply();
+            }
+        });
+
 
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
