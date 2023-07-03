@@ -18,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -50,23 +51,24 @@ public class AddProblemActivity extends AppCompatActivity {
     private final String[] branch = {"Solved","Tried","Wishlist"};
     String sl = "0";
     int selectedTab;
-    private String questionLink ="",enteredCode = "",questionTitle = "",questionTag="" , date = "";
+    private String questionLink ="",enteredCode = "",questionTitle = "",questionTag="" , date = "",summary="";
     private int diff;
     String uniqueId ="";
 
-    @SuppressLint({"MissingInflatedId", "SetTextI18n"})
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_problem);
 
-        TextView code = findViewById(R.id.code);
+        EditText code = findViewById(R.id.code);
         TextView textView1 = findViewById(R.id.text_headline1);
         TextView textView2 = findViewById(R.id.text_headline2);
-        TextView title = findViewById(R.id.title);
-        TextView link = findViewById(R.id.link);
-        TextView topic = findViewById(R.id.topic);
+        EditText title = findViewById(R.id.title);
+        EditText link = findViewById(R.id.link);
+        EditText topic = findViewById(R.id.topic);
         Button addButton = findViewById(R.id.add_problem);
+        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) EditText summ = findViewById(R.id.summary_add);
 
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -140,6 +142,7 @@ public class AddProblemActivity extends AppCompatActivity {
                 questionLink += link.getText().toString();
                 questionTag += topic.getText().toString();
                 enteredCode += code.getText().toString();
+                summary += summ.getText().toString();
                 date = selectedDate;
                 diff = selectedDifficulty;
 
@@ -206,7 +209,7 @@ public class AddProblemActivity extends AppCompatActivity {
         uniqueId = branchRef.push().getKey();
         DatabaseReference finalRef = myRef.child("user").child(uid).child(branch[selectedTab]).child(uniqueId);
 
-        DataHolder obj = new DataHolder(questionTitle, questionLink, date, diffItems[diff], questionTag,enteredCode,uniqueId,branch[selectedTab]);
+        DataHolder obj = new DataHolder(questionTitle, questionLink, date, diffItems[diff], questionTag,enteredCode,uniqueId,branch[selectedTab],summary);
 
         finalRef.setValue(obj);
 

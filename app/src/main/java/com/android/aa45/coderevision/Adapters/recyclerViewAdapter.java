@@ -1,14 +1,19 @@
 package com.android.aa45.coderevision.Adapters;
 
+import static androidx.core.content.ContextCompat.getSystemService;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.text.Html;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +23,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -32,6 +38,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.aa45.coderevision.AddProblemActivity;
 import com.android.aa45.coderevision.Firebase.DataHolder;
 import com.android.aa45.coderevision.MainActivity;
+import com.android.aa45.coderevision.PrettifyHighlighter;
 import com.android.aa45.coderevision.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -41,6 +48,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.Calendar;
+import java.util.Formatter;
 import java.util.List;
 
 public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapter.ViewHolder> {
@@ -105,16 +113,20 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapte
             TextView difficulty = dialog.findViewById(R.id.difficulty);
             TextView date = dialog.findViewById(R.id.date);
             TextView link = dialog.findViewById(R.id.link);
-            WebView code = dialog.findViewById(R.id.code);
+            TextView codeBtn = dialog.findViewById(R.id.codeBtn);
             RelativeLayout edit = dialog.findViewById(R.id.edit);
             RelativeLayout delete = dialog.findViewById(R.id.delete);
             ImageView back = dialog.findViewById(R.id.back);
+            TextView summ = dialog.findViewById(R.id.summary);
+
+            String summary_set = dataHolder.getSummary()==null? "" : dataHolder.getSummary();
 
             link.setText(dataHolder.getLink());
             slPlusTitle.setText((position+1) + ". "+dataHolder.getTitle());
             topic.setText("Topic : " + dataHolder.getTag());
             date.setText("Date : " + dataHolder.getDate());
             difficulty.setText("Difficulty : "+dataHolder.getDifficulty());
+            summ.setText("Summary : \t"+summary_set);
 
 
             back.setOnClickListener(new View.OnClickListener() {
@@ -136,6 +148,40 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapte
                     context.startActivity(problemLink);
                 }
             });
+            codeBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Dialog codeDialog = new Dialog(context,R.style.Base_Theme_CodeRevision);
+                    codeDialog.setContentView(R.layout.code_view);
+
+                    TextView code = codeDialog.findViewById(R.id.code);
+                    ImageView backToMainDia = codeDialog.findViewById(R.id.back_to_dialog);
+                    ImageView copy = codeDialog.findViewById(R.id.copy);
+
+                    backToMainDia.setOnClickListener(v1 -> {
+                        codeDialog.dismiss();
+                    });
+
+                    String s = dataHolder.getCode().replace("\\n","\n");
+
+                    PrettifyHighlighter highlighter = new PrettifyHighlighter();
+                    String highlighted = highlighter.highlight("java",s);
+                    code.setText(Html.fromHtml(highlighted));
+                    codeDialog.show();
+
+                    copy.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+                            ClipData clip = ClipData.newPlainText("code",s);
+                            clipboard.setPrimaryClip(clip);
+                            Toast.makeText(context, "Copied", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                }
+            });
+
 
             edit.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -143,20 +189,22 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapte
                     Dialog editDialog = new Dialog(context,R.style.Base_Theme_CodeRevision);
                     editDialog.setContentView(R.layout.dialog_edit_problem_details);
 
-                    TextView code = editDialog.findViewById(R.id.code_edit);
-                    TextView title = editDialog.findViewById(R.id.title_edit);
-                    TextView link = editDialog.findViewById(R.id.link_edit);
-                    TextView topic = editDialog.findViewById(R.id.topic_edit);
+                    EditText code = editDialog.findViewById(R.id.code_edit);
+                    EditText title = editDialog.findViewById(R.id.title_edit);
+                    EditText link = editDialog.findViewById(R.id.link_edit);
+                    EditText topic = editDialog.findViewById(R.id.topic_edit);
                     Button updateButton = editDialog.findViewById(R.id.update_button);
                     Spinner difficulty = editDialog.findViewById(R.id.spinner_edit);
                     datePickerButton = editDialog.findViewById(R.id.date_picker_edit);
                     ImageView back = editDialog.findViewById(R.id.back_edit);
+                    EditText summ = editDialog.findViewById(R.id.summary_edit);
 
 
                     code.setText(dataHolder.getCode());
                     title.setText(dataHolder.getTitle());
                     link.setText(dataHolder.getLink());
                     topic.setText(dataHolder.getTag());
+                    summ.setText(dataHolder.getSummary());
 
                     back.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -221,6 +269,7 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapte
                             String updatedLink = link.getText().toString();
                             String updatedCode = code.getText().toString();
                             String updatedDate = selectedDate;
+                            String updatedSummary = summ.getText().toString();
                             int diff = selectedDifficulty;
 
                             if(!Patterns.WEB_URL.matcher(updatedLink).matches()){
@@ -230,7 +279,7 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapte
                                 Toast.makeText(context, "Please fill the form appropriately", Toast.LENGTH_SHORT).show();
                             } else {
 
-                                DataHolder updatedDataHolder = new DataHolder(updatedTitle,updatedLink,updatedDate,diffItems[diff],updatedTopic,updatedCode, dataHolder.getSlNo(), dataHolder.getTab());
+                                DataHolder updatedDataHolder = new DataHolder(updatedTitle,updatedLink,updatedDate,diffItems[diff],updatedTopic,updatedCode, dataHolder.getSlNo(), dataHolder.getTab(),updatedSummary);
 
                                 updateData(updatedDataHolder);
 
