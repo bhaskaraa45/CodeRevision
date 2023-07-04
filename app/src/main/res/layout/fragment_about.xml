@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/primary"
     tools:context=".Fragments.AboutFragment">
 
     <TextView
@@ -50,7 +51,7 @@
         android:layout_marginEnd="8dp"
         android:fontFamily="@font/glitch0"
         android:text="@string/about_paragraph"
-        android:textSize="16sp"
+        android:textSize="19sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"

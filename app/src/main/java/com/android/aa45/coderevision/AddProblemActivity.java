@@ -146,6 +146,13 @@ public class AddProblemActivity extends AppCompatActivity {
                 date = selectedDate;
                 diff = selectedDifficulty;
 
+                questionTag=questionTag.toLowerCase();
+                String ch = questionTag.charAt(0)+"";
+                ch = ch.toUpperCase();
+                StringBuilder sb = new StringBuilder(questionTag);
+                sb.setCharAt(0,ch.charAt(0));
+                questionTag = sb.toString();
+
 
                 if(!Patterns.WEB_URL.matcher(questionLink).matches()){
                     Toast.makeText(AddProblemActivity.this, "Please Enter valid Link", Toast.LENGTH_SHORT).show();

@@ -8,9 +8,11 @@ import androidx.fragment.app.FragmentTransaction;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.widget.Toast;
 
 import com.android.aa45.coderevision.Firebase.LoginActivity;
 import com.android.aa45.coderevision.databinding.ActivityMainBinding;
@@ -53,6 +55,11 @@ public class MainActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
+        if(!NetworkIsConnected()){
+            Toast.makeText(this, "Failed To Connect Server", Toast.LENGTH_LONG).show();
+
+        }
+
         //for bottom Navigation
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -88,6 +95,11 @@ public class MainActivity extends AppCompatActivity {
     public void exitApplication(){
         finish();
         System.exit(0);
+    }
+
+    private boolean NetworkIsConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        return cm.getActiveNetworkInfo() != null;
     }
 
 

@@ -1,6 +1,8 @@
 package com.android.aa45.coderevision;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -14,11 +16,13 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.android.aa45.coderevision.Adapters.recyclerAdapter_Topics;
 import com.android.aa45.coderevision.Adapters.recyclerViewAdapter;
 import com.android.aa45.coderevision.Firebase.DataHolder;
 import com.android.aa45.coderevision.Fragments.SolvedFragment;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.HashMap;
 import java.util.List;
@@ -35,17 +39,20 @@ public class TopicsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_topics, container, false);
+        HashMap<String, Integer> hm = SolvedFragment.topicFreq;
 
-        @SuppressLint({"MissingInflatedId", "LocalSuppress"})
-        RecyclerView recyclerView = rootView.findViewById(R.id.recyclerViewGrid);
-        swipeRefreshLayout = rootView.findViewById(R.id.swipeRefreshLayout_topics);
+        if (hm != null) {
 
-        HashMap<String,Integer> hm = SolvedFragment.topicFreq;
-        List<DataHolder> items = SolvedFragment.ItemList;
+            @SuppressLint({"MissingInflatedId", "LocalSuppress"})
+            RecyclerView recyclerView = rootView.findViewById(R.id.recyclerViewGrid);
+            swipeRefreshLayout = rootView.findViewById(R.id.swipeRefreshLayout_topics);
 
-        viewAdapter = new recyclerAdapter_Topics(getContext(),hm,items);
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
-        recyclerView.setAdapter(viewAdapter);
+            List<DataHolder> items = SolvedFragment.ItemList;
+
+            viewAdapter = new recyclerAdapter_Topics(getContext(), hm, items);
+            recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+            recyclerView.setAdapter(viewAdapter);
+
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @SuppressLint("NotifyDataSetChanged")
@@ -56,7 +63,7 @@ public class TopicsFragment extends Fragment {
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
-
+    }
         return rootView;
     }
 

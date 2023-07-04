@@ -51,8 +51,8 @@
     </string-array>
 
     <string-array name="search_by">
-        <item>Search by Title</item>
-        <item>Search by Topic</item>
+        <item>Title</item>
+        <item>Topic</item>
     </string-array>
 
 

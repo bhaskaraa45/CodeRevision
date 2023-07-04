@@ -64,7 +64,7 @@ public class recyclerAdapter_Topics extends RecyclerView.Adapter<recyclerAdapter
 
             RecyclerView recyclerView = dialog.findViewById(R.id.recyclerView_topics);
             ImageView backTopic = dialog.findViewById(R.id.back_to_topic);
-            TextView topiName = dialog.findViewById(R.id.topic_name);
+            TextView topicName = dialog.findViewById(R.id.topic_name);
 
             List<DataHolder> sortedList = new ArrayList<>();
 
@@ -73,6 +73,7 @@ public class recyclerAdapter_Topics extends RecyclerView.Adapter<recyclerAdapter
                     sortedList.add(item);
                 }
             }
+            topicName.setText(key);
 
             backTopic.setOnClickListener(new View.OnClickListener() {
                 @SuppressLint("NotifyDataSetChanged")

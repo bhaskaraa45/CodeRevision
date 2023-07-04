@@ -28,7 +28,7 @@ import java.util.List;
 
 public class TriedFragment extends Fragment {
 
-    private List<DataHolder> ItemList;
+    public static List<DataHolder> ItemList;
     private recyclerViewAdapter viewAdapter;
     private SwipeRefreshLayout swipeRefreshLayout;
 
