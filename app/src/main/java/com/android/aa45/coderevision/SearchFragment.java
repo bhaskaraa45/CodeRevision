@@ -168,75 +168,6 @@ public class SearchFragment extends Fragment {
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
-//        DatabaseReference solvedRef = myRef.child("Solved");
-//
-//        solvedRef.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                for (DataSnapshot snap : snapshot.getChildren()){
-//                    DataHolder data = snap.getValue(DataHolder.class);
-//                    allData.add(data);
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-//        triedRef.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                for (DataSnapshot snap : snapshot.getChildren()){
-//                    DataHolder data = snap.getValue(DataHolder.class);
-//                    allData.add(data);
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-//        wishlistRef.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                for (DataSnapshot snap : snapshot.getChildren()){
-//                    DataHolder data = snap.getValue(DataHolder.class);
-//                    allData.add(data);
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-
-
-
-
-
-
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//
-//                List<DataHolder> list = dataSearch(query);
-//                Toast.makeText(getContext(), list.size()+"", Toast.LENGTH_SHORT).show();
-//                setDataToRecyclerView(list);
-//
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//                List<DataHolder> list = dataSearch(newText);
-//                Toast.makeText(getContext(), list.size()+"", Toast.LENGTH_SHORT).show();
-//                setDataToRecyclerView(list);
-//                return false;
-//            }
-//        });
 
         return view;
     }
@@ -269,8 +200,4 @@ public class SearchFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(viewAdapter);
     }
-
-//    private List<DataHolder> dataSearch(String s){
-//
-//    }
 }
