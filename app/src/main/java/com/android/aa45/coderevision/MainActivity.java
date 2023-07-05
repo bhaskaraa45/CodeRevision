@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
         //for dark mode
         SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("Settings", Context.MODE_PRIVATE);
-        boolean dark = sharedPref.getBoolean("dark",false);
+        boolean dark = sharedPref.getBoolean("dark",true);
         if(dark){
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         }else{

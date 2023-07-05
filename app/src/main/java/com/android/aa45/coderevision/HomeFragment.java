@@ -39,6 +39,7 @@ public class HomeFragment extends Fragment{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_home, container, false);
+        Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).setTitle("Home");
 
         //for SlideBar - solved,tried,wishlist
         TabLayout tl = view.findViewById(R.id.tabLayout);

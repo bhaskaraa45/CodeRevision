@@ -74,6 +74,7 @@
                 android:layout_marginStart="15dp"
                 style="?android:spinnerStyle"
                 android:textAlignment="center"
+                android:textColor="@color/white"
                 />
 
         </RelativeLayout>
@@ -114,7 +115,7 @@
                 android:hint="@string/enter_title"
                 android:textSize="14sp"
                 android:maxLines="2"
-                android:textColor="@color/grey_text"/>
+                android:textColor="@color/white"/>
         </RelativeLayout>
     </LinearLayout>
     <Space
@@ -149,7 +150,7 @@
                 android:hint="@string/paste_the_link"
                 android:textSize="14sp"
                 android:maxLines="2"
-                android:textColor="@color/grey_text"/>
+                android:textColor="@color/white"/>
         </RelativeLayout>
     </LinearLayout>
     <Space
@@ -184,7 +185,7 @@
                 android:hint="@string/topic"
                 android:textSize="14sp"
                 android:maxLines="2"
-                android:textColor="@color/grey_text"/>
+                android:textColor="@color/white"/>
         </RelativeLayout>
     </LinearLayout>
     <Space
@@ -218,7 +219,7 @@
                 android:layout_marginStart="14dp"
                 android:hint="Code"
                 android:textSize="14sp"
-                android:textColor="@color/grey_text"/>
+                android:textColor="@color/white"/>
 
         </RelativeLayout>
     </LinearLayout>
@@ -254,7 +255,7 @@
                 android:hint="Write Summary of the Code"
                 android:textSize="14sp"
                 android:maxLines="3"
-                android:textColor="@color/grey_text"/>
+                android:textColor="@color/white"/>
         </RelativeLayout>
     </LinearLayout>
     <Space
@@ -265,6 +266,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <RelativeLayout
+            android:id="@+id/spinner_layout"
             android:layout_marginStart="15dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

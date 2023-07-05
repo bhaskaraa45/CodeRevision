@@ -90,13 +90,17 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapte
         holder.setDiff.setText(dataHolder.getDifficulty());
         holder.setTopic.setText(dataHolder.getTag());
         holder.setTopic.setTextColor(blueColor);
+
+
         switch (dataHolder.getDifficulty()) {
             case "Hard":
                 holder.setDiff.setTextColor(redColor);
                 break;
             case "Easy":
-            case "Medium":
                 holder.setDiff.setTextColor(greenColor);
+                break;
+            case "Medium":
+                holder.setDiff.setTextColor(orangeColor);
                 break;
             default:
                 holder.setDiff.setTextColor(whiteColor);
@@ -118,15 +122,43 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapte
             RelativeLayout delete = dialog.findViewById(R.id.delete);
             ImageView back = dialog.findViewById(R.id.back);
             TextView summ = dialog.findViewById(R.id.summary);
+            TextView status = dialog.findViewById(R.id.status);
 
             String summary_set = dataHolder.getSummary()==null? "" : dataHolder.getSummary();
 
             link.setText(dataHolder.getLink());
             slPlusTitle.setText((position+1) + ". "+dataHolder.getTitle());
-            topic.setText("Topic : " + dataHolder.getTag());
+            topic.setText(dataHolder.getTag());
             date.setText("Date : " + dataHolder.getDate());
-            difficulty.setText("Difficulty : "+dataHolder.getDifficulty());
+            difficulty.setText(dataHolder.getDifficulty());
             summ.setText("Summary : \t"+summary_set);
+            status.setText(dataHolder.getTab());
+
+            switch (dataHolder.getTab()){
+            case "Solved":
+                status.setTextColor(greenColor);
+                break;
+            case "Tried":
+                status.setTextColor(redColor);
+                break;
+            default:
+                status.setTextColor(orangeColor);
+        }
+            switch (dataHolder.getDifficulty()) {
+                case "Hard":
+                    difficulty.setTextColor(redColor);
+                    break;
+                case "Easy":
+                    difficulty.setTextColor(greenColor);
+                    break;
+                case "Medium":
+                    difficulty.setTextColor(orangeColor);
+                    break;
+                default:
+                    difficulty.setTextColor(whiteColor);
+                    break;
+            }
+
 
 
             back.setOnClickListener(new View.OnClickListener() {
@@ -289,10 +321,10 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapte
                                 DataHolder updatedDataHolder = new DataHolder(updatedTitle,updatedLink,updatedDate,diffItems[diff],updatedTopic,updatedCode, dataHolder.getSlNo(), dataHolder.getTab(),updatedSummary);
                                 updateData(updatedDataHolder);
 
+                                Toast.makeText(context, "Updated", Toast.LENGTH_SHORT).show();
                                 dialog.dismiss();
                                 editDialog.dismiss();
                             }
-                            Toast.makeText(context, "Updated", Toast.LENGTH_SHORT).show();
 
                         }
                     });
@@ -305,7 +337,6 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapte
             delete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
                     showAlert(dataHolder,dialog);
                 }
             });

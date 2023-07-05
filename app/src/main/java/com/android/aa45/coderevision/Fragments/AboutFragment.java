@@ -17,15 +17,16 @@ import com.android.aa45.coderevision.R;
 import java.util.Objects;
 
 public class AboutFragment extends Fragment {
-    private TextView github , bhaskar;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_about, container, false);
+        Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).setTitle("About");
 
-        bhaskar =view.findViewById(R.id.bhaskar);
-        github = view.findViewById(R.id.githubLink);
+        TextView bhaskar = view.findViewById(R.id.bhaskar);
+        TextView github = view.findViewById(R.id.githubLink);
 
         bhaskar.setOnClickListener(new View.OnClickListener() {
             @Override

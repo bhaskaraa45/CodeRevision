@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.Spinner;
 
@@ -29,6 +32,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class SearchFragment extends Fragment {
 
@@ -39,12 +43,13 @@ public class SearchFragment extends Fragment {
     private List<DataHolder> allData;
     private SwipeRefreshLayout swipeRefreshLayout;
 
-    @SuppressLint("MissingInflatedId")
+    @SuppressLint({"MissingInflatedId", "UseCompatLoadingForDrawables"})
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_search, container, false);
+        Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).setTitle("Search");
 
         searchView = view.findViewById(R.id.searchView);
         recyclerView = view.findViewById(R.id.recyclerView_search);
@@ -55,6 +60,12 @@ public class SearchFragment extends Fragment {
         Spinner spinner = (Spinner) view.findViewById(R.id.spinner_search);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+        RelativeLayout spinner_rel_layout = view.findViewById(R.id.spinner_rel_layout);
+
+        if(AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_NO){
+            searchView.setBackground(getResources().getDrawable(R.drawable.edittet_shape));
+            spinner_rel_layout.setBackground(getResources().getDrawable(R.drawable.edittet_shape));
+        }
 
         allData = new ArrayList<>();
 

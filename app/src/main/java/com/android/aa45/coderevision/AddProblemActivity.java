@@ -3,6 +3,7 @@ package com.android.aa45.coderevision;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -55,7 +56,7 @@ public class AddProblemActivity extends AppCompatActivity {
     private int diff;
     String uniqueId ="";
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint({"SetTextI18n", "UseCompatLoadingForDrawables"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,8 +69,8 @@ public class AddProblemActivity extends AppCompatActivity {
         EditText link = findViewById(R.id.link);
         EditText topic = findViewById(R.id.topic);
         Button addButton = findViewById(R.id.add_problem);
+        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) RelativeLayout spinner_layout = findViewById(R.id.spinner_layout);
         @SuppressLint({"MissingInflatedId", "LocalSuppress"}) EditText summ = findViewById(R.id.summary_add);
-
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.difficulty_items, android.R.layout.simple_spinner_item);

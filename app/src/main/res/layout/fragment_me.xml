@@ -39,19 +39,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/bhaskar"
-            android:fontFamily="@font/glitch0"
+            android:fontFamily="@font/actor"
             android:layout_gravity="center"
             android:textSize="30sp"
             android:textColor="@color/white"
             android:padding="1dp"
             />
         <TextView
+            android:layout_marginTop="2dp"
             android:id="@+id/email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/email_id"
             android:layout_gravity="center"
-            android:textSize="10sp"
+            android:textSize="11sp"
             tools:ignore="SmallSp"
             android:textColor="@color/white"/>
 

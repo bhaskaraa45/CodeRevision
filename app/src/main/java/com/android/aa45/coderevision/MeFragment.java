@@ -1,6 +1,8 @@
 package com.android.aa45.coderevision;
 
 import android.annotation.SuppressLint;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -55,6 +57,7 @@ public class MeFragment extends Fragment {
 
         // Inflate the layout for this fragment
         final View rootView = inflater.inflate(R.layout.fragment_me, container, false);
+        Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).setTitle("Profile");
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -68,6 +71,7 @@ public class MeFragment extends Fragment {
         ImageView profilePic = (ImageView) rootView.findViewById(R.id.profilePic);
         TextView usersName = (TextView) rootView.findViewById(R.id.profile_name);
         TextView emailId = (TextView) rootView.findViewById(R.id.email);
+        emailId.setTextColor(getResources().getColor(R.color.grey_text));
 
         ArrayList<String> userData = MainActivity.userDetails;
         if(userData.size()>0){
@@ -75,6 +79,14 @@ public class MeFragment extends Fragment {
             emailId.setText(userData.get(1));
             Glide.with(requireActivity()).load(userData.get(2)).into(profilePic);
         }
+
+        emailId.setOnClickListener(v -> {
+            ClipboardManager clipboard = (ClipboardManager) requireContext().getSystemService(Context.CLIPBOARD_SERVICE);
+            ClipData clip = ClipData.newPlainText("code",userData.get(1));
+            clipboard.setPrimaryClip(clip);
+            Toast.makeText(getContext(), "Email Copied", Toast.LENGTH_SHORT).show();
+        });
+
 
         RelativeLayout settings = rootView.findViewById(R.id.settings);
         RelativeLayout feedback = rootView.findViewById(R.id.feedback);
@@ -87,7 +99,7 @@ public class MeFragment extends Fragment {
 
         SharedPreferences sharedPref = requireActivity().getSharedPreferences("Settings", Context.MODE_PRIVATE);
         @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = sharedPref.edit();
-        boolean dark = sharedPref.getBoolean("dark",false);
+        boolean dark = sharedPref.getBoolean("dark",true);
         boolean notify = sharedPref.getBoolean("notify",true);
 
         darkMode.setChecked(dark);
