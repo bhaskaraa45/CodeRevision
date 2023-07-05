@@ -6,14 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".HomeFragment"
     android:background="@color/secondary">
-    >
-
-
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -64,8 +60,6 @@
         android:focusable="true"
         android:contentDescription="@string/to_add_problems"
         />
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

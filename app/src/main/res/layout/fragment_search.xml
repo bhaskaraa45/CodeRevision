@@ -16,6 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Search by : "
+            android:textColor="@color/grey_text"
             android:textSize="20sp"
             android:layout_marginTop="10dp"
             android:layout_marginStart="20dp"
@@ -58,12 +59,13 @@
             android:layout_marginLeft="30dp"
             android:layout_marginTop="25dp"
             android:layout_marginRight="30dp"
-            android:background="@drawable/bg_me_items"
+            android:background="@drawable/edit_form_shape"
             android:iconifiedByDefault="false"
             android:queryHint="Search..."
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+
             />
 
 

@@ -60,7 +60,8 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/topic"
                     android:text="Topic : Array"
-                    android:textSize="20sp"/>
+                    android:textSize="20sp"
+                    android:textColor="@color/grey_text"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_marginTop="10dp"
@@ -73,7 +74,8 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/difficulty"
                     android:text="Difficulty : Medium"
-                    android:textSize="20sp"/>
+                    android:textSize="20sp"
+                    android:textColor="@color/grey_text"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_marginTop="10dp"
@@ -86,7 +88,8 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/date"
                     android:text="Date : 15-06-2003"
-                    android:textSize="20sp"/>
+                    android:textSize="20sp"
+                    android:textColor="@color/grey_text"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_marginTop="10dp"
@@ -100,6 +103,7 @@
                     android:layout_height="wrap_content"
                     android:text="Link : "
                     android:textSize="20sp"
+                    android:textColor="@color/grey_text"
                     />
                 <TextView
                     android:layout_width="match_parent"
@@ -130,6 +134,7 @@
                         android:layout_height="wrap_content"
                         android:text="Code : "
                         android:textSize="20sp"
+                        android:textColor="@color/grey_text"
                         />
                     <TextView
                         android:layout_width="match_parent"
@@ -157,6 +162,7 @@
                         android:text="Summary: \t\t Use DFS"
                         android:textSize="20sp"
                         android:layout_margin="8dp"
+                        android:textColor="#686868"
                         />
                 </androidx.cardview.widget.CardView>
 
@@ -187,6 +193,7 @@
                         android:id="@+id/editText"
                         android:padding="5dp"
                         android:paddingStart="15dp"
+                        android:textColor="@color/grey_text"
                         />
                     <ImageView
                         android:paddingEnd="15dp"
@@ -212,6 +219,7 @@
                         android:id="@+id/deleteText"
                         android:padding="5dp"
                         android:paddingStart="15dp"
+                        android:textColor="@color/grey_text"
                         />
                     <ImageView
                         android:paddingEnd="15dp"

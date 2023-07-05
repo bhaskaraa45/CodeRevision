@@ -103,7 +103,8 @@
                 android:layout_marginStart="14dp"
                 android:hint="@string/enter_title"
                 android:textSize="14sp"
-                android:maxLines="2"/>
+                android:maxLines="2"
+                android:textColor="@color/grey_text"/>
         </RelativeLayout>
     </LinearLayout>
     <Space
@@ -136,7 +137,8 @@
                 android:layout_marginStart="14dp"
                 android:hint="@string/paste_the_link"
                 android:textSize="14sp"
-                android:maxLines="2"/>
+                android:maxLines="2"
+                android:textColor="@color/grey_text"/>
         </RelativeLayout>
     </LinearLayout>
     <Space
@@ -169,7 +171,8 @@
                 android:layout_marginStart="14dp"
                 android:hint="@string/topic"
                 android:textSize="14sp"
-                android:maxLines="2"/>
+                android:maxLines="2"
+                android:textColor="@color/grey_text"/>
         </RelativeLayout>
     </LinearLayout>
     <Space
@@ -201,7 +204,8 @@
                 android:lines="12"
                 android:layout_marginStart="14dp"
                 android:hint="Code"
-                android:textSize="14sp"/>
+                android:textSize="14sp"
+                android:textColor="@color/grey_text"/>
 
         </RelativeLayout>
     </LinearLayout>
@@ -235,7 +239,8 @@
                 android:layout_marginStart="14dp"
                 android:hint="@string/write_summary_of_the_code"
                 android:textSize="14sp"
-                android:maxLines="3"/>
+                android:maxLines="3"
+                android:textColor="@color/grey_text"/>
         </RelativeLayout>
     </LinearLayout>
     <Space
@@ -297,7 +302,7 @@
         >
         <Button
             android:id="@+id/update_button"
-            android:layout_width="80dp"
+            android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_gravity="center"
             android:text="Update"

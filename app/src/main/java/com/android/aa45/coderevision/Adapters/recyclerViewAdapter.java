@@ -270,6 +270,14 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapte
                             String updatedCode = code.getText().toString();
                             String updatedDate = selectedDate;
                             String updatedSummary = summ.getText().toString();
+
+                            //to make first character capital
+
+                            updatedTopic=updatedTopic.toLowerCase();
+                            String ch = updatedTopic.charAt(0)+"";
+                            ch = ch.toUpperCase();
+                            updatedTopic = ch + updatedTopic.substring(1);
+
                             int diff = selectedDifficulty;
 
                             if(!Patterns.WEB_URL.matcher(updatedLink).matches()){
@@ -278,14 +286,13 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapte
                             else if (diff <0 || updatedTopic.equals("") || updatedCode.equals("")) {
                                 Toast.makeText(context, "Please fill the form appropriately", Toast.LENGTH_SHORT).show();
                             } else {
-
                                 DataHolder updatedDataHolder = new DataHolder(updatedTitle,updatedLink,updatedDate,diffItems[diff],updatedTopic,updatedCode, dataHolder.getSlNo(), dataHolder.getTab(),updatedSummary);
-
                                 updateData(updatedDataHolder);
 
                                 dialog.dismiss();
                                 editDialog.dismiss();
                             }
+                            Toast.makeText(context, "Updated", Toast.LENGTH_SHORT).show();
 
                         }
                     });

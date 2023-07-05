@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,15 +16,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.SearchView;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.android.aa45.coderevision.Adapters.recyclerViewAdapter;
 import com.android.aa45.coderevision.Firebase.DataHolder;
 import com.android.aa45.coderevision.Fragments.SolvedFragment;
-import com.android.aa45.coderevision.Fragments.TriedFragment;
-import com.android.aa45.coderevision.Fragments.WishlistFragment;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.firebase.ui.database.ObservableSnapshotArray;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -35,18 +29,13 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
-import java.util.Objects;
 
 public class SearchFragment extends Fragment {
 
-    private int selectedPos=-1;
-    private FirebaseDatabase database;
-    private DatabaseReference referenceSolved,referenceTried,referenceWishlist;
     private SearchView searchView;
     private RecyclerView recyclerView;
     private recyclerViewAdapter viewAdapter;
-    int sel=-1;
+    private int selectedPos =-1;
     private List<DataHolder> allData;
     private SwipeRefreshLayout swipeRefreshLayout;
 
@@ -113,12 +102,12 @@ public class SearchFragment extends Fragment {
             spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    sel=position;
+                    selectedPos =position;
                     searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                         @Override
                         public boolean onQueryTextSubmit(String query) {
                             List<DataHolder> newHolder = new ArrayList<>();
-                            if(sel==1){
+                            if(selectedPos ==1){
                                 newHolder = searchByTopic(query);
                                 setDataToRecyclerView(newHolder);
                             }else {
@@ -128,11 +117,10 @@ public class SearchFragment extends Fragment {
 
                             return false;
                         }
-
                         @Override
                         public boolean onQueryTextChange(String newText) {
                             List<DataHolder> newHolder = new ArrayList<>();
-                            if(sel==1){
+                            if(selectedPos ==1){
                                 newHolder = searchByTopic(newText);
                                 setDataToRecyclerView(newHolder);
                             }else {
@@ -142,22 +130,13 @@ public class SearchFragment extends Fragment {
                             return false;
                         }
                     });
-
                 }
-
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) {
 
                 }
             });
-
-
-
             setDataToRecyclerView(allData);
-
-
-
-
         }
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {

@@ -146,12 +146,6 @@ public class AddProblemActivity extends AppCompatActivity {
                 date = selectedDate;
                 diff = selectedDifficulty;
 
-                questionTag=questionTag.toLowerCase();
-                String ch = questionTag.charAt(0)+"";
-                ch = ch.toUpperCase();
-                StringBuilder sb = new StringBuilder(questionTag);
-                sb.setCharAt(0,ch.charAt(0));
-                questionTag = sb.toString();
 
 
                 if(!Patterns.WEB_URL.matcher(questionLink).matches()){
@@ -160,7 +154,14 @@ public class AddProblemActivity extends AppCompatActivity {
                 else if (diff <0 || questionTag.equals("") || enteredCode.equals("")) {
                     Toast.makeText(AddProblemActivity.this, "Please fill the form appropriately", Toast.LENGTH_SHORT).show();
                 } else {
+                    //To make first letter capital and others small
+                    questionTag=questionTag.toLowerCase();
+                    String ch = questionTag.charAt(0)+"";
+                    ch = ch.toUpperCase();
+                    questionTag = ch + questionTag.substring(1);
+
                     setData();
+                    Toast.makeText(AddProblemActivity.this, "Added", Toast.LENGTH_SHORT).show();
                     finish();
                 }
             }
