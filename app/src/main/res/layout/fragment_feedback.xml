@@ -37,7 +37,7 @@
             android:textSize="18sp"
             android:layout_marginTop="60dp"
             android:layout_gravity="center"
-            android:background="@drawable/edittet_shape"
+            android:background="@drawable/edit_form_shape"
 
             />
         <Button

@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -83,7 +84,9 @@ public class recyclerAdapter_Topics extends RecyclerView.Adapter<recyclerAdapter
                 }
             });
 
-
+            if(AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_NO){
+                backTopic.setImageDrawable(context.getResources().getDrawable(R.drawable.back_arrow_black));
+            }
 
             viewAdapter = new recyclerViewAdapter(sortedList,context);
             recyclerView.setLayoutManager(new LinearLayoutManager(context));

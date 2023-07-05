@@ -24,6 +24,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -50,7 +51,7 @@ public class MeFragment extends Fragment {
     private FirebaseAuth mAuth;
     private GoogleSignInClient mGoogleSignInClient;
 
-    @SuppressLint("MissingInflatedId")
+    @SuppressLint({"MissingInflatedId", "UseCompatLoadingForDrawables"})
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -58,6 +59,10 @@ public class MeFragment extends Fragment {
         // Inflate the layout for this fragment
         final View rootView = inflater.inflate(R.layout.fragment_me, container, false);
         Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).setTitle("Profile");
+
+
+
+
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -96,6 +101,11 @@ public class MeFragment extends Fragment {
         RelativeLayout about = rootView.findViewById(R.id.about);
         Switch notification = rootView.findViewById(R.id.notificationSwitch);
         Switch darkMode = rootView.findViewById(R.id.darkModeSwitch);
+
+        LinearLayout layout1 = rootView.findViewById(R.id.layout1);
+        LinearLayout layout2 = rootView.findViewById(R.id.layout2);
+        LinearLayout layout3 = rootView.findViewById(R.id.layout3);
+        LinearLayout layout4 = rootView.findViewById(R.id.layout4);
 
         SharedPreferences sharedPref = requireActivity().getSharedPreferences("Settings", Context.MODE_PRIVATE);
         @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = sharedPref.edit();
@@ -173,6 +183,13 @@ public class MeFragment extends Fragment {
                 replaceFragment(new AboutFragment());
             }
         });
+
+        if(AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_NO){
+            layout1.setBackground(getResources().getDrawable(R.drawable.edittet_shape));
+            layout2.setBackground(getResources().getDrawable(R.drawable.edittet_shape));
+            layout3.setBackground(getResources().getDrawable(R.drawable.edittet_shape));
+            layout4.setBackground(getResources().getDrawable(R.drawable.edittet_shape));
+        }
 
         return rootView;
     }

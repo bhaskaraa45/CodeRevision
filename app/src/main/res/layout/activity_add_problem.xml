@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AddProblemActivity"
-    android:background="@color/primary"
     android:orientation="vertical">
 
     <LinearLayout
@@ -52,6 +51,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <RelativeLayout
+            android:id="@+id/date_layout"
             android:layout_marginStart="15dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -71,10 +71,9 @@
                 android:layout_height="wrap_content"
                 android:text="@string/today"
                 android:layout_toEndOf="@id/calendar_icon"
-                android:layout_marginStart="15dp"
+                android:layout_marginStart="5dp"
                 style="?android:spinnerStyle"
                 android:textAlignment="center"
-                android:textColor="@color/white"
                 />
 
         </RelativeLayout>
@@ -311,9 +310,6 @@
 
         </RelativeLayout>
     </LinearLayout>
-
-
-
     <LinearLayout
         android:layout_marginTop="30dp"
         android:layout_width="match_parent"

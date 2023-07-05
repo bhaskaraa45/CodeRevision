@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primary"
     tools:context=".Fragments.AboutFragment">
 
     <TextView
@@ -15,8 +14,7 @@
         android:text="@string/code_revision"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:textColor="@color/grey_text" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/githubLink"
@@ -57,8 +55,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3"
-
-        android:textColor="@color/white"/>
+/>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -74,8 +71,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Developed by"
-            android:textSize="18sp"
-            android:textColor="@color/grey_text"/>
+            android:textSize="18sp"/>
 
         <TextView
             android:id="@+id/bhaskar"

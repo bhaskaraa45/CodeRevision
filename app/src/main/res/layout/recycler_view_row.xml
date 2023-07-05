@@ -13,11 +13,12 @@
         android:layout_marginEnd="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardElevation="15dp"
+        app:cardElevation="5dp"
         app:cardCornerRadius="15dp"
         android:layout_gravity="center"
         >
             <RelativeLayout
+                android:id="@+id/card_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/gradient_color">
@@ -28,10 +29,8 @@
                     android:text="@string/_1"
                     android:textSize="20sp"
                     android:layout_marginTop="24dp"
-                    android:textColor="@color/grey_text"
                     android:layout_marginStart="10dp"/>
                 <TextView
-                    android:textColor="@color/white"
                     android:id="@+id/setTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -41,10 +40,10 @@
                     android:textSize="20sp"
                     android:layout_marginTop="24dp"
                     android:layout_marginStart="10dp"
+                    android:textStyle="bold"
                     />
 
                 <TextView
-                    android:textColor="@color/grey_text"
                     android:id="@+id/setDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -64,7 +63,6 @@
                     android:textSize="12sp"
                     android:layout_marginBottom="5dp"
                     android:layout_marginTop="65dp"
-                    android:textColor="@color/grey_text"
                     android:layout_marginStart="40dp"/>
 
                 <TextView

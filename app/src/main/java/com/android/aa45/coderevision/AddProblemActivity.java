@@ -20,6 +20,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -69,7 +70,6 @@ public class AddProblemActivity extends AppCompatActivity {
         EditText link = findViewById(R.id.link);
         EditText topic = findViewById(R.id.topic);
         Button addButton = findViewById(R.id.add_problem);
-        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) RelativeLayout spinner_layout = findViewById(R.id.spinner_layout);
         @SuppressLint({"MissingInflatedId", "LocalSuppress"}) EditText summ = findViewById(R.id.summary_add);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -167,6 +167,39 @@ public class AddProblemActivity extends AppCompatActivity {
                 }
             }
         });
+
+        ImageView calendar_icon = findViewById(R.id.calendar_icon);
+        ImageView link_icon = findViewById(R.id.link_icon);
+        ImageView tag_icon = findViewById(R.id.tag_icon);
+        ImageView code_icon = findViewById(R.id.code_icon);
+        ImageView summary_icon = findViewById(R.id.summary_icon);
+        ImageView diff_icon = findViewById(R.id.diff_icon);
+
+        RelativeLayout diff_layout = findViewById(R.id.spinner_layout);
+        RelativeLayout date_layout = findViewById(R.id.date_layout);
+        RelativeLayout title_layout = findViewById(R.id.enter_title);
+        RelativeLayout link_layout = findViewById(R.id.enter_link);
+        RelativeLayout tag_layout = findViewById(R.id.enter_tag);
+        RelativeLayout code_layout = findViewById(R.id.enter_code);
+        RelativeLayout summary_layout = findViewById(R.id.enter_summary);
+        
+        //if light mode
+        if(AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_NO){
+            calendar_icon.setImageDrawable(getResources().getDrawable(R.drawable.edit_cal_dark));
+            link_icon.setImageDrawable(getResources().getDrawable(R.drawable.link_dark));
+            tag_icon.setImageDrawable(getResources().getDrawable(R.drawable.tag_dark));
+            code_icon.setImageDrawable(getResources().getDrawable(R.drawable.code_dark));
+            summary_icon.setImageDrawable(getResources().getDrawable(R.drawable.summary_dark));
+            diff_icon.setImageDrawable(getResources().getDrawable(R.drawable.difficulty_dark));
+
+            diff_layout.setBackground(getResources().getDrawable(R.drawable.edittet_shape));
+            date_layout.setBackground(getResources().getDrawable(R.drawable.edittet_shape));
+            title_layout.setBackground(getResources().getDrawable(R.drawable.edittet_shape));
+            link_layout.setBackground(getResources().getDrawable(R.drawable.edittet_shape));
+            tag_layout.setBackground(getResources().getDrawable(R.drawable.edittet_shape));
+            code_layout.setBackground(getResources().getDrawable(R.drawable.edittet_shape));
+            summary_layout.setBackground(getResources().getDrawable(R.drawable.edittet_shape));
+        }
     }
 
 

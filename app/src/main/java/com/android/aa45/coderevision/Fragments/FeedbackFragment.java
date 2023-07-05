@@ -1,9 +1,11 @@
 package com.android.aa45.coderevision.Fragments;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -31,6 +33,7 @@ public class FeedbackFragment extends Fragment {
     private Button submit;
     private RatingBar rating;
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -41,6 +44,10 @@ public class FeedbackFragment extends Fragment {
         submit = view.findViewById(R.id.feedbackSubmit);
         rating = view.findViewById(R.id.starRating);
         feedbackMassage = view.findViewById(R.id.feedbackText);
+
+        if (AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_NO){
+            feedbackMassage.setBackground(getResources().getDrawable(R.drawable.edittet_shape));
+        }
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -2,8 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/primary">
+    android:orientation="vertical">
     <LinearLayout
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
@@ -14,13 +13,14 @@
             android:layout_height="wrap_content">
             <ImageView
                 android:id="@+id/back_edit"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:paddingEnd="10dp"
+                android:paddingStart="10dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:src="@drawable/back_arrow"
                 />
             <TextView
+                android:id="@+id/edit_headline"
                 android:layout_marginTop="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -44,12 +44,13 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <RelativeLayout
+            android:id="@+id/date_layout_edit"
             android:layout_marginStart="15dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/edit_form_shape">
             <ImageView
-                android:id="@+id/calendar_icon"
+                android:id="@+id/calendar_icon_edit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/baseline_edit_calendar_24"
@@ -61,8 +62,8 @@
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:text="@string/today"
-                android:layout_toEndOf="@id/calendar_icon"
-                android:layout_marginStart="15dp"
+                android:layout_toEndOf="@id/calendar_icon_edit"
+                android:layout_marginStart="5dp"
                 style="?android:spinnerStyle"
                 android:textAlignment="center"
                 />
@@ -78,7 +79,7 @@
         android:orientation="vertical"
         >
         <RelativeLayout
-            android:id="@+id/enter_title"
+            android:id="@+id/enter_title_edit"
             android:layout_marginStart="15dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -104,7 +105,7 @@
                 android:hint="@string/enter_title"
                 android:textSize="14sp"
                 android:maxLines="2"
-                android:textColor="@color/grey_text"/>
+                android:layout_centerVertical="true"/>
         </RelativeLayout>
     </LinearLayout>
     <Space
@@ -116,7 +117,7 @@
         android:orientation="vertical"
         >
         <RelativeLayout
-            android:id="@+id/enter_link"
+            android:id="@+id/enter_link_edit"
             android:layout_marginStart="15dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -124,7 +125,7 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:id="@+id/link_icon"
+                android:id="@+id/link_icon_edit"
                 android:src="@drawable/link"
                 android:layout_marginTop="7dp"
                 android:contentDescription="@string/todo"
@@ -133,12 +134,12 @@
                 android:id="@+id/link_edit"
                 android:layout_width="310dp"
                 android:layout_height="wrap_content"
-                android:layout_toEndOf="@id/link_icon"
+                android:layout_toEndOf="@id/link_icon_edit"
                 android:layout_marginStart="14dp"
                 android:hint="@string/paste_the_link"
                 android:textSize="14sp"
                 android:maxLines="2"
-                android:textColor="@color/grey_text"/>
+                android:layout_centerVertical="true"/>
         </RelativeLayout>
     </LinearLayout>
     <Space
@@ -150,13 +151,13 @@
         android:orientation="vertical"
         >
         <RelativeLayout
-            android:id="@+id/enter_tag"
+            android:id="@+id/enter_tag_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:background="@drawable/edit_form_shape">
             <ImageView
-                android:id="@+id/tag_icon"
+                android:id="@+id/tag_icon_edit"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/tag"
@@ -167,12 +168,12 @@
                 android:id="@+id/topic_edit"
                 android:layout_width="310dp"
                 android:layout_height="wrap_content"
-                android:layout_toEndOf="@id/tag_icon"
+                android:layout_toEndOf="@id/tag_icon_edit"
                 android:layout_marginStart="14dp"
                 android:hint="@string/topic"
                 android:textSize="14sp"
                 android:maxLines="2"
-                android:textColor="@color/grey_text"/>
+                android:layout_centerVertical="true"/>
         </RelativeLayout>
     </LinearLayout>
     <Space
@@ -183,13 +184,13 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <RelativeLayout
-            android:id="@+id/enter_code"
+            android:id="@+id/enter_code_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:background="@drawable/edit_form_shape">
             <ImageView
-                android:id="@+id/code_icon"
+                android:id="@+id/code_icon_edit"
                 android:layout_width="28dp"
                 android:layout_height="28dp"
                 android:src="@drawable/code_icon"
@@ -200,12 +201,12 @@
                 android:id="@+id/code_edit"
                 android:layout_width="310dp"
                 android:layout_height="wrap_content"
-                android:layout_toEndOf="@id/code_icon"
+                android:layout_toEndOf="@id/code_icon_edit"
                 android:lines="12"
                 android:layout_marginStart="14dp"
                 android:hint="Code"
                 android:textSize="14sp"
-                android:textColor="@color/grey_text"/>
+                android:layout_centerVertical="true"/>
 
         </RelativeLayout>
     </LinearLayout>
@@ -218,13 +219,13 @@
         android:orientation="vertical"
         >
         <RelativeLayout
-            android:id="@+id/enter_summary"
+            android:id="@+id/enter_summary_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:background="@drawable/edit_form_shape">
             <ImageView
-                android:id="@+id/summary_icon"
+                android:id="@+id/summary_icon_edit"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/baseline_summarize_24"
@@ -235,12 +236,12 @@
                 android:id="@+id/summary_edit"
                 android:layout_width="310dp"
                 android:layout_height="wrap_content"
-                android:layout_toEndOf="@id/summary_icon"
+                android:layout_toEndOf="@id/summary_icon_edit"
                 android:layout_marginStart="14dp"
                 android:hint="@string/write_summary_of_the_code"
                 android:textSize="14sp"
                 android:maxLines="3"
-                android:textColor="@color/grey_text"/>
+                android:layout_centerVertical="true"/>
         </RelativeLayout>
     </LinearLayout>
     <Space
@@ -251,6 +252,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <RelativeLayout
+            android:id="@+id/spinner_layout_edit"
             android:layout_marginStart="15dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -259,38 +261,19 @@
             >
             <ImageView
                 android:layout_centerVertical="true"
-                android:id="@+id/diff_icon"
+                android:id="@+id/diff_icon_edit"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_marginStart="7dp"
                 android:src="@drawable/difficulty_level"
                 android:contentDescription="@string/todo" />
-            <!--            <com.google.android.material.textfield.TextInputLayout-->
-            <!--                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:layout_toEndOf="@id/diff_icon"-->
-            <!--                android:layout_marginStart="15dp"-->
-            <!--                android:layout_marginEnd="100dp"-->
-            <!--                android:hint="@string/difficulty_level">-->
-
-            <!--                <AutoCompleteTextView-->
-            <!--                    android:id="@+id/difficulty_level"-->
-            <!--                    android:layout_width="match_parent"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:layout_weight="1"-->
-            <!--                    tools:ignore="LabelFor" />-->
-            <!--            </com.google.android.material.textfield.TextInputLayout>-->
-
             <Spinner
                 android:layout_marginStart="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toEndOf="@+id/diff_icon"
+                android:layout_toEndOf="@+id/diff_icon_edit"
                 android:id="@+id/spinner_edit"
                 />
-
-
 
         </RelativeLayout>
     </LinearLayout>

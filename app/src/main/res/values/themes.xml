@@ -2,6 +2,8 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.CodeRevision" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <item name="colorPrimary" >@color/secondary</item>
+        <item name="android:colorBackground">@color/white</item>
+        <item name="android:textColor">@color/black</item>
     </style>
 
 

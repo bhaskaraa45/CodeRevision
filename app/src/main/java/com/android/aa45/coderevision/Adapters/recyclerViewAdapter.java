@@ -32,6 +32,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -73,14 +74,14 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapte
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_view_row, parent, false);
         redColor = parent.getContext().getResources().getColor(R.color.red);
-        blueColor = parent.getContext().getResources().getColor(R.color.blue);
+        blueColor = parent.getContext().getResources().getColor(R.color.blue_adapter);
         greenColor = parent.getContext().getResources().getColor(R.color.green);
         whiteColor = parent.getContext().getResources().getColor(R.color.white);
         orangeColor = parent.getContext().getResources().getColor(R.color.orange);
         return new ViewHolder(itemView);
     }
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint({"SetTextI18n", "UseCompatLoadingForDrawables"})
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         DataHolder dataHolder = items.get(position);
@@ -90,8 +91,9 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapte
         holder.setDiff.setText(dataHolder.getDifficulty());
         holder.setTopic.setText(dataHolder.getTag());
         holder.setTopic.setTextColor(blueColor);
-
-
+        if(AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_NO) {
+            holder.cardLayout.setBackground(context.getResources().getDrawable(R.drawable.gradient_color_light));
+        }
         switch (dataHolder.getDifficulty()) {
             case "Hard":
                 holder.setDiff.setTextColor(redColor);
@@ -159,6 +161,12 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapte
                     break;
             }
 
+            //if light mode
+            if(AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_NO){
+                back.setImageDrawable(context.getResources().getDrawable(R.drawable.back_arrow_black));
+                edit.setBackground(context.getResources().getDrawable(R.drawable.edittet_shape));
+                delete.setBackground(context.getResources().getDrawable(R.drawable.edittet_shape));
+            }
 
 
             back.setOnClickListener(new View.OnClickListener() {
@@ -329,6 +337,43 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapte
                         }
                     });
 
+                    ImageView calendar_icon = editDialog.findViewById(R.id.calendar_icon_edit);
+                    ImageView link_icon = editDialog.findViewById(R.id.link_icon_edit);
+                    ImageView tag_icon = editDialog.findViewById(R.id.tag_icon_edit);
+                    ImageView code_icon = editDialog.findViewById(R.id.code_icon_edit);
+                    ImageView summary_icon = editDialog.findViewById(R.id.summary_icon_edit);
+                    ImageView diff_icon = editDialog.findViewById(R.id.diff_icon_edit);
+
+                    TextView edit_headline = editDialog.findViewById(R.id.edit_headline);
+
+                    RelativeLayout diff_layout = editDialog.findViewById(R.id.spinner_layout_edit);
+                    RelativeLayout date_layout = editDialog.findViewById(R.id.date_layout_edit);
+                    RelativeLayout title_layout = editDialog.findViewById(R.id.enter_title_edit);
+                    RelativeLayout link_layout = editDialog.findViewById(R.id.enter_link_edit);
+                    RelativeLayout tag_layout = editDialog.findViewById(R.id.enter_tag_edit);
+                    RelativeLayout code_layout = editDialog.findViewById(R.id.enter_code_edit);
+                    RelativeLayout summary_layout = editDialog.findViewById(R.id.enter_summary_edit);
+                    if(AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_NO){
+                        calendar_icon.setImageDrawable(context.getResources().getDrawable(R.drawable.edit_cal_dark));
+                        link_icon.setImageDrawable(context.getResources().getDrawable(R.drawable.link_dark));
+                        tag_icon.setImageDrawable(context.getResources().getDrawable(R.drawable.tag_dark));
+                        code_icon.setImageDrawable(context.getResources().getDrawable(R.drawable.code_dark));
+                        summary_icon.setImageDrawable(context.getResources().getDrawable(R.drawable.summary_dark));
+                        diff_icon.setImageDrawable(context.getResources().getDrawable(R.drawable.difficulty_dark));
+
+                        diff_layout.setBackground(context.getResources().getDrawable(R.drawable.edittet_shape));
+                        date_layout.setBackground(context.getResources().getDrawable(R.drawable.edittet_shape));
+                        title_layout.setBackground(context.getResources().getDrawable(R.drawable.edittet_shape));
+                        link_layout.setBackground(context.getResources().getDrawable(R.drawable.edittet_shape));
+                        tag_layout.setBackground(context.getResources().getDrawable(R.drawable.edittet_shape));
+                        code_layout.setBackground(context.getResources().getDrawable(R.drawable.edittet_shape));
+                        summary_layout.setBackground(context.getResources().getDrawable(R.drawable.edittet_shape));
+                        datePickerButton.setTextColor(context.getResources().getColor(R.color.black));
+                        back.setImageDrawable(context.getResources().getDrawable(R.drawable.back_arrow_black));
+                        edit_headline.setTextColor(context.getResources().getColor(R.color.black));
+                    }
+
+
                     editDialog.show();
 
                 }
@@ -360,6 +405,7 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapte
         public TextView setTopic;
         public TextView setDiff;
         public CardView rowCard;
+        public RelativeLayout cardLayout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -369,6 +415,7 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapte
             setTopic = itemView.findViewById(R.id.setTopic);
             setDiff = itemView.findViewById(R.id.setDiff);
             rowCard = itemView.findViewById(R.id.rowCard);
+            cardLayout = itemView.findViewById(R.id.card_layout);
         }
     }
 
