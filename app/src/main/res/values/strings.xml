@@ -41,6 +41,7 @@
     <string name="name">Code Revision</string>
     <string name="about_paragraph">Sometimes, we forget certain approaches or syntax that we have previously used. To address this, I have developed an app that allows you to save your solved CP problems and revise them later.\n\nWith this app, you can easily store your solved problems and access them whenever you need to refresh your memory.</string>
     <string name="write_summary_of_the_code">Write Summary of the Code</string>
+    <string name="default_web_client_id" translatable="false">163465864454-mo6eiih5fjeskk0e0kl89odvu00tutas.apps.googleusercontent.com</string>
 
     <string-array name="difficulty_items">
         <item>Difficulty Level</item>

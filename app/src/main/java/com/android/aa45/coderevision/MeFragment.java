@@ -154,7 +154,7 @@ public class MeFragment extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent();
                 intent.setAction(Intent.ACTION_SEND);
-                intent.putExtra(Intent.EXTRA_TEXT,"Download CodeRevision app & save solved problems to revise it\n\n https://bit.ly/code-revision-aa45");
+                intent.putExtra(Intent.EXTRA_TEXT,"Download CodeRevision app & save solved problems to revise it\n\n https://github.com/bhaskaraa45/CodeRevision/raw/main/app/release/app-release.apk");
                 intent.setType("text/plain");
                 startActivity(intent);
             }
