@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Firebase.LoginActivity">
+    tools:context=".Firebase.LoginActivity"
+    android:id="@+id/parent_login">
 
 <!--    <de.hdodenhof.circleimageview.CircleImageView-->
 <!--        android:id="@+id/exitApp"-->

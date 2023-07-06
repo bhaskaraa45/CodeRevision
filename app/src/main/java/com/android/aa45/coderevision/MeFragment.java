@@ -109,7 +109,7 @@ public class MeFragment extends Fragment {
 
         SharedPreferences sharedPref = requireActivity().getSharedPreferences("Settings", Context.MODE_PRIVATE);
         @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = sharedPref.edit();
-        boolean dark = sharedPref.getBoolean("dark",true);
+        boolean dark = sharedPref.getBoolean("dark",false);
         boolean notify = sharedPref.getBoolean("notify",true);
 
         darkMode.setChecked(dark);

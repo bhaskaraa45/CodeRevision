@@ -197,6 +197,10 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapte
                     TextView code = codeDialog.findViewById(R.id.code);
                     ImageView backToMainDia = codeDialog.findViewById(R.id.back_to_dialog);
                     ImageView copy = codeDialog.findViewById(R.id.copy);
+                    LinearLayout parent = codeDialog.findViewById(R.id.parent_layout_code);
+
+                    if(AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_NO)
+                        parent.setBackgroundColor(context.getResources().getColor(R.color.grey_bg));
 
                     backToMainDia.setOnClickListener(v1 -> {
                         codeDialog.dismiss();

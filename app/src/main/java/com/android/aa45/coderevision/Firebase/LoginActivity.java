@@ -3,7 +3,9 @@ package com.android.aa45.coderevision.Firebase;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -52,6 +54,10 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) ConstraintLayout parent = findViewById(R.id.parent_login);
+        if(!MainActivity.dark){
+            parent.setBackgroundColor(getResources().getColor(R.color.grey_bg));
+        }
 
         mAuth = FirebaseAuth.getInstance();
 

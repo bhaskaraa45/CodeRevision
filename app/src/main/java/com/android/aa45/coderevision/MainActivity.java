@@ -26,6 +26,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     public static ArrayList<Context> MainActContext = new ArrayList<>();
+    public static boolean dark;
 
     FirebaseAuth mAuth;
     static ArrayList<String> userDetails=new ArrayList<>(); // at 0-> name , at 1-> email , at 2-> photo url
@@ -63,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
         //for dark mode
         SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("Settings", Context.MODE_PRIVATE);
-        boolean dark = sharedPref.getBoolean("dark",true);
+        dark = sharedPref.getBoolean("dark",false);
         if(dark){
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         }else{
