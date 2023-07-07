@@ -135,6 +135,12 @@ public class AddProblemActivity extends AppCompatActivity {
                 break;
         }
 
+        //if wishlist selected then code & summary is not necessary
+        if(selectedTab==2){
+            code.setHint("Code (Optional)");
+            summ.setHint("Write Summary of the Code (Optional)");
+        }
+
 
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -152,9 +158,13 @@ public class AddProblemActivity extends AppCompatActivity {
                 if(!Patterns.WEB_URL.matcher(questionLink).matches()){
                     Toast.makeText(AddProblemActivity.this, "Please Enter valid Link", Toast.LENGTH_SHORT).show();
                 }
-                else if (diff <0 || questionTag.equals("") || enteredCode.equals("")) {
+                else if (diff <0 || questionTag.equals("") ) {
                     Toast.makeText(AddProblemActivity.this, "Please fill the form appropriately", Toast.LENGTH_SHORT).show();
-                } else {
+                }
+                else if(selectedTab==0 && enteredCode.equals("")){
+                    Toast.makeText(AddProblemActivity.this, "Please fill the form appropriately", Toast.LENGTH_SHORT).show();
+                }
+                else {
                     //To make first letter capital and others small
                     questionTag=questionTag.toLowerCase();
                     String ch = questionTag.charAt(0)+"";
