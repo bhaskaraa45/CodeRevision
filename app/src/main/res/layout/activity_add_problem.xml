@@ -43,288 +43,286 @@
             />
     </LinearLayout>
 
-    <Space
-        android:layout_width="45dp"
-        android:layout_height="30dp"/>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <RelativeLayout
-            android:id="@+id/date_layout"
-            android:layout_marginStart="15dp"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:ignore="UselessParent"
-            android:background="@drawable/edit_form_shape">
-            <ImageView
-                android:id="@+id/calendar_icon"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:id="@+id/date_layout"
+                android:layout_marginStart="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/baseline_edit_calendar_24"
-                android:contentDescription="@string/todo"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="5dp"/>
-            <Button
-                android:id="@+id/date_picker"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:text="@string/today"
-                android:layout_toEndOf="@id/calendar_icon"
-                android:layout_marginStart="5dp"
-                style="?android:spinnerStyle"
-                android:textAlignment="center"
-                />
+                tools:ignore="UselessParent"
+                android:background="@drawable/edit_form_shape">
+                <ImageView
+                    android:id="@+id/calendar_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/baseline_edit_calendar_24"
+                    android:contentDescription="@string/todo"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="5dp"/>
+                <Button
+                    android:id="@+id/date_picker"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/today"
+                    android:layout_toEndOf="@id/calendar_icon"
+                    android:layout_marginStart="5dp"
+                    style="?android:spinnerStyle"
+                    android:textAlignment="center"
+                    />
 
-        </RelativeLayout>
-    </LinearLayout>
-    <Space
-        android:layout_width="10dp"
-        android:layout_height="20dp"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
-        <RelativeLayout
-            android:id="@+id/enter_title"
-            android:layout_marginStart="15dp"
-            android:layout_width="wrap_content"
+            </RelativeLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:ignore="UselessParent"
-            android:background="@drawable/edit_form_shape">
-
-            <ImageView
-                android:id="@+id/title_icon"
-                android:layout_width="24sp"
-                android:layout_height="24sp"
-                android:src="@drawable/title"
-                android:background="@color/white"
-                android:layout_marginTop="7dp"
-                android:contentDescription="@string/todo"
-                android:layout_marginStart="8dp"
-                />
-
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/title"
-                android:layout_width="310dp"
-                android:layout_height="wrap_content"
-                android:layout_toEndOf="@id/title_icon"
-                android:layout_marginStart="14dp"
-                android:hint="@string/enter_title"
-                android:textSize="14sp"
-                android:maxLines="2"
-                android:textColor="@color/white"/>
-        </RelativeLayout>
-    </LinearLayout>
-    <Space
-        android:layout_width="10dp"
-        android:layout_height="20dp"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
-        <RelativeLayout
-            android:id="@+id/enter_link"
-            android:layout_marginStart="15dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:ignore="UselessParent"
-            android:background="@drawable/edit_form_shape">
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:id="@+id/link_icon"
-                android:src="@drawable/link"
-                android:layout_marginTop="7dp"
-                android:contentDescription="@string/todo"
-                android:layout_marginStart="8dp"/>
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/link"
-                android:layout_width="310dp"
-                android:layout_height="wrap_content"
-                android:layout_toEndOf="@id/link_icon"
-                android:layout_marginStart="14dp"
-                android:hint="@string/paste_the_link"
-                android:textSize="14sp"
-                android:maxLines="2"
-                android:textColor="@color/white"/>
-        </RelativeLayout>
-    </LinearLayout>
-    <Space
-        android:layout_width="10dp"
-        android:layout_height="20dp"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
-        <RelativeLayout
-            android:id="@+id/enter_tag"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            tools:ignore="UselessParent"
-            android:background="@drawable/edit_form_shape">
-            <ImageView
-                android:id="@+id/tag_icon"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/tag"
-                android:layout_marginTop="7dp"
-                android:contentDescription="@string/todo"
-                android:layout_marginStart="8dp"/>
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/topic"
-                android:layout_width="310dp"
-                android:layout_height="wrap_content"
-                android:layout_toEndOf="@id/tag_icon"
-                android:layout_marginStart="14dp"
-                android:hint="@string/topic"
-                android:textSize="14sp"
-                android:maxLines="2"
-                android:textColor="@color/white"/>
-        </RelativeLayout>
-    </LinearLayout>
-    <Space
-        android:layout_width="10dp"
-        android:layout_height="20dp"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <RelativeLayout
-            android:id="@+id/enter_code"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            tools:ignore="UselessParent"
-            android:background="@drawable/edit_form_shape">
-            <ImageView
-                android:id="@+id/code_icon"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:src="@drawable/code_icon"
-                android:layout_centerVertical="true"
-                android:contentDescription="@string/todo"
-                android:layout_marginStart="8dp"/>
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/code"
-                android:layout_width="310dp"
-                android:layout_height="wrap_content"
-                android:layout_toEndOf="@id/code_icon"
-                android:lines="12"
-                android:layout_marginStart="14dp"
-                android:hint="Code"
-                android:textSize="14sp"
-                android:textColor="@color/white"/>
-
-        </RelativeLayout>
-    </LinearLayout>
-    <Space
-        android:layout_width="10dp"
-        android:layout_height="20dp"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
-        <RelativeLayout
-            android:id="@+id/enter_summary"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            tools:ignore="UselessParent"
-            android:background="@drawable/edit_form_shape">
-            <ImageView
-                android:id="@+id/summary_icon"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/baseline_summarize_24"
-                android:layout_marginTop="7dp"
-                android:contentDescription="@string/todo"
-                android:layout_marginStart="8dp"/>
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/summary_add"
-                android:layout_width="310dp"
-                android:layout_height="wrap_content"
-                android:layout_toEndOf="@id/summary_icon"
-                android:layout_marginStart="14dp"
-                android:hint="Write Summary of the Code"
-                android:textSize="14sp"
-                android:maxLines="3"
-                android:textColor="@color/white"/>
-        </RelativeLayout>
-    </LinearLayout>
-    <Space
-        android:layout_width="10dp"
-        android:layout_height="20dp"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <RelativeLayout
-            android:id="@+id/spinner_layout"
-            android:layout_marginStart="15dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:ignore="UselessParent"
-            android:background="@drawable/edit_form_shape"
-            android:padding="5dp"
+            android:orientation="vertical"
             >
-            <ImageView
-                android:layout_centerVertical="true"
-                android:id="@+id/diff_icon"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginStart="7dp"
-                android:src="@drawable/difficulty_level"
-                android:contentDescription="@string/todo" />
-<!--            <com.google.android.material.textfield.TextInputLayout-->
-<!--                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_toEndOf="@id/diff_icon"-->
-<!--                android:layout_marginStart="15dp"-->
-<!--                android:layout_marginEnd="100dp"-->
-<!--                android:hint="@string/difficulty_level">-->
-
-<!--                <AutoCompleteTextView-->
-<!--                    android:id="@+id/difficulty_level"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_weight="1"-->
-<!--                    tools:ignore="LabelFor" />-->
-<!--            </com.google.android.material.textfield.TextInputLayout>-->
-
-            <Spinner
-                android:layout_marginStart="10dp"
+            <RelativeLayout
+                android:id="@+id/enter_title"
+                android:layout_marginStart="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toEndOf="@+id/diff_icon"
-                android:id="@+id/spinner"
+                tools:ignore="UselessParent"
+                android:background="@drawable/edit_form_shape">
+
+                <ImageView
+                    android:id="@+id/title_icon"
+                    android:layout_width="24sp"
+                    android:layout_height="24sp"
+                    android:src="@drawable/title"
+                    android:background="@color/white"
+                    android:layout_marginTop="7dp"
+                    android:contentDescription="@string/todo"
+                    android:layout_marginStart="8dp"
+                    />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/title"
+                    android:layout_width="310dp"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/title_icon"
+                    android:layout_marginStart="14dp"
+                    android:hint="@string/enter_title"
+                    android:textSize="14sp"
+                    android:maxLines="2"
+                    android:textColor="@color/white"/>
+            </RelativeLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <RelativeLayout
+                android:id="@+id/enter_link"
+                android:layout_marginStart="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:ignore="UselessParent"
+                android:background="@drawable/edit_form_shape">
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:id="@+id/link_icon"
+                    android:src="@drawable/link"
+                    android:layout_marginTop="7dp"
+                    android:contentDescription="@string/todo"
+                    android:layout_marginStart="8dp"/>
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/link"
+                    android:layout_width="310dp"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/link_icon"
+                    android:layout_marginStart="14dp"
+                    android:hint="@string/paste_the_link"
+                    android:textSize="14sp"
+                    android:maxLines="2"
+                    android:textColor="@color/white"/>
+            </RelativeLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <RelativeLayout
+                android:id="@+id/enter_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                tools:ignore="UselessParent"
+                android:background="@drawable/edit_form_shape">
+                <ImageView
+                    android:id="@+id/tag_icon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/tag"
+                    android:layout_marginTop="7dp"
+                    android:contentDescription="@string/todo"
+                    android:layout_marginStart="8dp"/>
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/topic"
+                    android:layout_width="310dp"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/tag_icon"
+                    android:layout_marginStart="14dp"
+                    android:hint="@string/topic"
+                    android:textSize="14sp"
+                    android:maxLines="2"
+                    android:textColor="@color/white"/>
+            </RelativeLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:id="@+id/enter_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                tools:ignore="UselessParent"
+                android:background="@drawable/edit_form_shape">
+                <ImageView
+                    android:id="@+id/code_icon"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/code_icon"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="@string/todo"
+                    android:layout_marginStart="8dp"/>
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/code"
+                    android:layout_width="310dp"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/code_icon"
+                    android:lines="12"
+                    android:layout_marginStart="14dp"
+                    android:hint="Code"
+                    android:textSize="14sp"
+                    android:textColor="@color/white"/>
+
+            </RelativeLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <RelativeLayout
+                android:id="@+id/enter_summary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                tools:ignore="UselessParent"
+                android:background="@drawable/edit_form_shape">
+                <ImageView
+                    android:id="@+id/summary_icon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/baseline_summarize_24"
+                    android:layout_marginTop="7dp"
+                    android:contentDescription="@string/todo"
+                    android:layout_marginStart="8dp"/>
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/summary_add"
+                    android:layout_width="310dp"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/summary_icon"
+                    android:layout_marginStart="14dp"
+                    android:hint="Write Summary of the Code"
+                    android:textSize="14sp"
+                    android:maxLines="3"
+                    android:textColor="@color/white"/>
+            </RelativeLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:id="@+id/spinner_layout"
+                android:layout_marginStart="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:ignore="UselessParent"
+                android:background="@drawable/edit_form_shape"
+                android:padding="5dp"
+                >
+                <ImageView
+                    android:layout_centerVertical="true"
+                    android:id="@+id/diff_icon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="7dp"
+                    android:src="@drawable/difficulty_level"
+                    android:contentDescription="@string/todo" />
+                <!--            <com.google.android.material.textfield.TextInputLayout-->
+                <!--                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"-->
+                <!--                android:layout_width="match_parent"-->
+                <!--                android:layout_height="wrap_content"-->
+                <!--                android:layout_toEndOf="@id/diff_icon"-->
+                <!--                android:layout_marginStart="15dp"-->
+                <!--                android:layout_marginEnd="100dp"-->
+                <!--                android:hint="@string/difficulty_level">-->
+
+                <!--                <AutoCompleteTextView-->
+                <!--                    android:id="@+id/difficulty_level"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_weight="1"-->
+                <!--                    tools:ignore="LabelFor" />-->
+                <!--            </com.google.android.material.textfield.TextInputLayout>-->
+
+                <Spinner
+                    android:layout_marginStart="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/diff_icon"
+                    android:id="@+id/spinner"
+                    />
+
+
+
+            </RelativeLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <Button
+                android:id="@+id/add_problem"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:text="@string/add"
+                android:backgroundTint="@color/blue_"
                 />
-
-
-
-        </RelativeLayout>
+        </LinearLayout>
     </LinearLayout>
-    <LinearLayout
-        android:layout_marginTop="30dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
-        <Button
-            android:id="@+id/add_problem"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:text="@string/add"
-            android:backgroundTint="@color/blue_"
-            />
-    </LinearLayout>
+</ScrollView>
+
+
+
 
 
 
