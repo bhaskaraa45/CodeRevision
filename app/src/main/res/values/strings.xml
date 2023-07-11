@@ -57,5 +57,64 @@
         <item>Difficulty</item>
     </string-array>
 
+    <string-array name="topic_list">
+        <item>Arrays</item>
+        <item>Mathematical</item>
+        <item>Strings</item>
+        <item>Dynamic Programming</item>
+        <item>Tree</item>
+        <item>Sorting</item>
+        <item>Hash</item>
+        <item>Bit Magic</item>
+        <item>Matrix</item>
+        <item>Graph</item>
+        <item>Linked List</item>
+        <item>Greedy</item>
+        <item>Stack</item>
+        <item>Searching</item>
+        <item>Recursion</item>
+        <item>Binary Search Tree</item>
+        <item>STL</item>
+        <item>Prime Number</item>
+        <item>Number Theory</item>
+        <item>DFS</item>
+        <item>BFS</item>
+        <item>Binary Search</item>
+        <item>Misc</item>
+        <item>Two Pointer</item>
+        <item>Numbers</item>
+        <item>Backtracking</item>
+        <item>Queue</item>
+        <item>Sieve</item>
+        <item>Heap</item>
+        <item>Map</item>
+        <item>Sliding Window</item>
+        <item>Combinatorial</item>
+        <item>Divide and Conquer</item>
+        <item>Palindrome</item>
+        <item>Pattern</item>
+        <item>Trie</item>
+        <item>Fibonacci</item>
+        <item>Geometric</item>
+        <item>Permutation</item>
+        <item>Logical Thinking</item>
+        <item>OOP</item>
+        <item>Traversal</item>
+        <item>Set</item>
+        <item>Hashing</item>
+        <item>HashTable</item>
+        <item>Pattern Searching</item>
+        <item>Priority Queue</item>
+        <item>Doubly Linked list</item>
+        <item>Circular Linked List</item>
+        <item>Union</item>
+        <item>Merge Sort</item>
+        <item>Quick Sort</item>
+        <item>Anagram</item>
+        <item>Kadane</item>
+        <item>Set</item>
+
+    </string-array>
+
 
 </resources>

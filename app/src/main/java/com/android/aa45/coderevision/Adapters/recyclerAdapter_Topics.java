@@ -70,9 +70,18 @@ public class recyclerAdapter_Topics extends RecyclerView.Adapter<recyclerAdapter
             List<DataHolder> sortedList = new ArrayList<>();
 
             for (DataHolder item : allItems){
-                if(Objects.equals(item.getTag(), key)){
-                    sortedList.add(item);
+
+
+                String[] tags = item.getTag().split("    ",0);
+
+                for (String tag : tags){
+                    if(Objects.equals(tag, key)){
+                        sortedList.add(item);
+                        break;
+                    }
                 }
+
+
             }
             topicName.setText(key);
 

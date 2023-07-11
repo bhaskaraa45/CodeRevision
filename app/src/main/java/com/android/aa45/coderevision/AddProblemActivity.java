@@ -1,26 +1,23 @@
 package com.android.aa45.coderevision;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.content.SharedPreferences;
-import android.icu.text.SimpleDateFormat;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
-import android.webkit.URLUtil;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -28,19 +25,12 @@ import android.widget.Toast;
 
 import com.android.aa45.coderevision.Firebase.DataHolder;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-import java.net.MalformedURLException;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Objects;
 import java.util.Stack;
 
 public class AddProblemActivity extends AppCompatActivity {
@@ -63,14 +53,18 @@ public class AddProblemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_problem);
 
+        String[] topic_list = getResources().getStringArray(R.array.topic_list);
+
         EditText code = findViewById(R.id.code);
         TextView textView1 = findViewById(R.id.text_headline1);
         TextView textView2 = findViewById(R.id.text_headline2);
         EditText title = findViewById(R.id.title);
         EditText link = findViewById(R.id.link);
-        EditText topic = findViewById(R.id.topic);
+        LinearLayout addTopic = findViewById(R.id.add_tag);
         Button addButton = findViewById(R.id.add_problem);
         @SuppressLint({"MissingInflatedId", "LocalSuppress"}) EditText summ = findViewById(R.id.summary_add);
+        TextView topic = findViewById(R.id.topic);
+        ImageView back = findViewById(R.id.back_to_home);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.difficulty_items, android.R.layout.simple_spinner_item);
@@ -91,7 +85,10 @@ public class AddProblemActivity extends AppCompatActivity {
             }
         });
 
-
+        //back
+        back.setOnClickListener(v -> {
+            finish();
+        });
 
 
         //select date
@@ -141,13 +138,51 @@ public class AddProblemActivity extends AppCompatActivity {
             summ.setHint("Write Summary of the Code (Optional)");
         }
 
+        //click on add tag
+        ArrayList<Integer> listCheck = new ArrayList<>();
+        addTopic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Dialog selectTopicDia = new Dialog(AddProblemActivity.this);
+                selectTopicDia.setContentView(R.layout.dialog_add_tag);
+
+                TextView done = selectTopicDia.findViewById(R.id.done_topic);
+                ListView list = selectTopicDia.findViewById(R.id.listView);
+
+                ArrayAdapter<String> listAdapter = new ArrayAdapter<>(AddProblemActivity.this,
+                        android.R.layout.simple_list_item_multiple_choice,topic_list);
+
+                list.setAdapter(listAdapter);
+
+                if(!listAdapter.isEmpty()){
+                    for (int i : listCheck){
+                        list.setItemChecked(i,true);
+                    }
+                }
+
+                done.setOnClickListener(v1 -> {
+                    listCheck.clear();
+                    questionTag = "";
+                    for (int i=0;i<list.getCount();i++){
+                        if(list.isItemChecked(i)){
+                            questionTag += list.getItemAtPosition(i) + "    ";
+                            listCheck.add(i);
+                        }
+                    }
+                    topic.setText(questionTag);
+                    selectTopicDia.dismiss();
+                });
+                selectTopicDia.show();
+
+            }
+        });
+
 
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 questionTitle += title.getText().toString();
                 questionLink += link.getText().toString();
-                questionTag += topic.getText().toString();
                 enteredCode += code.getText().toString();
                 summary += summ.getText().toString();
                 date = selectedDate;
@@ -165,12 +200,6 @@ public class AddProblemActivity extends AppCompatActivity {
                     Toast.makeText(AddProblemActivity.this, "Please fill the form appropriately", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    //To make first letter capital and others small
-                    questionTag=questionTag.toLowerCase();
-                    String ch = questionTag.charAt(0)+"";
-                    ch = ch.toUpperCase();
-                    questionTag = ch + questionTag.substring(1);
-
                     setData();
                     Toast.makeText(AddProblemActivity.this, "Added", Toast.LENGTH_SHORT).show();
                     finish();
@@ -201,6 +230,17 @@ public class AddProblemActivity extends AppCompatActivity {
             code_icon.setImageDrawable(getResources().getDrawable(R.drawable.code_dark));
             summary_icon.setImageDrawable(getResources().getDrawable(R.drawable.summary_dark));
             diff_icon.setImageDrawable(getResources().getDrawable(R.drawable.difficulty_dark));
+            back.setImageDrawable(getResources().getDrawable(R.drawable.back_arrow_black));
+            datePickerButton.setTextColor(getResources().getColor(R.color.black));
+            summ.setTextColor(getResources().getColor(R.color.black));
+            code.setTextColor(getResources().getColor(R.color.black));
+            link.setTextColor(getResources().getColor(R.color.black));
+            title.setTextColor(getResources().getColor(R.color.black));
+            topic.setTextColor(getResources().getColor(R.color.black));
+            ImageView img = findViewById(R.id.image_add_circle);
+            img.setImageDrawable(getResources().getDrawable(R.drawable.add_circle_dark));
+
+
 
             diff_layout.setBackground(getResources().getDrawable(R.drawable.edittet_shape));
             date_layout.setBackground(getResources().getDrawable(R.drawable.edittet_shape));
@@ -254,8 +294,6 @@ public class AddProblemActivity extends AppCompatActivity {
         DatabaseReference myRef = db.getReference(); //root
         String uid = FirebaseAuth.getInstance().getUid();
 
-
-
         //root->user->uid->branch(tab)
         DatabaseReference branchRef = myRef.child("user").child(uid).child(branch[selectedTab]);
         uniqueId = branchRef.push().getKey();
@@ -265,6 +303,11 @@ public class AddProblemActivity extends AppCompatActivity {
 
         finalRef.setValue(obj);
 
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        Objects.requireNonNull(AddProblemActivity.this.getSupportActionBar()).hide();
     }
 
 }

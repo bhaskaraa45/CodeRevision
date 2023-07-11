@@ -61,14 +61,18 @@ public class SolvedFragment extends Fragment {
                 for (DataSnapshot userSnap : snapshot.getChildren()) {
                     DataHolder dataS = userSnap.getValue(DataHolder.class);
                     ItemList.add(dataS);
-                    String tag = ItemList.get(ItemList.size()-1).getTag();
-                    if(topicFreq.containsKey(tag)){
-                        Integer currCount = topicFreq.get(tag);
-                        int newCount = currCount==null? 1 : currCount+1;
-                        topicFreq.put(tag, (newCount));
+                    String[] tags = ItemList.get(ItemList.size()-1).getTag().split("    ",0);
+                    for (String tag : tags) {
+                        if(!tag.equals("")) {
+                            if (topicFreq.containsKey(tag)) {
+                                Integer currCount = topicFreq.get(tag);
+                                int newCount = currCount == null ? 1 : currCount + 1;
+                                topicFreq.put(tag, (newCount));
 
-                    }else{
-                        topicFreq.put(tag , 1);
+                            } else {
+                                topicFreq.put(tag, 1);
+                            }
+                        }
                     }
                 }
                 viewAdapter.notifyDataSetChanged();

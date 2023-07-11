@@ -315,13 +315,6 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapte
                             String updatedDate = selectedDate;
                             String updatedSummary = summ.getText().toString();
 
-                            //to make first character capital
-
-                            updatedTopic=updatedTopic.toLowerCase();
-                            String ch = updatedTopic.charAt(0)+"";
-                            ch = ch.toUpperCase();
-                            updatedTopic = ch + updatedTopic.substring(1);
-
                             int diff = selectedDifficulty;
 
                             if(!Patterns.WEB_URL.matcher(updatedLink).matches()){
