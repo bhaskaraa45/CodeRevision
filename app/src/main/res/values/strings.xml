@@ -54,6 +54,7 @@
     <string-array name="search_by">
         <item>Title</item>
         <item>Topic</item>
+        <item>Difficulty</item>
     </string-array>
 
 

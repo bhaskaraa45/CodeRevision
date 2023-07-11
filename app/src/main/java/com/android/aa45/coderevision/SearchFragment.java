@@ -77,6 +77,9 @@ public class SearchFragment extends Fragment {
             DatabaseReference myRef = db.getReference().child("user").child(uid); //root->user->uid
             DatabaseReference triedRef = myRef.child("Tried");
             DatabaseReference wishlistRef = myRef.child("Wishlist");
+
+            //added tried data
+
             triedRef.addValueEventListener(new ValueEventListener() {
                 @SuppressLint("NotifyDataSetChanged")
                 @Override
@@ -94,6 +97,7 @@ public class SearchFragment extends Fragment {
                 }
             });
 
+            //added wishlist's data
             wishlistRef.addValueEventListener(new ValueEventListener() {
                 @SuppressLint("NotifyDataSetChanged")
                 @Override
@@ -121,7 +125,11 @@ public class SearchFragment extends Fragment {
                             if(selectedPos ==1){
                                 newHolder = searchByTopic(query);
                                 setDataToRecyclerView(newHolder);
-                            }else {
+                            }else if(selectedPos==2){
+                                newHolder = searchByDifficulty(query);
+                                setDataToRecyclerView(newHolder);
+                            }
+                            else {
                                 newHolder = searchByTitle(query);
                                 setDataToRecyclerView(newHolder);
                             }
@@ -133,6 +141,10 @@ public class SearchFragment extends Fragment {
                             List<DataHolder> newHolder = new ArrayList<>();
                             if(selectedPos ==1){
                                 newHolder = searchByTopic(newText);
+                                setDataToRecyclerView(newHolder);
+                            }
+                            else if(selectedPos==2){
+                                newHolder = searchByDifficulty(newText);
                                 setDataToRecyclerView(newHolder);
                             }else {
                                 newHolder = searchByTitle(newText);
@@ -178,6 +190,18 @@ public class SearchFragment extends Fragment {
         List<DataHolder> list = new ArrayList<>();
         for (DataHolder data : allData) {
             if (data.getTag().toLowerCase().contains(s)) {
+                list.add(data);
+            }
+
+        }
+        return list;
+    }
+
+    private List<DataHolder> searchByDifficulty(String s){
+        s = s.toLowerCase();
+        List<DataHolder> list = new ArrayList<>();
+        for (DataHolder data : allData) {
+            if (data.getDifficulty().toLowerCase().contains(s)) {
                 list.add(data);
             }
 
