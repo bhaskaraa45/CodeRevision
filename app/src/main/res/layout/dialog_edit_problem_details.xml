@@ -3,35 +3,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <LinearLayout
-        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        >
+        android:layout_marginTop="10dp">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <ImageView
                 android:id="@+id/back_edit"
-                android:paddingEnd="10dp"
-                android:paddingStart="10dp"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/back_arrow"
-                />
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:src="@drawable/back_arrow" />
+
             <TextView
                 android:id="@+id/edit_headline"
-                android:layout_marginTop="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Edit"
-                android:textSize="30sp"
-                android:textStyle="bold"
-                android:textColor="@color/white"
-                android:layout_gravity="center"
-                android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
-                />
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:text="Edit"
+                android:textColor="@color/white"
+                android:textSize="30sp"
+                android:textStyle="bold" />
         </RelativeLayout>
 
 
@@ -39,260 +40,308 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="wrap_content">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <LinearLayout
-                android:layout_marginTop="40dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
                 android:orientation="vertical">
+
                 <RelativeLayout
                     android:id="@+id/date_layout_edit"
-                    android:layout_marginStart="15dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
                     android:background="@drawable/edit_form_shape">
+
                     <ImageView
                         android:id="@+id/calendar_icon_edit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/baseline_edit_calendar_24"
-                        android:contentDescription="@string/todo"
                         android:layout_centerVertical="true"
-                        android:layout_marginStart="5dp"/>
+                        android:layout_marginStart="5dp"
+                        android:contentDescription="@string/todo"
+                        android:src="@drawable/baseline_edit_calendar_24" />
+
                     <Button
                         android:id="@+id/date_picker_edit"
+                        style="?android:spinnerStyle"
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
-                        android:text="@string/today"
-                        android:layout_toEndOf="@id/calendar_icon_edit"
                         android:layout_marginStart="5dp"
-                        style="?android:spinnerStyle"
-                        android:textAlignment="center"
-                        />
+                        android:layout_toEndOf="@id/calendar_icon_edit"
+                        android:text="@string/today"
+                        android:textAlignment="center" />
 
                 </RelativeLayout>
             </LinearLayout>
+
             <LinearLayout
-                android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
+                android:layout_marginTop="20dp"
+                android:orientation="vertical">
+
                 <RelativeLayout
                     android:id="@+id/enter_title_edit"
-                    android:layout_marginStart="15dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
                     android:background="@drawable/edit_form_shape">
 
                     <ImageView
                         android:id="@+id/title_icon"
                         android:layout_width="24sp"
                         android:layout_height="24sp"
-                        android:src="@drawable/title"
-                        android:background="@color/white"
-                        android:layout_marginTop="7dp"
-                        android:contentDescription="@string/todo"
+                        android:layout_centerVertical="true"
                         android:layout_marginStart="8dp"
-                        />
+                        android:layout_marginTop="7dp"
+                        android:background="@color/white"
+                        android:contentDescription="@string/todo"
+                        android:src="@drawable/title" />
 
                     <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/title_edit"
                         android:layout_width="310dp"
                         android:layout_height="wrap_content"
-                        android:layout_toEndOf="@id/title_icon"
+                        android:layout_centerVertical="true"
                         android:layout_marginStart="14dp"
+                        android:layout_toEndOf="@id/title_icon"
                         android:hint="@string/enter_title"
-                        android:textSize="14sp"
                         android:maxLines="2"
-                        android:layout_centerVertical="true"/>
+                        android:textSize="14sp" />
                 </RelativeLayout>
             </LinearLayout>
+
             <LinearLayout
-                android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
+                android:layout_marginTop="20dp"
+                android:orientation="vertical">
+
                 <RelativeLayout
                     android:id="@+id/enter_link_edit"
-                    android:layout_marginStart="15dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
                     android:background="@drawable/edit_form_shape">
+
                     <ImageView
+                        android:id="@+id/link_icon_edit"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:id="@+id/link_icon_edit"
-                        android:src="@drawable/link"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="8dp"
                         android:layout_marginTop="7dp"
                         android:contentDescription="@string/todo"
-                        android:layout_marginStart="8dp"/>
+                        android:src="@drawable/link" />
+
                     <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/link_edit"
                         android:layout_width="310dp"
                         android:layout_height="wrap_content"
-                        android:layout_toEndOf="@id/link_icon_edit"
+                        android:layout_centerVertical="true"
                         android:layout_marginStart="14dp"
+                        android:layout_toEndOf="@id/link_icon_edit"
                         android:hint="@string/paste_the_link"
-                        android:textSize="14sp"
                         android:maxLines="2"
-                        android:layout_centerVertical="true"/>
+                        android:textSize="14sp" />
                 </RelativeLayout>
             </LinearLayout>
+
             <LinearLayout
-                android:layout_marginTop="20dp"
-                android:layout_width="match_parent"
+                android:layout_width="370dp"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
+                android:layout_marginTop="20dp"
+                android:orientation="vertical">
+
                 <RelativeLayout
                     android:id="@+id/enter_tag_edit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
                     android:background="@drawable/edit_form_shape">
+
                     <ImageView
                         android:id="@+id/tag_icon_edit"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/tag"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="8dp"
                         android:layout_marginTop="7dp"
                         android:contentDescription="@string/todo"
-                        android:layout_marginStart="8dp"/>
-                    <androidx.appcompat.widget.AppCompatEditText
-                        android:id="@+id/topic_edit"
-                        android:layout_width="310dp"
-                        android:layout_height="wrap_content"
-                        android:layout_toEndOf="@id/tag_icon_edit"
+                        android:src="@drawable/tag" />
+
+                    <LinearLayout
+                        android:id="@+id/add_tag_edit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_centerVertical="true"
                         android:layout_marginStart="14dp"
-                        android:hint="@string/topic"
-                        android:textSize="14sp"
-                        android:maxLines="2"
-                        android:layout_centerVertical="true"/>
+                        android:layout_toEndOf="@id/tag_icon_edit"
+                        android:background="@drawable/bg_add_tag"
+                        android:elevation="10dp"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/image_add_circle_edit"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="1dp"
+                            android:src="@drawable/add_circle_light" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginEnd="15dp"
+                            android:layout_marginBottom="3dp"
+                            android:text="add tag/topic"
+                            android:textSize="11sp" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/topic_edit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="14dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_toEndOf="@id/add_tag_edit"
+                        android:textSize="14sp" />
                 </RelativeLayout>
             </LinearLayout>
+
             <LinearLayout
-                android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 android:orientation="vertical">
+
                 <RelativeLayout
                     android:id="@+id/enter_code_edit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
                     android:background="@drawable/edit_form_shape">
+
                     <ImageView
                         android:id="@+id/code_icon_edit"
                         android:layout_width="28dp"
                         android:layout_height="28dp"
-                        android:src="@drawable/code_icon"
                         android:layout_centerVertical="true"
+                        android:layout_marginStart="8dp"
                         android:contentDescription="@string/todo"
-                        android:layout_marginStart="8dp"/>
+                        android:src="@drawable/code_icon" />
+
                     <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/code_edit"
                         android:layout_width="310dp"
                         android:layout_height="wrap_content"
-                        android:layout_toEndOf="@id/code_icon_edit"
-                        android:lines="12"
+                        android:layout_centerVertical="true"
                         android:layout_marginStart="14dp"
+                        android:layout_toEndOf="@id/code_icon_edit"
                         android:hint="Code"
-                        android:textSize="14sp"
-                        android:layout_centerVertical="true"/>
+                        android:lines="12"
+                        android:textSize="14sp" />
 
                 </RelativeLayout>
             </LinearLayout>
+
             <LinearLayout
-                android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
+                android:layout_marginTop="20dp"
+                android:orientation="vertical">
+
                 <RelativeLayout
                     android:id="@+id/enter_summary_edit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
                     android:background="@drawable/edit_form_shape">
+
                     <ImageView
                         android:id="@+id/summary_icon_edit"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/baseline_summarize_24"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="8dp"
                         android:layout_marginTop="7dp"
                         android:contentDescription="@string/todo"
-                        android:layout_marginStart="8dp"/>
+                        android:src="@drawable/baseline_summarize_24" />
+
                     <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/summary_edit"
                         android:layout_width="310dp"
                         android:layout_height="wrap_content"
-                        android:layout_toEndOf="@id/summary_icon_edit"
+                        android:layout_centerVertical="true"
                         android:layout_marginStart="14dp"
+                        android:layout_toEndOf="@id/summary_icon_edit"
                         android:hint="@string/write_summary_of_the_code"
-                        android:textSize="14sp"
                         android:maxLines="3"
-                        android:layout_centerVertical="true"/>
+                        android:textSize="14sp" />
                 </RelativeLayout>
             </LinearLayout>
+
             <LinearLayout
-                android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 android:orientation="vertical">
+
                 <RelativeLayout
                     android:id="@+id/spinner_layout_edit"
-                    android:layout_marginStart="15dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
                     android:background="@drawable/edit_form_shape"
-                    android:padding="5dp"
-                    >
+                    android:padding="5dp">
+
                     <ImageView
-                        android:layout_centerVertical="true"
                         android:id="@+id/diff_icon_edit"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
+                        android:layout_centerVertical="true"
                         android:layout_marginStart="7dp"
-                        android:src="@drawable/difficulty_level"
-                        android:contentDescription="@string/todo" />
+                        android:contentDescription="@string/todo"
+                        android:src="@drawable/difficulty_level" />
+
                     <Spinner
-                        android:layout_marginStart="10dp"
+                        android:id="@+id/spinner_edit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_toEndOf="@+id/diff_icon_edit"
-                        android:id="@+id/spinner_edit"
-                        />
+                        android:layout_marginStart="10dp"
+                        android:layout_toEndOf="@+id/diff_icon_edit" />
 
                 </RelativeLayout>
             </LinearLayout>
+
             <LinearLayout
-                android:layout_marginTop="30dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
+                android:layout_marginTop="30dp"
+                android:orientation="vertical">
+
                 <Button
                     android:id="@+id/update_button"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
-                    android:text="Update"
                     android:backgroundTint="@color/blue_"
-                    />
+                    android:text="Update" />
             </LinearLayout>
         </LinearLayout>
 
     </ScrollView>
-
-
-
 
 
 </LinearLayout>

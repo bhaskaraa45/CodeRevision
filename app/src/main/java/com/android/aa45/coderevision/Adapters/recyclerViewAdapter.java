@@ -26,6 +26,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -48,6 +49,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Formatter;
 import java.util.List;
@@ -61,6 +64,7 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapte
     private String selectedDate;
     int selectedDifficulty=-1;
     private final String[] diffItems = {"Basic", "Easy" , "Medium" , "Hard"};
+    private String questionTag="";
 
 
     public recyclerViewAdapter(List<DataHolder> items,Context context) {
@@ -230,18 +234,22 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapte
             edit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
+                    String[] topic_list = context.getResources().getStringArray(R.array.topic_list);
+
                     Dialog editDialog = new Dialog(context,R.style.Base_Theme_CodeRevision);
                     editDialog.setContentView(R.layout.dialog_edit_problem_details);
 
                     EditText code = editDialog.findViewById(R.id.code_edit);
                     EditText title = editDialog.findViewById(R.id.title_edit);
                     EditText link = editDialog.findViewById(R.id.link_edit);
-                    EditText topic = editDialog.findViewById(R.id.topic_edit);
+                    TextView topic = editDialog.findViewById(R.id.topic_edit);
                     Button updateButton = editDialog.findViewById(R.id.update_button);
                     Spinner difficulty = editDialog.findViewById(R.id.spinner_edit);
                     datePickerButton = editDialog.findViewById(R.id.date_picker_edit);
                     ImageView back = editDialog.findViewById(R.id.back_edit);
                     EditText summ = editDialog.findViewById(R.id.summary_edit);
+                    LinearLayout addTag = editDialog.findViewById(R.id.add_tag_edit);
 
 
                     code.setText(dataHolder.getCode());
@@ -249,6 +257,8 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapte
                     link.setText(dataHolder.getLink());
                     topic.setText(dataHolder.getTag());
                     summ.setText(dataHolder.getSummary());
+
+                    String[] prevTags = dataHolder.getTag().split("    ",0);
 
                     back.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -303,13 +313,54 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapte
                             difficulty.setSelection(0);
                     }
 
+                    ArrayList<Integer> listCheck = new ArrayList<>();
+                    ArrayList<String> list = new ArrayList<>(Arrays.asList(topic_list));
+                    for(String str : prevTags){
+                        if(!str.equals("")) {
+                            int index = list.indexOf(str);
+                            listCheck.add(index);
+                        }
+                    }
+                    addTag.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Dialog selectTopicDia = new Dialog(context);
+                            selectTopicDia.setContentView(R.layout.dialog_add_tag);
+                            TextView done = selectTopicDia.findViewById(R.id.done_topic);
+                            ListView list = selectTopicDia.findViewById(R.id.listView);
+                            ArrayAdapter<String> listAdapter = new ArrayAdapter<>(context,
+                                    android.R.layout.simple_list_item_multiple_choice,topic_list);
+
+                            list.setAdapter(listAdapter);
+
+                            if(!listAdapter.isEmpty()){
+                                for (int i : listCheck){
+                                    list.setItemChecked(i,true);
+                                }
+                            }
+                            done.setOnClickListener(v1 -> {
+                                listCheck.clear();
+                                questionTag = "";
+                                for (int i=0;i<list.getCount();i++){
+                                    if(list.isItemChecked(i)){
+                                        questionTag += list.getItemAtPosition(i) + "    ";
+                                        listCheck.add(i);
+                                    }
+                                }
+                                topic.setText(questionTag);
+                                selectTopicDia.dismiss();
+                            });
+                            selectTopicDia.show();
+                        }
+                    });
+
 
 
                     updateButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             String updatedTitle = title.getText().toString();
-                            String updatedTopic = topic.getText().toString();
+                            String updatedTopic = questionTag;
                             String updatedLink = link.getText().toString();
                             String updatedCode = code.getText().toString();
                             String updatedDate = selectedDate;
@@ -357,6 +408,8 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapte
                         code_icon.setImageDrawable(context.getResources().getDrawable(R.drawable.code_dark));
                         summary_icon.setImageDrawable(context.getResources().getDrawable(R.drawable.summary_dark));
                         diff_icon.setImageDrawable(context.getResources().getDrawable(R.drawable.difficulty_dark));
+                        ImageView img = editDialog.findViewById(R.id.image_add_circle_edit);
+                        img.setImageDrawable(context.getResources().getDrawable(R.drawable.add_circle_dark));
 
                         diff_layout.setBackground(context.getResources().getDrawable(R.drawable.edittet_shape));
                         date_layout.setBackground(context.getResources().getDrawable(R.drawable.edittet_shape));
