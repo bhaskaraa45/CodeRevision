@@ -26,9 +26,9 @@ With this app, you can easily store your solved/tried/wishlist problems and acce
 
 3. Explore the app and familiarize yourself with its features.
 
-4. To add a problem to the database, tap on the "Plus Button" (bottom right side) and select type(Solved/ Tried/ Wishlist) and provide the necessary details such as problem title, date, link,code, summary and difficulty level.
+4. To add a problem to the database, tap on the "Plus Button" (bottom right side) and select type(Solved/ Tried/ Wishlist) and provide the necessary details such as problem title, date, link,code, summary,tags/topics and difficulty level.
 
-5. To search for problems in the database, tap on the "Search" section in bottom navigation and select title or tags in search by option. default it is title.
+5. To search for problems in the database, tap on the "Search" section in bottom navigation and select title or tags or difficulty in search by option, default it is title.
 
 6. And there is a section in Bottom navigation called "Topics" , here your solved problems will be sorted based on the topics name.
 
