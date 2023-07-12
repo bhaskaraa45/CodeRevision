@@ -90,7 +90,8 @@
 
                 <RelativeLayout
                     android:id="@+id/enter_title_edit"
-                    android:layout_width="wrap_content"
+                    android:layout_marginEnd="12dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
                     android:background="@drawable/edit_form_shape">
@@ -108,7 +109,8 @@
 
                     <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/title_edit"
-                        android:layout_width="310dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginStart="14dp"
@@ -127,7 +129,8 @@
 
                 <RelativeLayout
                     android:id="@+id/enter_link_edit"
-                    android:layout_width="wrap_content"
+                    android:layout_marginEnd="12dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
                     android:background="@drawable/edit_form_shape">
@@ -144,7 +147,8 @@
 
                     <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/link_edit"
-                        android:layout_width="310dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginStart="14dp"
@@ -156,7 +160,8 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="370dp"
+                android:layout_marginEnd="12dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:orientation="vertical">
@@ -228,7 +233,8 @@
 
                 <RelativeLayout
                     android:id="@+id/enter_code_edit"
-                    android:layout_width="wrap_content"
+                    android:layout_marginEnd="12dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
                     android:background="@drawable/edit_form_shape">
@@ -244,14 +250,15 @@
 
                     <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/code_edit"
-                        android:layout_width="310dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginStart="14dp"
                         android:layout_toEndOf="@id/code_icon_edit"
                         android:hint="Code"
                         android:lines="12"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        android:layout_marginEnd="5dp"/>
 
                 </RelativeLayout>
             </LinearLayout>
@@ -263,6 +270,7 @@
                 android:orientation="vertical">
 
                 <RelativeLayout
+                    android:layout_marginEnd="12dp"
                     android:id="@+id/enter_summary_edit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -281,14 +289,15 @@
 
                     <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/summary_edit"
-                        android:layout_width="310dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginStart="14dp"
                         android:layout_toEndOf="@id/summary_icon_edit"
                         android:hint="@string/write_summary_of_the_code"
                         android:maxLines="3"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        android:layout_marginEnd="5dp"/>
                 </RelativeLayout>
             </LinearLayout>
 
