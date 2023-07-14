@@ -4,7 +4,7 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "com.android.aa45.coderevision",
+  "applicationId": "com.bhaskar.aa45.coderevision",
   "variantName": "release",
   "elements": [
     {

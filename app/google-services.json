@@ -1,18 +1,35 @@
 {
   "project_info": {
     "project_number": "163465864454",
+    "firebase_url": "https://code-revision-default-rtdb.asia-southeast1.firebasedatabase.app",
     "project_id": "code-revision",
     "storage_bucket": "code-revision.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:163465864454:android:cba364c35d352883b72a87",
+        "mobilesdk_app_id": "1:163465864454:android:ab9282da66cc0729b72a87",
         "android_client_info": {
-          "package_name": "com.android.aa45.coderevision"
+          "package_name": "com.bhaskar.aa45.coderevision"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "163465864454-5k90g7f2qghin2j8buhbnkvgkcf0eqqh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bhaskar.aa45.coderevision",
+            "certificate_hash": "3ff983067b7dde998300dcc15d6ecce32110ae14"
+          }
+        },
+        {
+          "client_id": "163465864454-hf3n13kckmif945gcvnvt9shunbls21n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bhaskar.aa45.coderevision",
+            "certificate_hash": "88c6e4e5b2bc7ee958ff7972d8854a7ddb31d044"
+          }
+        },
         {
           "client_id": "163465864454-mo6eiih5fjeskk0e0kl89odvu00tutas.apps.googleusercontent.com",
           "client_type": 3

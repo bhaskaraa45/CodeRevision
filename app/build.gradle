@@ -9,7 +9,7 @@ android {
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.android.aa45.coderevision"
+        applicationId "com.bhaskar.aa45.coderevision"
         minSdk 23
         targetSdk 33
         versionCode 2
