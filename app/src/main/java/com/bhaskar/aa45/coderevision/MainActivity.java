@@ -10,12 +10,19 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
+import android.content.res.Configuration;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.bhaskar.aa45.coderevision.Firebase.LoginActivity;
 import com.bhaskar.aa45.coderevision.databinding.ActivityMainBinding;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -25,6 +32,12 @@ public class MainActivity extends AppCompatActivity {
 
     public static ArrayList<Context> MainActContext = new ArrayList<>();
     public static boolean dark;
+    public static  BottomNavigationView navigationView ;
+    public static int white;
+    public static int black;
+    public static int grey;
+    public static int grey2;
+    public static int sec;
 
     FirebaseAuth mAuth;
     static ArrayList<String> userDetails=new ArrayList<>(); // at 0-> name , at 1-> email , at 2-> photo url
@@ -42,37 +55,35 @@ public class MainActivity extends AppCompatActivity {
                 userDetails.add(user.getDisplayName());
                 userDetails.add(user.getEmail());
                 userDetails.add(String.valueOf(user.getPhotoUrl()));
-
         }
     }
 
-    ActivityMainBinding binding;
+    @SuppressLint("StaticFieldLeak")
+    public static ActivityMainBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        replaceFragment(new HomeFragment());
 
         MainActContext.add(MainActivity.this);
 
         mAuth = FirebaseAuth.getInstance();
 
-        if(!NetworkIsConnected()){
+        if (!NetworkIsConnected()) {
             Toast.makeText(this, "Failed To Connect Server", Toast.LENGTH_LONG).show();
         }
 
-        //for dark mode
-        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("Settings", Context.MODE_PRIVATE);
-        dark = sharedPref.getBoolean("dark",false);
-        if(dark){
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-        }else{
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        }
+        navigationView=findViewById(R.id.bottomNavigationView);
+        white = getResources().getColor(R.color.white);
+        black = getResources().getColor(R.color.black);
+        grey = getResources().getColor(R.color.grey_bg);
+        grey2 = getResources().getColor(R.color.grey_bg_login);
+        sec = getResources().getColor(R.color.secondary);
 
         //for bottom Navigation
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        replaceFragment(new HomeFragment());
         binding.bottomNavigationView.setOnItemSelectedListener(item ->{
             int id = item.getItemId();
             int home = R.id.home;
@@ -110,6 +121,17 @@ public class MainActivity extends AppCompatActivity {
         ConnectivityManager cm = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm.getActiveNetworkInfo() != null;
     }
-
+    public static void changeBottomNavColor(boolean what){
+//        Menu
+        if(what){
+            binding.bottomNavigationView.setItemTextColor(ColorStateList.valueOf(white));
+            binding.bottomNavigationView.setBackgroundColor(black);
+            binding.bottomNavigationView.setItemIconTintList(ColorStateList.valueOf(grey));
+        }else{
+            binding.bottomNavigationView.setBackgroundColor(white);
+            binding.bottomNavigationView.setItemTextColor(ColorStateList.valueOf(black));
+            binding.bottomNavigationView.setItemIconTintList(ColorStateList.valueOf(grey2));
+        }
+    }
 
 }

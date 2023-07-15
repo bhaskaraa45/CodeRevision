@@ -13,10 +13,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.Toast;
 
+import com.bhaskar.aa45.coderevision.MeFragment;
 import com.bhaskar.aa45.coderevision.R;
+import com.bhaskar.aa45.coderevision.uiMode.changeText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -45,8 +48,22 @@ public class FeedbackFragment extends Fragment {
         rating = view.findViewById(R.id.starRating);
         feedbackMassage = view.findViewById(R.id.feedbackText);
 
-        if (AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_NO){
+        LinearLayout parent = view.findViewById(R.id.parent_feedback);
+
+        changeText.textColorChange(view,MeFragment.isDark,getContext());
+        //if dark mode
+        int white = getResources().getColor(R.color.white);
+        submit.setTextColor(white);
+
+        if(MeFragment.isDark){
+            feedbackMassage.setBackground(getResources().getDrawable(R.drawable.edit_form_shape));
+            feedbackMassage.setHintTextColor(getResources().getColor(R.color.grey_t));
+            parent.setBackgroundColor(getResources().getColor(R.color.primary));
+        }else{//if light mode
             feedbackMassage.setBackground(getResources().getDrawable(R.drawable.edittet_shape));
+            parent.setBackgroundColor(getResources().getColor(R.color.white));
+            feedbackMassage.setHintTextColor(getResources().getColor(R.color.grey_t2));
+
         }
 
         submit.setOnClickListener(new View.OnClickListener() {

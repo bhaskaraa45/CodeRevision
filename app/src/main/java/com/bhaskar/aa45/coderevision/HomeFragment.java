@@ -2,12 +2,16 @@ package com.bhaskar.aa45.coderevision;
 
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -20,6 +24,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.bhaskar.aa45.coderevision.Adapters.FragPageAdapter;
 import com.bhaskar.aa45.coderevision.Fragments.SolvedFragment;
@@ -120,5 +125,25 @@ public class HomeFragment extends Fragment{
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.getWindow().getAttributes().windowAnimations = R.style.FloatingActionButton;
         dialog.getWindow().setGravity(Gravity.BOTTOM);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        boolean dark;
+        SharedPreferences sharedPref = requireContext().getSharedPreferences("Settings", Context.MODE_PRIVATE);
+        int currentMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        if (!sharedPref.contains("dark")) {
+            dark= currentMode == Configuration.UI_MODE_NIGHT_YES;
+        }else{
+            dark = sharedPref.getBoolean("dark",true);
+        }
+
+        if(dark){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        }else{
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
+
     }
 }

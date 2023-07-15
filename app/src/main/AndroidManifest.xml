@@ -2,8 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.bhaskar.aa45.coderevision">
-<uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -14,22 +16,21 @@
         android:supportsRtl="true"
         tools:targetApi="31">
         <activity
-            android:name="com.bhaskar.aa45.coderevision.Firebase.LoginActivity"
+            android:name=".Firebase.LoginActivity"
             android:exported="false"
-            android:theme="@style/AddedTheme"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name="com.bhaskar.aa45.coderevision.AddProblemActivity"
-            android:exported="false"
-            android:theme="@style/AddedTheme"
             android:screenOrientation="portrait"
-             />
+            android:theme="@style/AddedTheme" />
         <activity
-            android:name="com.bhaskar.aa45.coderevision.MainActivity"
+            android:name=".AddProblemActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/AddedTheme" />
+        <activity
+            android:name=".MainActivity"
             android:exported="true"
-            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait"
             android:theme="@style/Base.Theme.CodeRevision"
-            android:screenOrientation="portrait">
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

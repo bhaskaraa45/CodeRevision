@@ -18,11 +18,12 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -33,8 +34,8 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bhaskar.aa45.coderevision.AddProblemActivity;
 import com.bhaskar.aa45.coderevision.Firebase.DataHolder;
+import com.bhaskar.aa45.coderevision.MeFragment;
 import com.bhaskar.aa45.coderevision.PrettifyHighlighter;
 import com.bhaskar.aa45.coderevision.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -62,7 +63,7 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapte
         this.items = items;
         this.context =context;
     }
-    int redColor,blueColor,greenColor,whiteColor,orangeColor;
+    int redColor,blueColor,greenColor,whiteColor,orangeColor,blackColor,primaryColor;
 
     @NonNull
     @Override
@@ -73,12 +74,15 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapte
         greenColor = parent.getContext().getResources().getColor(R.color.green);
         whiteColor = parent.getContext().getResources().getColor(R.color.white);
         orangeColor = parent.getContext().getResources().getColor(R.color.orange);
+        blackColor = parent.getContext().getResources().getColor(R.color.black);
+        primaryColor = parent.getContext().getResources().getColor(R.color.primary);
         return new ViewHolder(itemView);
     }
 
     @SuppressLint({"SetTextI18n", "UseCompatLoadingForDrawables"})
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
         DataHolder dataHolder = items.get(position);
         holder.setTitle.setText(dataHolder.getTitle());
         holder.setDate.setText(dataHolder.getDate());
@@ -86,9 +90,26 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapte
         holder.setDiff.setText(dataHolder.getDifficulty());
         holder.setTopic.setText(dataHolder.getTag());
         holder.setTopic.setTextColor(blueColor);
-        if(AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_NO) {
-            holder.cardLayout.setBackground(context.getResources().getDrawable(R.drawable.gradient_color_light));
+        ArrayList<TextView> textViews = new ArrayList<>();
+        textViews.add(holder.setDate);
+        textViews.add(holder.setDiff);
+        textViews.add(holder.setTitle);
+        textViews.add(holder.setSlNo);
+        textViews.add(holder.topics);
+
+        if(MeFragment.check==-1 && AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_YES) {
+            holder.cardLayout.setBackground(context.getResources().getDrawable(R.drawable.gradient_color));
         }
+
+        if(MeFragment.check!=-1) {
+            uiModeChange(textViews, MeFragment.isDark);
+            if (MeFragment.isDark) {
+                holder.cardLayout.setBackground(context.getResources().getDrawable(R.drawable.gradient_color));
+            }
+            else
+                holder.cardLayout.setBackground(context.getResources().getDrawable(R.drawable.gradient_color_light));
+        }
+
         switch (dataHolder.getDifficulty()) {
             case "Hard":
                 holder.setDiff.setTextColor(redColor);
@@ -106,6 +127,14 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapte
             Dialog dialog = new Dialog(context,R.style.Base_Theme_CodeRevision);
             dialog.setContentView(R.layout.dialog_row_card);
 
+            TextView textView1 = dialog.findViewById(R.id.text31);
+            TextView textView2 = dialog.findViewById(R.id.text32);
+            TextView textView3 = dialog.findViewById(R.id.text33);
+            TextView textView4 = dialog.findViewById(R.id.text34);
+            TextView textView5 = dialog.findViewById(R.id.text35);
+            TextView editText = dialog.findViewById(R.id.editText);
+            TextView deleteText = dialog.findViewById(R.id.deleteText);
+
             TextView slPlusTitle = dialog.findViewById(R.id.sl_plus_title);
             TextView topic = dialog.findViewById(R.id.topic);
             TextView difficulty = dialog.findViewById(R.id.difficulty);
@@ -117,8 +146,22 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapte
             ImageView back = dialog.findViewById(R.id.back);
             TextView summ = dialog.findViewById(R.id.summary);
             TextView status = dialog.findViewById(R.id.status);
+            LinearLayout parent_details = dialog.findViewById(R.id.parent_dialog_details);
 
             String summary_set = dataHolder.getSummary()==null? "" : dataHolder.getSummary();
+
+            //for changing ui
+            ArrayList<TextView> texts = new ArrayList<>();
+            texts.add(textView1);
+            texts.add(textView2);
+            texts.add(textView3);
+            texts.add(textView4);
+            texts.add(textView5);
+            texts.add(date);
+            texts.add(slPlusTitle);
+            texts.add(topic);
+            texts.add(editText);
+            texts.add(deleteText);
 
             link.setText(dataHolder.getLink());
             slPlusTitle.setText((position+1) + ". "+dataHolder.getTitle());
@@ -154,10 +197,24 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapte
             }
 
             //if light mode
-            if(AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_NO){
+            if(MeFragment.check==-1 && AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_NO){
                 back.setImageDrawable(context.getResources().getDrawable(R.drawable.back_arrow_black));
                 edit.setBackground(context.getResources().getDrawable(R.drawable.edittet_shape));
                 delete.setBackground(context.getResources().getDrawable(R.drawable.edittet_shape));
+            }
+            if(MeFragment.check!=-1){
+                uiModeChange(texts,MeFragment.isDark);
+                if(MeFragment.isDark){
+                    parent_details.setBackgroundColor(primaryColor);
+                    back.setImageDrawable(context.getResources().getDrawable(R.drawable.back_arrow));
+                    edit.setBackground(context.getResources().getDrawable(R.drawable.bg_me_items));
+                    delete.setBackground(context.getResources().getDrawable(R.drawable.bg_me_items));
+                }else{
+                    parent_details.setBackgroundColor(whiteColor);
+                    back.setImageDrawable(context.getResources().getDrawable(R.drawable.back_arrow_black));
+                    edit.setBackground(context.getResources().getDrawable(R.drawable.edittet_shape));
+                    delete.setBackground(context.getResources().getDrawable(R.drawable.edittet_shape));
+                }
             }
 
 
@@ -190,9 +247,20 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapte
                     ImageView backToMainDia = codeDialog.findViewById(R.id.back_to_dialog);
                     ImageView copy = codeDialog.findViewById(R.id.copy);
                     LinearLayout parent = codeDialog.findViewById(R.id.parent_layout_code);
+                    CheckBox syntax = codeDialog.findViewById(R.id.syntax_highlight);
 
-                    if(AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_NO)
+                    syntax.setChecked(true);
+
+                    if((MeFragment.check==-1 && AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_NO) || MeFragment.check==0) {
                         parent.setBackgroundColor(context.getResources().getColor(R.color.grey_bg));
+                        backToMainDia.setImageDrawable(context.getResources().getDrawable(R.drawable.back_arrow_black));
+                        syntax.setTextColor(blackColor);
+                    }
+                    else{
+                        syntax.setTextColor(whiteColor);
+                        parent.setBackgroundColor(primaryColor);
+                        backToMainDia.setImageDrawable(context.getResources().getDrawable(R.drawable.back_arrow));
+                    }
 
                     backToMainDia.setOnClickListener(v1 -> {
                         codeDialog.dismiss();
@@ -203,6 +271,20 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapte
                     PrettifyHighlighter highlighter = new PrettifyHighlighter();
                     String highlighted = highlighter.highlight("java",s);
                     code.setText(Html.fromHtml(highlighted));
+
+                    syntax.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                        @Override
+                        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                            if(isChecked){
+                                code.setText(Html.fromHtml(highlighted));
+                            }else{
+                                code.setTextColor(whiteColor);
+                                code.setText(s);
+                            }
+                        }
+                    });
+
+
                     codeDialog.show();
 
                     copy.setOnClickListener(new View.OnClickListener() {
@@ -211,7 +293,7 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapte
                             ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
                             ClipData clip = ClipData.newPlainText("code",s);
                             clipboard.setPrimaryClip(clip);
-                            Toast.makeText(context, "Copied", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "Code Copied", Toast.LENGTH_SHORT).show();
                         }
                     });
 
@@ -245,6 +327,10 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapte
                     link.setText(dataHolder.getLink());
                     topic.setText(dataHolder.getTag());
                     summ.setText(dataHolder.getSummary());
+                    if(dataHolder.getTab().equals("Wishlist")){
+                        code.setHint("Code (Optional)");
+                        summ.setHint("Write Summary of the Code (Optional)");
+                    }
 
                     String[] prevTags = dataHolder.getTag().split("    ",0);
 
@@ -354,7 +440,7 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapte
                         @Override
                         public void onClick(View view) {
                             String updatedTitle = title.getText().toString();
-                            String updatedTopic = questionTag;
+                            String updatedTopic = topic.getText().toString();
                             String updatedLink = link.getText().toString();
                             String updatedCode = code.getText().toString();
                             String updatedDate = selectedDate;
@@ -364,8 +450,10 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapte
 
                             if(!Patterns.WEB_URL.matcher(updatedLink).matches()){
                                 Toast.makeText(context, "Please Enter valid Link", Toast.LENGTH_SHORT).show();
+                            }else if(!dataHolder.getTab().equals("Wishlist") && updatedCode.equals("")){
+                                Toast.makeText(context, "Please fill the form appropriately", Toast.LENGTH_SHORT).show();
                             }
-                            else if (diff <0 || updatedTopic.equals("") || updatedCode.equals("")) {
+                            else if (diff <0 || updatedTopic.equals("")) {
                                 Toast.makeText(context, "Please fill the form appropriately", Toast.LENGTH_SHORT).show();
                             } else {
                                 DataHolder updatedDataHolder = new DataHolder(updatedTitle,updatedLink,updatedDate,diffItems[diff],updatedTopic,updatedCode, dataHolder.getSlNo(), dataHolder.getTab(),updatedSummary);
@@ -387,6 +475,7 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapte
                     ImageView diff_icon = editDialog.findViewById(R.id.diff_icon_edit);
 
                     TextView edit_headline = editDialog.findViewById(R.id.edit_headline);
+                    LinearLayout parent_edit = editDialog.findViewById(R.id.parent_edit_details);
 
                     RelativeLayout diff_layout = editDialog.findViewById(R.id.spinner_layout_edit);
                     RelativeLayout date_layout = editDialog.findViewById(R.id.date_layout_edit);
@@ -395,7 +484,8 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapte
                     RelativeLayout tag_layout = editDialog.findViewById(R.id.enter_tag_edit);
                     RelativeLayout code_layout = editDialog.findViewById(R.id.enter_code_edit);
                     RelativeLayout summary_layout = editDialog.findViewById(R.id.enter_summary_edit);
-                    if(AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_NO){
+                    if((MeFragment.check==-1 && AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_NO) || (MeFragment.check==0)){
+                        parent_edit.setBackgroundColor(whiteColor);
                         calendar_icon.setImageDrawable(context.getResources().getDrawable(R.drawable.edit_cal_dark));
                         link_icon.setImageDrawable(context.getResources().getDrawable(R.drawable.link_dark));
                         tag_icon.setImageDrawable(context.getResources().getDrawable(R.drawable.tag_dark));
@@ -412,9 +502,43 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapte
                         tag_layout.setBackground(context.getResources().getDrawable(R.drawable.edittet_shape));
                         code_layout.setBackground(context.getResources().getDrawable(R.drawable.edittet_shape));
                         summary_layout.setBackground(context.getResources().getDrawable(R.drawable.edittet_shape));
-                        datePickerButton.setTextColor(context.getResources().getColor(R.color.black));
+                        datePickerButton.setTextColor(blackColor);
                         back.setImageDrawable(context.getResources().getDrawable(R.drawable.back_arrow_black));
-                        edit_headline.setTextColor(context.getResources().getColor(R.color.black));
+                        edit_headline.setTextColor(blackColor);
+                        code.setTextColor(blackColor);
+                        title.setTextColor(blackColor);
+                        link.setTextColor(blackColor);
+                        topic.setTextColor(blackColor);
+                        summ.setTextColor(blackColor);
+                    }
+                    if(MeFragment.check!=-1){
+                        if(MeFragment.isDark){
+                            parent_edit.setBackgroundColor(primaryColor);
+                            calendar_icon.setImageDrawable(context.getResources().getDrawable(R.drawable.baseline_edit_calendar_24));
+                            link_icon.setImageDrawable(context.getResources().getDrawable(R.drawable.link));
+                            tag_icon.setImageDrawable(context.getResources().getDrawable(R.drawable.tag));
+                            code_icon.setImageDrawable(context.getResources().getDrawable(R.drawable.code_icon));
+                            summary_icon.setImageDrawable(context.getResources().getDrawable(R.drawable.baseline_summarize_24));
+                            diff_icon.setImageDrawable(context.getResources().getDrawable(R.drawable.difficulty_level));
+                            ImageView img = editDialog.findViewById(R.id.image_add_circle_edit);
+                            img.setImageDrawable(context.getResources().getDrawable(R.drawable.add_circle_light));
+
+                            diff_layout.setBackground(context.getResources().getDrawable(R.drawable.edit_form_shape));
+                            date_layout.setBackground(context.getResources().getDrawable(R.drawable.edit_form_shape));
+                            title_layout.setBackground(context.getResources().getDrawable(R.drawable.edit_form_shape));
+                            link_layout.setBackground(context.getResources().getDrawable(R.drawable.edit_form_shape));
+                            tag_layout.setBackground(context.getResources().getDrawable(R.drawable.edit_form_shape));
+                            code_layout.setBackground(context.getResources().getDrawable(R.drawable.edit_form_shape));
+                            summary_layout.setBackground(context.getResources().getDrawable(R.drawable.edit_form_shape));
+                            datePickerButton.setTextColor(whiteColor);
+                            back.setImageDrawable(context.getResources().getDrawable(R.drawable.back_arrow));
+                            edit_headline.setTextColor(whiteColor);
+                            code.setTextColor(whiteColor);
+                            title.setTextColor(whiteColor);
+                            link.setTextColor(whiteColor);
+                            topic.setTextColor(whiteColor);
+                            summ.setTextColor(whiteColor);
+                        }
                     }
 
 
@@ -450,6 +574,7 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapte
         public TextView setDiff;
         public CardView rowCard;
         public RelativeLayout cardLayout;
+        public TextView topics;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -460,6 +585,7 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapte
             setDiff = itemView.findViewById(R.id.setDiff);
             rowCard = itemView.findViewById(R.id.rowCard);
             cardLayout = itemView.findViewById(R.id.card_layout);
+            topics = itemView.findViewById(R.id.text22);
         }
     }
 
@@ -532,6 +658,19 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapte
         androidx.appcompat.app.AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
+
+    @SuppressLint("UseCompatLoadingForDrawables")
+    private void uiModeChange(ArrayList<TextView> texts, boolean dark){
+        for(TextView text : texts){
+            if(!dark){
+                text.setTextColor(blackColor);
+            }else{
+                text.setTextColor(whiteColor);
+            }
+        }
+
+    }
+
 
 
 }

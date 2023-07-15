@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.bhaskar.aa45.coderevision.Fragments.FeedbackFragment"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:id="@+id/parent_feedback">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -30,7 +31,9 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:numStars="5"
-                android:progressTint="#F6912B" />
+                android:progressTint="#F6912B"
+                android:theme="@style/RatingBar"/>
+
 
             <EditText
                 android:id="@+id/feedbackText"

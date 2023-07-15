@@ -14,6 +14,10 @@
     <color name="blue">#8DBEE6</color>
     <color name="blue_adapter">#BF008BFF</color>
     <color name="grey_bg">#D9BABABA</color>
+    <color name="grey_t">#D9939393</color>
+    <color name="alert_light">#DADADA</color>
+    <color name="grey_t2">#B33C3C3C</color>
+    <color name="alert_dark">#3C3C3C</color>
     <color name="grey_bg_login">#E6555555</color>
 
     <color name="purple_200" >#FFBB86FC</color>
@@ -23,6 +27,7 @@
     <color name="teal_700" >#FF018786</color>
 
     <color name="primary">#0E0120</color>
+    <color name="primary2">#A60E0120</color>
     <color name="secondary" >#035950</color>
 
 

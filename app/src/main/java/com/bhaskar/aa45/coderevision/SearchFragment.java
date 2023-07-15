@@ -5,7 +5,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,14 +15,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.bhaskar.aa45.coderevision.Adapters.recyclerViewAdapter;
 import com.bhaskar.aa45.coderevision.Firebase.DataHolder;
 import com.bhaskar.aa45.coderevision.Fragments.SolvedFragment;
-import com.bhaskar.aa45.coderevision.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -43,6 +43,10 @@ public class SearchFragment extends Fragment {
     private int selectedPos =-1;
     private List<DataHolder> allData;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private RelativeLayout spinner_rel_layout;
+    LinearLayout parent;
+    Spinner spinner;
+    TextView text21;
 
     @SuppressLint({"MissingInflatedId", "UseCompatLoadingForDrawables"})
     @Override
@@ -52,21 +56,24 @@ public class SearchFragment extends Fragment {
         final View view = inflater.inflate(R.layout.fragment_search, container, false);
         Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).setTitle("Search");
 
+//        if(MeFragment.check!=-1)
+
         searchView = view.findViewById(R.id.searchView);
         recyclerView = view.findViewById(R.id.recyclerView_search);
         swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout_search);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
-                R.array.search_by, android.R.layout.simple_spinner_item);
-        Spinner spinner = (Spinner) view.findViewById(R.id.spinner_search);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-        RelativeLayout spinner_rel_layout = view.findViewById(R.id.spinner_rel_layout);
+                R.array.search_by, R.layout.spinner_text);
+        spinner = (Spinner) view.findViewById(R.id.spinner_search);
 
-        if(AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_NO){
-            searchView.setBackground(getResources().getDrawable(R.drawable.edittet_shape));
-            spinner_rel_layout.setBackground(getResources().getDrawable(R.drawable.edittet_shape));
-        }
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spinner.setAdapter(adapter);
+        spinner_rel_layout = view.findViewById(R.id.spinner_rel_layout);
+        parent =view.findViewById(R.id.parent_search);
+        text21 = view.findViewById(R.id.text21);
+        uiModeChange(MeFragment.check);
+
 
         allData = new ArrayList<>();
 
@@ -214,5 +221,18 @@ public class SearchFragment extends Fragment {
         viewAdapter = new recyclerViewAdapter(dataHolder,getContext());
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(viewAdapter);
+    }
+    @SuppressLint("UseCompatLoadingForDrawables")
+    private void uiModeChange(int dark){
+        if(dark==1){
+            parent.setBackgroundColor(getResources().getColor(R.color.primary));
+//            spinner.setPopupBackgroundDrawable(getResources().getDrawable(R.color.primary));
+            text21.setTextColor(getResources().getColor(R.color.white));
+        }
+        else if (dark==0){
+            parent.setBackgroundColor(getResources().getColor(R.color.white));
+//            spinner.setPopupBackgroundDrawable(getResources().getDrawable(R.color.white));
+            text21.setTextColor(getResources().getColor(R.color.black));
+        }
     }
 }

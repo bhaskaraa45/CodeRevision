@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.bhaskar.aa45.coderevision.Firebase.DataHolder;
+import com.bhaskar.aa45.coderevision.MeFragment;
 import com.bhaskar.aa45.coderevision.R;
 
 import java.util.ArrayList;
@@ -45,6 +47,7 @@ public class recyclerAdapter_Topics extends RecyclerView.Adapter<recyclerAdapter
         return new recyclerAdapter_Topics.ViewHolder(itemView);
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         String key = (String) hm.keySet().toArray()[position];
@@ -61,6 +64,7 @@ public class recyclerAdapter_Topics extends RecyclerView.Adapter<recyclerAdapter
             RecyclerView recyclerView = dialog.findViewById(R.id.recyclerView_topics);
             ImageView backTopic = dialog.findViewById(R.id.back_to_topic);
             TextView topicName = dialog.findViewById(R.id.topic_name);
+            LinearLayout parent = dialog.findViewById(R.id.parent_select_topic);
 
             List<DataHolder> sortedList = new ArrayList<>();
 
@@ -88,8 +92,15 @@ public class recyclerAdapter_Topics extends RecyclerView.Adapter<recyclerAdapter
                 }
             });
 
-            if(AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_NO){
+            if((MeFragment.check==-1 && AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_NO)
+                    ||(MeFragment.check==0)){
+                topicName.setTextColor(context.getResources().getColor(R.color.black));
                 backTopic.setImageDrawable(context.getResources().getDrawable(R.drawable.back_arrow_black));
+                parent.setBackgroundColor(context.getResources().getColor(R.color.white));
+            }else{
+                topicName.setTextColor(context.getResources().getColor(R.color.white));
+                backTopic.setImageDrawable(context.getResources().getDrawable(R.drawable.back_arrow));
+                parent.setBackgroundColor(context.getResources().getColor(R.color.primary));
             }
 
             viewAdapter = new recyclerViewAdapter(sortedList,context);

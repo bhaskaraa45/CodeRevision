@@ -5,7 +5,8 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:layout_marginTop="7dp">
+    android:layout_marginTop="7dp"
+    >
 
     <androidx.cardview.widget.CardView
         android:id="@+id/rowCard"
@@ -16,12 +17,13 @@
         app:cardElevation="5dp"
         app:cardCornerRadius="15dp"
         android:layout_gravity="center"
+        android:backgroundTint="@color/primary2"
         >
             <RelativeLayout
                 android:id="@+id/card_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/gradient_color">
+                android:background="@drawable/gradient_color_light">
                 <TextView
                     android:id="@+id/setSlNo"
                     android:layout_width="wrap_content"
@@ -77,7 +79,7 @@
                     android:layout_marginEnd="10dp"
                     >
                     <TextView
-                        android:id="@+id/text21"
+                        android:id="@+id/text22"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Topics :  "
@@ -91,7 +93,7 @@
                         android:text="Array"
                         android:textSize="14sp"
                         android:textStyle="italic"
-                        android:layout_toEndOf="@id/text21"
+                        android:layout_toEndOf="@id/text22"
                         android:maxLines="1"
                         android:ellipsize="end" />
                 </RelativeLayout>

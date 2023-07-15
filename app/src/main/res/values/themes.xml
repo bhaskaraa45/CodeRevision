@@ -16,8 +16,13 @@
         <item name="colorPrimary">@color/blue_dark</item>
     </style>
 
-
-
+<style name="RatingBar" parent="Base.Theme.CodeRevision">
+    <item name="colorControlNormal">#313131</item>
+    <item name="colorControlActivated">#F6912B</item>
+</style>
+    <style name="AlertDialogThemeLight" parent="Base.Theme.CodeRevision">
+        <item name="android:background">@color/grey_text</item>
+    </style>
 
     <style name="Theme.CodeRevision" parent="Base.Theme.CodeRevision" />
 </resources>

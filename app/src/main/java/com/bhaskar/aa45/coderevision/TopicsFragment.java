@@ -14,6 +14,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.bhaskar.aa45.coderevision.Adapters.recyclerAdapter_Topics;
 import com.bhaskar.aa45.coderevision.Firebase.DataHolder;
@@ -29,13 +30,24 @@ public class TopicsFragment extends Fragment {
 
     private recyclerAdapter_Topics viewAdapter;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private LinearLayout parent;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_topics, container, false);
         Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).setTitle("Topics");
+
+        parent =rootView.findViewById(R.id.parent_topics);
+
+        if(MeFragment.check==0){
+            parent.setBackgroundColor(getContext().getResources().getColor(R.color.white));
+        }else if(MeFragment.check==1){
+            parent.setBackgroundColor(getContext().getResources().getColor(R.color.primary));
+        }
+
 
         HashMap<String, Integer> hm = SolvedFragment.topicFreq;
 
@@ -65,7 +77,7 @@ public class TopicsFragment extends Fragment {
         return rootView;
     }
 
-    private void refreshFragment(Fragment fragment){
+    void refreshFragment(Fragment fragment){
         FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
         @SuppressLint("CommitTransaction") FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frameLayout,fragment);

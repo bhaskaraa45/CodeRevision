@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.bhaskar.aa45.coderevision.MeFragment">
+    tools:context="com.bhaskar.aa45.coderevision.MeFragment"
+    android:id="@+id/parent_me">
 
     <FrameLayout
         android:id="@+id/frameLayout"

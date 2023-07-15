@@ -7,16 +7,17 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +32,7 @@ import android.widget.Toast;
 import com.bhaskar.aa45.coderevision.Fragments.AboutFragment;
 import com.bhaskar.aa45.coderevision.Fragments.FeedbackFragment;
 import com.bhaskar.aa45.coderevision.Fragments.SettingsFragment;
+import com.bhaskar.aa45.coderevision.uiMode.changeText;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -44,8 +46,16 @@ import java.util.Objects;
 @SuppressLint("UseSwitchCompatOrMaterialCode")
 public class MeFragment extends Fragment {
 
+
     private FirebaseAuth mAuth;
     private GoogleSignInClient mGoogleSignInClient;
+    LinearLayout layout1;
+    LinearLayout layout2;
+    LinearLayout layout3;
+    LinearLayout layout4;
+    LinearLayout parent ;
+    public static boolean isDark;
+    public static int check = -1;
 
     @SuppressLint({"MissingInflatedId", "UseCompatLoadingForDrawables"})
     @Override
@@ -55,10 +65,6 @@ public class MeFragment extends Fragment {
         // Inflate the layout for this fragment
         final View rootView = inflater.inflate(R.layout.fragment_me, container, false);
         Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).setTitle("Profile");
-
-
-
-
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -98,29 +104,41 @@ public class MeFragment extends Fragment {
         Switch notification = rootView.findViewById(R.id.notificationSwitch);
         Switch darkMode = rootView.findViewById(R.id.darkModeSwitch);
 
-        LinearLayout layout1 = rootView.findViewById(R.id.layout1);
-        LinearLayout layout2 = rootView.findViewById(R.id.layout2);
-        LinearLayout layout3 = rootView.findViewById(R.id.layout3);
-        LinearLayout layout4 = rootView.findViewById(R.id.layout4);
+        layout1 = rootView.findViewById(R.id.layout1);
+        layout2 = rootView.findViewById(R.id.layout2);
+        layout3 = rootView.findViewById(R.id.layout3);
+        layout4 = rootView.findViewById(R.id.layout4);
+        parent = rootView.findViewById(R.id.parent_me);
 
         SharedPreferences sharedPref = requireActivity().getSharedPreferences("Settings", Context.MODE_PRIVATE);
         @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = sharedPref.edit();
-        boolean dark = sharedPref.getBoolean("dark",false);
         boolean notify = sharedPref.getBoolean("notify",true);
 
-        darkMode.setChecked(dark);
-        notification.setChecked(notify);
+        int currentMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        if (!sharedPref.contains("dark")) {
+            boolean dark= currentMode == Configuration.UI_MODE_NIGHT_YES;
+            darkMode.setChecked(dark);
+        }else{
+           boolean dark = sharedPref.getBoolean("dark",true);
+           darkMode.setChecked(dark);
+        }
 
+        notification.setChecked(notify);
+        isDark = darkMode.isChecked();
+        changeText.textColorChange(rootView,isDark,getContext());
+        modeChange(isDark);
+        check = isDark ? 1:0;
         darkMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                if(isChecked){
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                }else{
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                }
+                changeText.textColorChange(rootView,isChecked,getContext());
+                modeChange(isChecked);
+                MainActivity.changeBottomNavColor(isChecked);
+//                MainActivity.navigationView.setBackgroundColor(getContext().getColor(R.color.red));
                 editor.putBoolean("dark",isChecked);
                 editor.apply();
+                isDark = isChecked;
+                check = isDark ? 1:0;
             }
         });
         notification.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -180,12 +198,6 @@ public class MeFragment extends Fragment {
             }
         });
 
-        if(AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_NO){
-            layout1.setBackground(getResources().getDrawable(R.drawable.edittet_shape));
-            layout2.setBackground(getResources().getDrawable(R.drawable.edittet_shape));
-            layout3.setBackground(getResources().getDrawable(R.drawable.edittet_shape));
-            layout4.setBackground(getResources().getDrawable(R.drawable.edittet_shape));
-        }
 
         return rootView;
     }
@@ -193,7 +205,7 @@ public class MeFragment extends Fragment {
     private void showAlert() {
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
         builder.setMessage("Do you want to log out?");
-        builder.setPositiveButton("Log Out", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(Html.fromHtml("Log Out"), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 signOut();
@@ -225,5 +237,22 @@ public class MeFragment extends Fragment {
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.replace(R.id.frameLayout,fragment);
         fragmentTransaction.commit();
+    }
+
+@SuppressLint("UseCompatLoadingForDrawables")
+void modeChange(boolean dark){
+    if (dark) {
+        parent.setBackgroundColor(getResources().getColor(R.color.primary));
+        layout1.setBackground(getResources().getDrawable(R.drawable.bg_me_items));
+        layout2.setBackground(getResources().getDrawable(R.drawable.bg_me_items));
+        layout3.setBackground(getResources().getDrawable(R.drawable.bg_me_items));
+        layout4.setBackground(getResources().getDrawable(R.drawable.bg_me_items));
+    } else {
+        parent.setBackgroundColor(getResources().getColor(R.color.white));
+        layout1.setBackground(getResources().getDrawable(R.drawable.edittet_shape));
+        layout2.setBackground(getResources().getDrawable(R.drawable.edittet_shape));
+        layout3.setBackground(getResources().getDrawable(R.drawable.edittet_shape));
+        layout4.setBackground(getResources().getDrawable(R.drawable.edittet_shape));
+    }
     }
 }

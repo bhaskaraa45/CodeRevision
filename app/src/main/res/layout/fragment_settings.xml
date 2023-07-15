@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.bhaskar.aa45.coderevision.Fragments.SettingsFragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/parent_settings">
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
