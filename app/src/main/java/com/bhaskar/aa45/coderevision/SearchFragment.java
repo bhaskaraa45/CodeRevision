@@ -82,6 +82,7 @@ public class SearchFragment extends Fragment {
 
             FirebaseDatabase db = FirebaseDatabase.getInstance("https://code-revision-default-rtdb.asia-southeast1.firebasedatabase.app/");
             String uid = FirebaseAuth.getInstance().getUid();
+            assert uid != null;
             DatabaseReference myRef = db.getReference().child("user").child(uid); //root->user->uid
             DatabaseReference triedRef = myRef.child("Tried");
             DatabaseReference wishlistRef = myRef.child("Wishlist");

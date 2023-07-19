@@ -267,16 +267,19 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapte
                     });
 
                     String s = dataHolder.getCode().replace("\\n","\n");
-
+                    String nk = s.replace("  ","\t");
                     PrettifyHighlighter highlighter = new PrettifyHighlighter();
-                    String highlighted = highlighter.highlight("java",s);
-                    code.setText(Html.fromHtml(highlighted));
+                    String highlighted = highlighter.highlight("java",nk);
+                    String temp = highlighted.replace(">><",">&gt<");
+                    String temp2 = temp.replace("><<",">&lt<");
+                    String str = temp2.replace("\n","<br/>");
+                    code.setText(Html.fromHtml(str));
 
                     syntax.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                         @Override
                         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                             if(isChecked){
-                                code.setText(Html.fromHtml(highlighted));
+                                code.setText(Html.fromHtml(str));
                             }else{
                                 code.setTextColor(whiteColor);
                                 code.setText(s);
